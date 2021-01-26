@@ -1,0 +1,41 @@
+
+git 分布式版本控制系统
+
+git init 初始化为版本库
+工作区：持有实际文件
+暂存区：暂时存储工作区的一些变动（我们看不到的一个区域）
+本地仓库：本机的版本库（我们看不到的一个区域）
+
+git add .  提交到暂存区
+git commit -m '注释'   从暂存区提交到本地仓库
+
+git status  查看状态
+git log  查看日志
+git reflog  查看日志
+git diff 文件名  查看修改变动
+
+git reset --hard 版本号  回退到指定版本
+
+git remote add origin 远程仓库地址   本地仓库与远程仓库关联
+git push -u origin master
+-u origin master 设置git push默认提交的远程地址和分支
+
+git remote -v  查看关联的远程地址
+git rm origin
+git remote add origin 远程仓库地址
+
+git clone 远程仓库地址  克隆远程仓库到本地
+git fetch  从远程更新到本地（不会自动merge）
+git merge FETCH_HEAD
+git pull  从远程更新到本地（会自动merge）
+
+git branch  查看分支
+git checkout 分支名  切换分支
+git branch 分支名  创建分支
+git branch -d 分支名  删除分支
+git merge 分支名  合并分支
+
+git push origin 分支名  提交其他分支到远程仓库
+git pull origin 分支名  更新某个分支到本地
+
+
