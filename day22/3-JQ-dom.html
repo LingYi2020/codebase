@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="box1">box1</div>
+  <div class="box2">box2</div>
+  <div class="box3">box3</div>
+  <div class="box4">box4</div>
+</div>
+<div>最后的div</div>
+<button class="btn">按钮</button>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// 原生js
+// var div = document.createElement('div')//创建
+// div.innerText = '新建的div'
+// parentNode.appendChild(div)//添加
+// parentNode.insertBefore(newNode,oldNode)//添加
+// parentNode.removeChild(childNode)//删除
+// parentNode.replaceChild(newNode,oldNode)//替换
+// dom.remove()
+
+// JQ中的dom操作
+var box = '<div class="box">新建的box</div>'//创建
+
+// 在wrap末尾添加元素
+// $('.wrap').append(box)
+// $('.wrap').append($(box))
+// $(box).appendTo('.wrap')
+// $(box).appendTo($('.wrap'))
+
+// 在wrap前面添加元素
+// $('.wrap').prepend(box)
+// $(box).prependTo('.wrap')
+
+// 在box2之后添加元素
+// $('.box2').after(box)
+// $(box).insertAfter('.box2')
+
+// 在box2之前添加元素
+// $('.box2').before(box)
+// $(box).insertBefore('.box2')
+
+//删除box2
+// $('.box2').remove()
+
+// 清空wrap
+// $('.wrap').empty()
+
+// 移除box2，并返回移除的元素
+// var $box2 = $('.box2').detach()
+// console.log( $box2 )
+
+// box替换box2
+// $(box).replaceAll('.box2')
+
+// 克隆元素
+// $('.btn').click(function (){
+//   alert('BMW')
+// })
+// var cloneBtn = $('.btn').clone(true)//true深复制，包括元素上事件
+// $('.wrap').append(cloneBtn)
+
+
+
+
+</script>
+</body>
+</html>

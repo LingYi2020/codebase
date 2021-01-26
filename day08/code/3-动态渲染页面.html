@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.wrap{
+  width: 900px;
+  margin: 100px auto;
+  overflow: hidden;
+}
+.content{
+  width: 930px;
+  overflow: hidden;
+}
+.box{
+  float: left;
+  width: 210px;
+  margin: 0 20px 20px 0;
+  background-color: #eee;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.box img{
+  width: 210px;
+  height: 182px;
+}
+.box h3{
+  font-size: 14px;
+  font-weight: normal;
+  padding: 5px 10px;
+}
+.box p{
+  padding: 5px 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="content">
+    <!-- <div class="box">
+      <img src="https://img.zcool.cn/community/01d08b5fe995a811013ee04d08716d.jpg@260w_195h_1c_1e_1o_100sh.jpg" alt="">
+      <h3>电商设计 | 七度空间国风限定</h3>
+      <p>访问量：1234</p>
+    </div>
+    <div class="box">
+      <img src="https://img.zcool.cn/community/01d08b5fe995a811013ee04d08716d.jpg@260w_195h_1c_1e_1o_100sh.jpg" alt="">
+      <h3>电商设计 | 七度空间国风限定</h3>
+      <p>1234</p>
+    </div>
+    <div class="box">
+      <img src="https://img.zcool.cn/community/01d08b5fe995a811013ee04d08716d.jpg@260w_195h_1c_1e_1o_100sh.jpg" alt="">
+      <h3>电商设计 | 七度空间国风限定</h3>
+      <p>1234</p>
+    </div>
+    <div class="box">
+      <img src="https://img.zcool.cn/community/01d08b5fe995a811013ee04d08716d.jpg@260w_195h_1c_1e_1o_100sh.jpg" alt="">
+      <h3>电商设计 | 七度空间国风限定</h3>
+      <p>1234</p>
+    </div>
+    <div class="box">
+      <img src="https://img.zcool.cn/community/01d08b5fe995a811013ee04d08716d.jpg@260w_195h_1c_1e_1o_100sh.jpg" alt="">
+      <h3>电商设计 | 七度空间国风限定</h3>
+      <p>1234</p>
+    </div>
+    <div class="box">
+      <img src="https://img.zcool.cn/community/01d08b5fe995a811013ee04d08716d.jpg@260w_195h_1c_1e_1o_100sh.jpg" alt="">
+      <h3>电商设计 | 七度空间国风限定</h3>
+      <p>1234</p>
+    </div>
+    <div class="box">
+      <img src="https://img.zcool.cn/community/01d08b5fe995a811013ee04d08716d.jpg@260w_195h_1c_1e_1o_100sh.jpg" alt="">
+      <h3>电商设计 | 七度空间国风限定</h3>
+      <p>1234</p>
+    </div> -->
+  </div>
+</div>
+
+
+<script>
+// 要渲染的数据
+var data = [
+  {
+    imgurl: 'https://img.zcool.cn/community/0165e55fe9ede511013fdcc7ad2419.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '手机摄影 | 2020年合集',
+    look: 998
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/01f93b5fea693511013fdcc72e2cd3.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '喜茶产品图形图案设计',
+    look: 1998
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/01beb35fea904111013ee04d8fcd81.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '【斯诺·SINUO】啤酒包装',
+    look: 123
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/0105245feac74611013ee04d616dbc.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '【盲盒设计】渺渺山海',
+    look: 666
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/0165e55fe9ede511013fdcc7ad2419.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '手机摄影 | 2020年合集',
+    look: 998
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/01f93b5fea693511013fdcc72e2cd3.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '喜茶产品图形图案设计',
+    look: 1998
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/01beb35fea904111013ee04d8fcd81.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '【斯诺·SINUO】啤酒包装',
+    look: 123
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/0105245feac74611013ee04d616dbc.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '【盲盒设计】渺渺山海',
+    look: 666
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/0165e55fe9ede511013fdcc7ad2419.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '手机摄影 | 2020年合集',
+    look: 998
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/01f93b5fea693511013fdcc72e2cd3.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '喜茶产品图形图案设计',
+    look: 1998
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/01beb35fea904111013ee04d8fcd81.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '【斯诺·SINUO】啤酒包装',
+    look: 123
+  },
+  {
+    imgurl: 'https://img.zcool.cn/community/0105245feac74611013ee04d616dbc.jpg@260w_195h_1c_1e_1o_100sh.jpg',
+    title: '【盲盒设计】渺渺山海',
+    look: 666
+  }
+]
+var content = document.querySelector('.content')
+var str = ''
+for (var i = 0, len = data.length; i < len; i++){
+  str += '<div class="box">'+
+          '<img src="'+data[i].imgurl+'" alt="">'+
+          '<h3>'+data[i].title+'</h3>'+
+          '<p>访问量：'+data[i].look+'</p>'+
+        '</div>'
+}
+content.innerHTML = str
+
+
+</script>
+</body>
+</html>

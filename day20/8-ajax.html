@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<p>账号：<input type="text" class="user"></p>
+<p>密码：<input type="text" class="pass"></p>
+<button class="btn">登录</button>
+
+
+<script>
+/* 
+接口文档
+url: 'http://localhost/test/GP05/day20/data/post.php'
+type: 'post'
+params:
+  user 账号
+  pass 密码
+返回值：
+  '{"err":1,"msg":"登录成功"}'
+*/
+
+var btn = document.querySelector('.btn')
+var show = document.querySelector('.show')
+var user = document.querySelector('.user')
+var pass = document.querySelector('.pass')
+
+btn.onclick = function (){
+  // 参考 jQuery对ajax的封装
+  // $.ajax({
+  //   url: 'www.baidu.com',
+  //   type: 'get',
+  //   data: 'user=xiaocuo&pass=12345',
+  //   // data: {user:'xiaocuo',pass:'123456'},
+  //   dataType: 'text',// 'json'  'xml'
+  //   success: function (data){
+
+  //   },
+  //   error: function (err){
+      
+  //   }
+  // })
+  
+  ajax({
+    url: 'http://localhost/test/GP05/day20/data/post.php',
+    type: 'get',
+    data: 'user='+user.value+'&pass='+pass.value,
+    // data: {'user': user.value,'pass': pass.value},
+    cache: true,// true使用缓存，默认为false
+    dataType: 'json',// 根据参数进行预解析 'text' 'json' 'xml'
+    success: function (obj){
+      alert(obj.msg)
+    },
+    error: function (code){
+      alert('请求失败')
+    }
+  })
+
+}
+
+// console.log( Object.prototype.toString.call({}) )//'[object Object]'
+// console.log( Object.prototype.toString.call([]) )//'[object Array]'
+// console.log( Object.prototype.toString.call(null) )//'[object Null]'
+// console.log( Object.prototype.toString.call(undefined) )//'[object Undefined]'
+// console.log( Object.prototype.toString.call(123) )//'[object Number]'
+// console.log( Object.prototype.toString.call('abc') )//'[object String]'
+// console.log( Object.prototype.toString.call(true) )//'[object Boolean]'
+// console.log( Object.prototype.toString.call(Math) )//'[object Math]'
+// console.log( Object.prototype.toString.call(function (){}) )//'[object Function]'
+
+function ajax(options){
+  // 1.创建数据交互对象（XMLHttpRequest）
+  var xhr = new XMLHttpRequest()//除了IE56其他都支持
+
+  var data = ''
+  if (typeof options.data === 'string'){
+    // 如果参数是字符串不做任何处理
+    data = options.data
+  }
+  if (Object.prototype.toString.call(options.data) === '[object Object]'){
+    // 如果参数是对象，转成参数字符串 'user=xiaocuo&pass=123456'
+    for (var key in options.data){
+      data += (key+'='+options.data[key]+'&')
+    }
+    // 'user=xiaocuo&pass=123456&'
+    data = data.substring(0,data.length-1)
+  }
+  // console.log(data)//'user=xiaocuo&pass=123456'
+
+  if (options.type.toLowerCase() === 'get') {
+    // 2.初始化请求
+    if (options.cache) {
+      xhr.open(options.type,options.url+'?'+data,true)
+    } else {
+      xhr.open(options.type,options.url+'?'+data+'&_='+Date.now(),true)
+    }
+    // 3.发送请求
+    xhr.send(null)
+  } else if (options.type.toLowerCase() === 'post'){
+    // 2.初始化请求
+    xhr.open(options.type,options.url,true)
+    // 设置请求头，模拟表单post提交数据
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+    // 3.发送请求
+    xhr.send(data)
+  } else {
+    alert('仅支持 get和post 请求方式！')
+    return //结束执行
+  }
+
+  // 4.请求响应状态
+  // xhr.readyState 属性值会从0-4发送变化
+  // 当xhr.readyState属性发生变化时，会触发onreadystatechange事件
+  xhr.onreadystatechange = function (){
+    // console.log( xhr.readyState )//2 3 4
+    if (xhr.readyState === 4) {//请求完成
+      // 响应状态码 xhr.status
+      if (xhr.status >=200 && xhr.status < 300) {// 响应就绪
+        // 可以拿到数据了
+        // xhr.responseText  接收文本字符串数据
+        // xhr.responseXML  接收xml数据
+        if (options.dataType === 'json') {
+          var json = JSON.parse(xhr.responseText)
+          options.success(json)
+        } else if (options.dataType === 'xml') {
+          options.success(xhr.responseXML)
+        } else {
+          options.success(xhr.responseText)
+        }
+      } else {
+        options.error(xhr.status)
+      }
+    }
+  }
+}
+
+</script>
+</body>
+</html>

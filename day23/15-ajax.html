@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+
+<form class="data">
+  <p>账号：<input type="text" class="user" name="user"></p>
+  <p>密码：<input type="text" class="pass" name="pass"></p>
+  <p>邮箱：<input type="text" class="email" name="email"></p>
+  <p><p class="btn">提交</p></p>
+</form>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+
+$('.btn').click(function (){
+  $.ajax({
+    url:'https://www.baidu.com/',
+    type: 'get',
+    data: $('.data').serialize(),// 'user=xiaoming&pass=12345&email=123456@qq.com'
+    // data: {
+    //   user: $('.user').val(),
+    //   pass: $('.pass').val(),
+    //   email: $('.email').val()
+    // }
+    success: function (res){
+      console.log(res)
+    }
+  })
+
+})
+
+
+
+
+
+</script>
+</body>
+</html>

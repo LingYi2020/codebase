@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.wrap{
+  width: 800px;
+  margin: 50px auto 0;
+  /* border: 1px solid #ccc; */
+}
+.header{
+  overflow: hidden;
+  border-top: 2px solid #06A86E;
+}
+.header h3{
+  float: left;
+  width: 200px;
+  line-height: 34px;
+  text-align: center;
+  background-color: #eee;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+.content{
+  /* height: 240px; */
+  overflow: hidden;
+}
+.content div{
+  padding: 15px 0;
+  display: none;
+}
+.content div img{
+  width: 180px;
+  height: 240px;
+  margin: 0 10px;
+  float: left;
+}
+/* 选中的样式 */
+.header .active{
+  background-color: #06A86E;
+  color: #fff;
+}
+.content .show{
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="header">
+    <h3 class="active">喜剧</h3>
+    <h3>爱情</h3>
+    <h3>科幻</h3>
+    <h3>动作</h3>
+  </div>
+  <div class="content">
+    <div class="show">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+    </div>
+  </div>
+</div>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// JQ实现
+/* $('.header h3').click(function (){
+  var index = $(this).index()// 当前点击元素的索引
+  $(this).addClass('active').siblings().removeClass('active')
+  $('.content div').eq(index).addClass('show').siblings().removeClass('show')
+}) */
+
+$('.header h3').each(function (index,item){
+  $(item).click(function (){
+    $(item).addClass('active').siblings().removeClass('active')
+    $('.content div').eq(index).addClass('show').siblings().removeClass('show')
+  })
+})
+
+
+
+// 面向过程
+/* var h3s = document.querySelectorAll('.header h3')
+var divs = document.querySelectorAll('.content div')
+var prevIndex = 0 // 上次选中元素的索引
+
+// 给所有h3添加点击事件
+for (var i = 0, len = h3s.length; i < len; i++){
+  // 给每一个DOM对象添加index属性保存对应的索引
+  h3s[i].index = i
+  h3s[i].onclick = function (){
+    // 1.清除上次选中元素的类名
+    h3s[prevIndex].className = ''
+    divs[prevIndex].className = ''
+
+    // 2.给当前点击的元素添加类名
+    // this -> 当前点击的元素 索引为 this.index == h3s[1].index
+    h3s[this.index].className = 'active'
+    divs[this.index].className = 'show'
+    
+    // 3.更新上次选中的索引
+    prevIndex = this.index
+  }
+} */
+
+
+// 面向对象
+// 1. 定义构造函数，通常函数名的首字母大写
+/* function Tab(){// 类
+  // 2. 把变量变成对象的属性
+  this.h3s = document.querySelectorAll('.header h3')
+  this.divs = document.querySelectorAll('.content div')
+  this.prevIndex = 0 // 上次选中元素的索引
+  // var self = this//保存当前this指向
+  var _this = this//保存当前this指向
+
+  // 给所有h3添加点击事件
+  for (var i = 0, len = this.h3s.length; i < len; i++){
+    // 给每一个DOM对象添加index属性保存对应的索引
+    this.h3s[i].index = i
+    // this -> Tab的实例对象
+    this.h3s[i].onclick = function (){
+      // this -> 指向点击的元素
+      // 1.清除上次选中元素的类名
+      _this.h3s[_this.prevIndex].className = ''
+      _this.divs[_this.prevIndex].className = ''
+
+      // 2.给当前点击的元素添加类名
+      // this -> 当前点击的元素 索引为 this.index == h3s[1].index
+      _this.h3s[this.index].className = 'active'
+      _this.divs[this.index].className = 'show'
+      
+      // 3.更新上次选中的索引
+      _this.prevIndex = this.index
+    }
+  }
+} */
+// 实例化
+// new Tab()
+// var tab1 = new Tab()
+
+
+</script>
+</body>
+</html>

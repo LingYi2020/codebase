@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  .box{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+</style>
+</head>
+<body>
+
+<div class="box"></div>
+
+<script>
+var box = document.querySelector('.box')
+
+// 响应不及时，迟钝，不灵活
+// document.onkeydown = function (e){
+//   if (e.keyCode == 37){//左
+//     box.style.left = box.offsetLeft-10+'px'
+//   }
+//   if (e.keyCode == 39){//右
+//     box.style.left = box.offsetLeft+10+'px'
+//   }
+//   if (e.keyCode == 38){//上
+//     box.style.top = box.offsetTop-10+'px'
+//   }
+//   if (e.keyCode == 40){//下
+//     box.style.top = box.offsetTop+10+'px'
+//   }
+// }
+
+
+// 标记运动方法
+var t = false, b = false, l = false, r = false
+setInterval(function (){
+  if (t) {
+    box.style.top = box.offsetTop-10+'px'
+  }
+  if (b) {
+    box.style.top = box.offsetTop+10+'px'
+  }
+  if (l) {
+    box.style.left = box.offsetLeft-10+'px'
+  }
+  if (r) {
+    box.style.left = box.offsetLeft+10+'px'
+  }
+},20);
+
+document.onkeydown = function (e){
+  switch(e.keyCode){
+    case 37:
+      l = true
+      break
+    case 38:
+      t = true
+      break
+    case 39:
+      r = true
+      break
+    case 40:
+      b = true
+      break
+  }
+}
+document.onkeyup = function (e){
+  switch(e.keyCode){
+    case 37:
+      l = false
+      break
+    case 38:
+      t = false
+      break
+    case 39:
+      r = false
+      break
+    case 40:
+      b = false
+      break
+  }
+}
+
+
+</script>
+
+</body>
+</html>

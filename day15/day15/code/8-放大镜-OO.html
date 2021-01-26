@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .wrap {
+      width: 1200px;
+      margin: 10px;
+      overflow: hidden;
+      margin: 10px auto;
+    }
+
+    .left,
+    .right {
+      float: left;
+      border: 2px solid #eeeeee;
+      box-sizing: border-box;
+      margin: 0 5px;
+      position: relative;
+    }
+
+    .left {
+      width: 350px;
+      height: 400px;
+    }
+
+    .left .top {
+      width: 350px;
+      height: 350px;
+    }
+
+    .left .top img {
+      width: 350px;
+      height: 350px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .mask {
+      width: 175px;
+      height: 175px;
+      background-color: orange;
+      opacity: .4;
+      cursor: move;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+
+    .toggle {
+      height: 50px;
+    }
+
+    .toggle img {
+      float: left;
+      width: 35px;
+      height: 35px;
+      margin: 5px 15px 0;
+      cursor: pointer;
+    }
+
+    .toggle img:hover {
+      border: 2px solid red;
+      box-sizing: border-box;
+    }
+
+    .right {
+      width: 400px;
+      height: 400px;
+      display: none;
+      overflow: hidden;
+    }
+
+    .right img {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="left">
+      <div class="top">
+        <img src="./img/small1.jpg" alt="">
+        <div class="mask"></div>
+      </div>
+      <div class="toggle">
+        <img src="./img/small1.jpg" alt="">
+        <img src="./img/small2.jpg" alt="">
+        <img src="./img/small3.jpg" alt="">
+        <img src="./img/small4.jpg" alt="">
+        <img src="./img/small5.jpg" alt="">
+      </div>
+    </div>
+    <div class="right">
+      <img src="./img/big1.jpg" alt="">
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    // 放大镜
+    (function () {
+      function Enlarge(options) {
+        this.init(options)
+      }
+      
+      Enlarge.prototype = {
+        constructor: Enlarge,
+        // 初始化
+        init(options) {
+          this.current = this.$1(options.current)
+          this.currentImg = this.$1(options.currentImg)
+          this.mask = this.$1(options.mask)
+          this.toggle = this.$1(options.toggle)
+          this.toggleImgs = this.$2(options.toggleImgs)
+          this.target = this.$1(options.target)
+          this.targetImg = this.$1(options.targetImg)
+          this.show()
+          this.hide()
+          this.move()
+          this.change()
+          this.smallImgMove()
+        },
+
+        // 设置获取元素的选择器
+        $1(selector) {
+          return document.querySelector(selector)
+        },
+        $2(selector) {
+          return document.querySelectorAll(selector)
+        },
+
+        // 获取临近父级元素的offsetLeft和offsetTop
+        offset(dom, bool) {
+          let l = 0
+          let t = 0
+          let domBDL = dom.clientLeft
+          let domBDT = dom.clientTop
+          while (dom) {
+            l += dom.clientLeft + dom.offsetLeft
+            t += dom.clientTop + dom.offsetTop
+            dom = dom.offsetParent
+          }
+          if (bool) {
+            return { left: l, top: t }
+          } else {
+            return { left: l - domBDL, top: t - domBDT }
+          }
+        },
+
+        // 鼠标移入显示遮罩和大图
+        show() {
+          this.current.onmouseenter = function () {
+            this.mask.style.display = 'block'
+            this.target.style.display = 'block'
+          }.bind(this)
+        },
+
+        // 鼠标移出显示遮罩和大图
+        hide() {
+          this.current.onmouseleave = function () {
+            this.mask.style.display = 'none'
+            this.target.style.display = 'none'
+          }.bind(this)
+        },
+
+        // 点击小图片切换大图
+        change() {
+          this.toggleImgs.forEach((item, index) => {
+            this.toggleImgs[index].onclick = function () {
+              let imgSrc = this.toggleImgs[index].src
+              let imgIndex = index + 1
+              this.setImgSrc(imgSrc, imgIndex)
+            }.bind(this)
+          })
+        },
+
+        // 移动小图片切换大图
+        smallImgMove() {
+          this.toggleImgs.forEach((item, index) => {
+            this.toggleImgs[index].onmouseenter = function () {
+              let imgSrc = this.toggleImgs[index].src
+              let imgIndex = index + 1
+              this.setImgSrc(imgSrc, imgIndex)
+            }.bind(this)
+          })
+        },
+
+        // 设置图片的src属性
+        setImgSrc(imgSrc, imgIndex) {
+          this.currentImg.src = imgSrc
+          this.targetImg.src = './img/big' + imgIndex + '.jpg'
+        },
+
+        // 鼠标的移动事件，使遮罩移动和大图移动
+        move() {
+          this.current.onmousemove = function (ev) {
+            let e = ev || event
+            this.maskMove(e)
+            this.bigImgMove()
+          }.bind(this)
+        },
+
+        // 使遮罩移动
+        maskMove(e) {
+          this.maskX = e.pageX - this.offset(this.current).left - this.mask.clientWidth / 2
+          this.maskY = e.pageY - this.offset(this.current).top - this.mask.clientHeight / 2
+          this.maxX = this.current.clientWidth - this.mask.clientWidth
+          this.maxY = this.current.clientHeight - this.mask.clientHeight
+          if (this.maskX < 0) {
+            this.maskX = 0
+          }
+          if (this.maskX > this.maxX) {
+            this.maskX = this.maxX
+          }
+          if (this.maskY < 0) {
+            this.maskY = 0
+          }
+          if (this.maskY > this.maxY) {
+            this.maskY = this.maxY
+          }
+          this.mask.style.left = this.maskX + 'px'
+          this.mask.style.top = this.maskY + 'px'
+        },
+        
+        // 使大图移动
+        bigImgMove() {
+          let scaleX = this.maskX / this.maxX
+          let scaleY = this.maskY / this.maxY
+          let bigX = (this.targetImg.clientWidth - this.target.clientWidth) * scaleX
+          let bigY = (this.targetImg.clientHeight - this.target.clientHeight) * scaleY
+          this.targetImg.style.left = -bigX + 'px'
+          this.targetImg.style.top = -bigY + 'px'
+        },
+      }
+
+      // 入口函数
+      function factory(options) {
+        return new Enlarge(options)
+      }
+      window.enlarge = factory
+    })()
+
+    // 调用方法，参数传递
+    enlarge({
+      current: '.top',
+      currentImg: '.top img',
+      mask: '.mask',
+      toggle: '.toggle',
+      toggleImgs: '.toggle img',
+      target: '.right',
+      targetImg: '.right img'
+    })
+
+  </script>
+</body>
+
+</html>

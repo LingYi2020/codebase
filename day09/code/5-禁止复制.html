@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0; 
+} 
+body{
+  width: 2000px;
+  height: 3000px;
+}
+.box{
+  width: 200px;
+  height: 200px;
+  background-color: #ccc;
+}
+
+</style>
+</head>
+<body>
+
+<div class="box"></div>
+<p>离开时建档立卡福建师范圣诞福利咖啡色安慰法离开时建档立卡福建师范圣诞福利咖啡色安慰法离开时建档立卡福建师范圣诞福利咖啡色安慰法</p>
+
+<script>
+
+document.onmousedown = function (ev){
+  var e = ev || event
+  // 禁止选中文本
+  e.preventDefault()//阻止默认行为
+
+}
+
+document.onkeydown = function (ev){
+  var e = ev || event
+  e.preventDefault()//阻止默认行为
+  if (e.ctrlKey && e.keyCode == 67){
+    alert('本站禁止复制')
+  }
+
+}
+
+
+</script>
+</body>
+</html>

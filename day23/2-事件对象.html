@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn">按钮</button>
+
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// var btn = document.querySelector('.btn')
+// btn.onclick = function (ev){
+//   var e = ev||window.event
+//   console.log(e)
+// }
+
+$('.btn').click(function (e){
+  console.log(this)//原生dom对象
+  // jQuery将事件对象进行了重新封装，解决了兼容问题，可以直接使用
+  // console.log(e)
+  // console.log(e.target)//原生dom对象
+  console.log( $(e.target) )//JQ对象
+})
+
+</script>
+</body>
+</html>

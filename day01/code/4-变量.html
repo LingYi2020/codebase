@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+// 变量：可变的数据
+// js中声明变量用 var 关键字
+// 关键字  变量名  赋值  数据
+var        abc     =    123// 把123这个数据赋值给变量abc
+// js声明变量：
+// 1.使用关键字var 
+var str = 'abc' // 显式声明变量
+// 2.声明变量可以不给初始值
+var num // 显式声明变量
+// 3.声明变量可以不使用关键字var
+age = 18 // 隐式声明变量
+console.log( age )// 18  引用变量
+// 4.但是不允许直接使用一个未声明的变量
+// console.log( hehe )
+// Uncaught ReferenceError: hehe is not defined   at 4-变量.html:25
+// 未捕获     引用错误     ：hehe 未定义 (报文)           报错位置
+
+// 一个变量对应一段可操作的内存空间
+
+// 标识符（变量、函数、属性、参数，你自己命名的东西）命名规范：
+// 1.第一个字符不能是数字，可以字母、下划线、美元符号$
+// 2.命名中不能包含空格
+// 3.从第二个字符开始可以是数字、字母、下划线、美元符号$
+// 4.不可以使用关键字和保留字命名
+// var var = 123
+// console.log( var )
+// Uncaught SyntaxError: Unexpected token 'var'    4-变量.html:37 
+//             语法错误
+// 5.标识符命名要语义化（有语义有含义）非必须
+// var user_age_number = 23
+// 语义化命名规范：
+  // 1.驼峰命名法
+  var userAgeNumber = 23
+  // 2.帕斯卡命名法
+  var UserAgeNumber = 23
+  // 3.下划线命名法
+  var user_age_number = 23
+  // 4.匈牙利命名法
+  var num_user_age = 23
+  var nUserAge = 23
+
+  // var a1
+  // a2 
+  // a3
+  // a4 ....
+
+
+</script>
+</body>
+</html>

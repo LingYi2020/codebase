@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .wrap{
+    width: 800px;
+    height: 157px;
+    overflow: auto;
+    border: 1px solid #000;
+    margin: 50px auto 0;
+  }
+  .main{
+    width: 3000px;
+    height: 140px;
+  }
+  .con1,.con2{
+    float: left;
+  }
+  .main img{
+    width: 200px;
+    height: 140px;
+    float: left;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="main">
+    <div class="con1">
+      <img src="./img/b1.jpg" alt="">
+      <img src="./img/b2.jpg" alt="">
+      <img src="./img/b3.jpg" alt="">
+      <img src="./img/b4.jpg" alt="">
+    </div>
+    <div class="con2"></div>
+  </div>
+</div>
+
+<script>
+var wrap = document.querySelector('.wrap')
+var con1 = document.querySelector('.con1')
+var con2 = document.querySelector('.con2')
+var imgWidth = document.querySelector('.con1 img').clientWidth
+// 复制一份图片
+con2.innerHTML = con1.innerHTML
+var maxWidth = con1.clientWidth
+var timer
+function run(){
+  clearInterval(timer)
+  timer = setInterval(function(){
+    wrap.scrollLeft+=2
+    // 临界值判断
+    if (wrap.scrollLeft >= maxWidth) {
+      wrap.scrollLeft = 0
+    }
+    if (wrap.scrollLeft%imgWidth == 0) {
+      clearInterval(timer)
+      setTimeout(function (){
+        run()
+      },2000)
+    }
+  },20)
+}
+run()//进入页面自动执行
+wrap.onmouseenter = function (){
+  clearInterval(timer)
+}
+wrap.onmouseleave = function (){
+  run()
+}
+</script>
+</body>
+</html>

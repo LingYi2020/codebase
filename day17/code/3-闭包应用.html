@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script>
+
+// 也会形成闭包
+window.onload = function (){
+  var btn = document.querySelector('.btn')
+  btn.onclick = function (){//事件相当于在全局触发
+    // btn.style.color = 'red'//保持对上层作用域的引用 btn
+    console.log('abc')
+    // this
+  }
+}
+
+</script>
+</head>
+<body>
+
+<button class="btn">按钮</button>
+<div class="show"></div>
+<ul class="list">
+  <li>a1</li>
+  <li>a2</li>
+  <li>a3</li>
+  <li>a4</li>
+</ul>
+
+
+<script>
+
+// 模块化 图片预加载
+// var loadModule = (function (){
+//   var loadImg = new Image()
+//   var showImg = new Image()
+//   var abc = 123
+//   loadImg.onload = function (){
+//     showImg.src = this.src
+//   }
+//   return {
+//     setSrc: function (dom,src){
+//       showImg.src = './loading7.gif'
+//       loadImg.src = src
+//       dom.appendChild(showImg)
+//     }
+//   }
+// })()
+// var show = document.querySelector('.show')
+// loadModule.setSrc(show,'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa0.att.hudong.com%2F52%2F62%2F31300542679117141195629117826.jpg&refer=http%3A%2F%2Fa0.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1613024970&t=5f5465929206dab2e1178e5fffe2bff0')
+
+// (function (){
+//   function Tab(){}
+//   function factory(){
+//     return new Tab()
+//   }
+//   window.tab = factory
+// })()
+// tab()
+
+
+// var lis = document.querySelectorAll('.list li')
+// for (var i = 0, len = lis.length; i < len; i++){
+//   (function (n){
+//     // 事件都是在全局触发的
+//     lis[n].onclick = function (){
+//       console.log(n)
+//     }
+//   })(i)
+// }
+
+
+function outer(){
+  var a = 5
+  return function (){
+    a++
+    console.log(a)
+  }
+}
+var inner = outer()
+inner()//6
+inner()//7
+inner()//8
+
+
+</script>
+</body>
+</html>

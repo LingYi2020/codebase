@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.show{
+  overflow: hidden;
+  background-color: lightblue;
+  min-height: 50px;
+}
+.show span{
+  float: left;
+  padding: 4px 6px;
+  background-color: #eee;
+  margin: 10px;
+}
+.show span i{
+  cursor: pointer;
+  color: red;
+}
+.list{
+  list-style: none;
+  padding: 0;
+  overflow: hidden;
+  background-color: lightgreen;
+}
+.list li{
+  float: left;
+  padding: 4px 6px;
+  background-color: lightgoldenrodyellow;
+  cursor: pointer;
+  margin: 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  好友对我的印象：
+  <div class="show">
+    <!-- <span>技术宅1 <i>X</i></span>
+    <span>技术宅2 <i>X</i></span>
+    <span>技术宅3 <i>X</i></span>
+    <span>技术宅3 <i>X</i></span> -->
+  </div>
+  <ul class="list">
+    <li>技术宅</li>
+    <li>内骚型</li>
+    <li>外骚型</li>
+    <li>玉树临风</li>
+    <li>风流倜傥</li>
+    <li>老色批</li>
+  </ul>
+  自定义：<input type="text" class="ipt">
+  <button class="btn">贴上</button>
+  <ol>
+    <li>111</li>
+    <li>222</li>
+  </ol>
+</div>
+
+<script>
+var lis = document.querySelectorAll('.list li')
+var show = document.querySelector('.show')
+var ipt = document.querySelector('.ipt')
+var wrap = document.querySelector('.wrap')
+// var rm = document.querySelectorAll('span i')//null
+
+
+wrap.onclick = function (ev){
+  var e = ev || event
+  var target = e.target || e.srcElement
+  if (target.tagName == 'LI'&& target.parentNode.className == 'list') {
+    var tagTxt = target.innerText//选中标签的文本
+    // 动态元素（未来元素），保证在添加完之后再获取 
+    var newSpan = document.createElement('span')
+    newSpan.innerHTML = tagTxt+' <i>X</i>'
+    show.appendChild(newSpan)
+  }
+  if (target.tagName == 'I'&&target.parentNode.parentNode.className == 'show'){
+    target.parentNode.parentNode.removeChild(target.parentNode)
+  }
+  if (target.className == 'btn'){
+    var txt = ipt.value
+    ipt.value = ''
+    // 动态元素（未来元素），保证在添加完之后再获取 
+    var newSpan = document.createElement('span')
+    newSpan.innerHTML = txt+' <i>X</i>'
+    show.appendChild(newSpan)
+  }
+}
+
+
+/* for (var i = 0, len = lis.length; i < len; i++){
+  lis[i].onclick = function (){
+    var tagTxt = this.innerText//选中标签的文本
+    addTag(tagTxt)
+    // 动态元素（未来元素），保证在添加完之后再获取 
+    var newSpan = document.createElement('span')
+    newSpan.innerHTML = tagTxt+' <i>X</i>'
+    show.appendChild(newSpan)
+    // 获取所有的删除按钮
+    var rm = document.querySelectorAll('span i')
+    for (var n = 0; n < rm.length; n++){
+      rm[n].onclick = function (){
+        // 删除点击元素的父元素
+        show.removeChild(this.parentNode)
+        // this.parentNode.parentNode.removeChild(this.parentNode)
+      }
+    }
+  }
+}
+
+
+var btn = document.querySelector('.btn')
+var ipt = document.querySelector('.ipt')
+btn.onclick = function (){
+  var txt = ipt.value
+  addTag(txt)
+  ipt.value = ''
+  // 动态元素（未来元素），保证在添加完之后再获取 
+  var newSpan = document.createElement('span')
+  newSpan.innerHTML = txt+' <i>X</i>'
+  show.appendChild(newSpan)
+  // 获取所有的删除按钮
+  var rm = document.querySelectorAll('span i')
+  for (var n = 0; n < rm.length; n++){
+    rm[n].onclick = function (){
+      // 删除点击元素的父元素
+      show.removeChild(this.parentNode)
+      // this.parentNode.parentNode.removeChild(this.parentNode)
+    }
+  }
+} */
+
+
+
+</script>
+</body>
+</html>

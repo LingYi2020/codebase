@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<p>账号：<input type="text" class="user"></p>
+<p>密码：<input type="text" class="pass"></p>
+<button class="btn">登录</button>
+
+
+<script>
+/* 
+接口文档
+url: 'http://localhost/test/GP05/day20/data/post.php'
+type: 'post/get'
+params:
+  user 账号
+  pass 密码
+返回值：
+  '{"err":1,"msg":"登录成功"}'
+*/
+
+var btn = document.querySelector('.btn')
+var show = document.querySelector('.show')
+var user = document.querySelector('.user')
+var pass = document.querySelector('.pass')
+
+btn.onclick = function (){
+
+  // 1.创建数据交互对象（XMLHttpRequest）
+  var xhr = new XMLHttpRequest()//除了IE56其他都支持
+  // var xhr = new ActiveXObject('Microsoft.XMLHTTP')//IE56支持
+
+  // 2.初始化请求
+  // 参数：
+    // 1请求方式get/post 
+    // 2数据接口地址 
+    // 3布尔值，默认true异步，false同步
+    // get请求在url后面传参
+  xhr.open('get','http://localhost/test/GP05/day20/data/post.php?user='+user.value+'&pass='+pass.value,true)
+
+  // 3.发送请求
+  xhr.send(null)
+
+  // 4.请求响应状态
+  // xhr.readyState 属性值会从0-4发送变化
+  // 当xhr.readyState属性发生变化时，会触发onreadystatechange事件
+  xhr.onreadystatechange = function (){
+    // console.log( xhr.readyState )//2 3 4
+    if (xhr.readyState === 4) {//请求完成
+      // 响应状态码 xhr.status
+      if (xhr.status >=200 && xhr.status < 300) {// 响应就绪
+        // 可以拿到数据了
+        // xhr.responseText  接收文本字符串数据
+        // xhr.responseXML  接收xml数据
+        var json = JSON.parse(xhr.responseText)
+        alert(json.msg)
+      } else {
+        console.log( xhr.status )
+      }
+    }
+  }
+}
+
+</script>
+</body>
+</html>

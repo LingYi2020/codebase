@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+<div class="show"></div>
+
+<script src="./utils.js"></script>
+<script>
+// 1.有多个异步程序，如何保证他们的执行顺序？
+// setTimeout(()=>{
+//   console.log('程序1')
+// },800)
+// setTimeout(()=>{
+//   console.log('程序2')
+// },500)
+// setTimeout(()=>{
+//   console.log('程序3')
+// },1000)
+
+// 回调地狱
+// setTimeout(()=>{
+//   console.log('程序1')
+//   setTimeout(()=>{
+//     console.log('程序2')
+//     setTimeout(()=>{
+//       console.log('程序3')
+//     },1000)
+//   },500)
+// },800)
+
+
+// 2.有三个数据接口，如何保证三个数据都拿到之后再执行后面的操作？
+var arr = []
+ajax({
+  url: './promise.php',
+  type: 'get',
+  data: 'code=a1',
+  dataType: 'json',
+  success: function (json){
+    arr.push(json)
+  }
+})
+ajax({
+  url: './promise.php',
+  type: 'get',
+  data: 'code=a2',
+  dataType: 'json',
+  success: function (json){
+    arr.push(json)
+  }
+})
+ajax({
+  url: './promise.php',
+  type: 'get',
+  data: 'code=a3',
+  dataType: 'json',
+  success: function (json){
+    arr.push(json)
+  }
+})
+
+// 拿到所有数据再遍历展示
+// console.log(arr)//[]
+
+// 回调地狱
+ajax({
+  url: './promise.php',
+  type: 'get',
+  data: 'code=a1',
+  dataType: 'json',
+  success: function (json){
+    arr.push(json)
+    ajax({
+      url: './promise.php',
+      type: 'get',
+      data: 'code=a2',
+      dataType: 'json',
+      success: function (json){
+        arr.push(json)
+        ajax({
+          url: './promise.php',
+          type: 'get',
+          data: 'code=a3',
+          dataType: 'json',
+          success: function (json){
+            arr.push(json)
+            console.log('拿到所有数据再遍历展示。。。')
+          }
+        })
+      }
+    })
+  }
+})
+
+
+// 多个回调函数嵌套/回调地狱带来的问题：
+// 1.多层函数嵌套，代码特别丑陋
+// 2.代码可读性差，不方便维护
+
+
+</script>
+</body>
+</html>

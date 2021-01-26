@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+// 基本类型
+// var a = 123
+// var b = a
+// a = 456
+// console.log(a)//456
+// console.log(b)//123
+
+// 引用类型
+var obj1 = {name:'老王',age:23}
+var obj2 = obj1
+obj1.age = 25
+// console.log(obj1.age)//25
+// console.log(obj2.age)//25
+// 引用类型 比较内存地址
+console.log( obj1 === obj2 )// true
+console.log( {} === {} )//false
+
+
+// 函数的值传递
+// var a = 123
+// function fn1(a){
+//   console.log(a)//123
+//   a = 456
+// }
+// fn1(a)
+// console.log(a)//123
+
+// 函数的引用传递
+// var a = {name:'李四',age:23}
+// function fn2(a){
+//   console.log(a.age)//23
+//   a.age = 24
+// }
+// fn2(a)
+// console.log(a.age)//24
+
+
+
+
+</script>
+</body>
+</html>

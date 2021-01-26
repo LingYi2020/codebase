@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.wrap{
+  width: 800px;
+  margin: 50px auto 0;
+  /* border: 1px solid #ccc; */
+}
+.header{
+  overflow: hidden;
+  border-top: 2px solid #06A86E;
+}
+.header h3{
+  float: left;
+  width: 200px;
+  line-height: 34px;
+  text-align: center;
+  background-color: #eee;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+.content{
+  /* height: 240px; */
+  overflow: hidden;
+}
+.content div{
+  padding: 15px 0;
+  display: none;
+}
+.content div img{
+  width: 180px;
+  height: 240px;
+  margin: 0 10px;
+  float: left;
+}
+/* 选中的样式 */
+.header .active{
+  background-color: #06A86E;
+  color: #fff;
+}
+.content .show{
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap tab1">
+  <div class="header">
+    <h3>喜剧</h3>
+    <h3>爱情</h3>
+    <h3>科幻</h3>
+    <h3>动作</h3>
+  </div>
+  <div class="content">
+    <div>
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+    </div>
+  </div>
+</div>
+<div class="wrap tab2">
+  <div class="header">
+    <h3>喜剧</h3>
+    <h3>爱情</h3>
+    <h3>科幻</h3>
+    <h3>动作</h3>
+  </div>
+  <div class="content">
+    <div>
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+// 面向过程
+/* var h3s = document.querySelectorAll('.header h3')
+var divs = document.querySelectorAll('.content div')
+var prevIndex = 0 // 上次选中元素的索引
+
+// 给所有h3添加点击事件
+for (var i = 0, len = h3s.length; i < len; i++){
+  // 给每一个DOM对象添加index属性保存对应的索引
+  h3s[i].index = i
+  h3s[i].onclick = function (){
+    // 1.清除上次选中元素的类名
+    h3s[prevIndex].className = ''
+    divs[prevIndex].className = ''
+
+    // 2.给当前点击的元素添加类名
+    // this -> 当前点击的元素 索引为 this.index == h3s[1].index
+    h3s[this.index].className = 'active'
+    divs[this.index].className = 'show'
+    
+    // 3.更新上次选中的索引
+    prevIndex = this.index
+  }
+} */
+
+// 面向对象
+(function (){//模块化
+  function Tab(options){
+    this.init(options)//初始化
+  }
+  // Tab.prototype = {constructor: Tab}
+  // console.log(Tab.prototype)
+  Tab.prototype = {
+    constructor: Tab,//手动指正构造器
+    init: function (options){
+      // 初始索引
+      this.prevIndex = options.initIndex || 0
+      this.h3s = this.getElement(options.tits)
+      this.divs = this.getElement(options.cons)
+      // 初始化显示对应的选项
+      this.setClass(this.h3s[this.prevIndex],'active')
+      this.setClass(this.divs[this.prevIndex],'show')
+      // 添加事件
+      this.addEvent()
+    },
+    getElement: function (selector){
+      return document.querySelectorAll(selector)
+    },
+    setClass: function (dom,oClass){
+      dom.className = oClass
+    },
+    addEvent: function (){
+      // this -> 实例对象
+      for (var i = 0, len = this.h3s.length; i < len; i++){
+        this.h3s[i].onclick = function (index){
+          // this -> 点击的元素 -> 实例对象
+          // 1.清除上次选中元素的类名
+          this.setClass(this.h3s[this.prevIndex],'')
+          this.setClass(this.divs[this.prevIndex],'')
+          // 2.给当前点击的元素添加类名
+          this.setClass(this.h3s[index],'active')
+          this.setClass(this.divs[index],'show')
+          // 3.更新上次选中的索引
+          this.prevIndex = index
+        }.bind(this,i)
+      }
+    },
+    getIndex: function (){
+      return this.prevIndex
+    }
+  }
+
+  console.log(Tab.prototype)
+  // 工厂函数
+  function factory(options){
+    return new Tab(options)//返回一个实例对象
+  }
+  
+  // 如何对外暴露接口
+  window.tab = factory
+})()
+
+// 如何使用？
+var tab1 = tab({
+  tits: '.tab1 .header h3',
+  cons: '.tab1 .content div',
+  initIndex: 1
+})
+var tab2 = tab({
+  tits: '.tab2 .header h3',
+  cons: '.tab2 .content div',
+  initIndex: 2//初始显示第三个选项
+})
+
+console.log( tab1.constructor )//Tab
+</script>
+</body>
+</html>

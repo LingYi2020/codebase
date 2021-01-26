@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<button class="add">添加元素</button>
+<div class="show">
+  show标签
+  <h5 class="tit">h5标签</h5>
+  <p>p标签</p>
+  <span>span标签</span>
+  <div>div标签</div>
+  <em>em现成的</em>
+</div>
+
+<script>
+var add = document.querySelector('.add')
+var show = document.querySelector('.show')
+
+add.onclick = function (){
+  var em = document.createElement('em')//动态元素/未来元素
+  em.innerText = 'em标签 '
+  show.appendChild(em)
+}
+
+// 事件委托：子元素的事件委托的父元素来完成
+// 原理：事件冒泡
+// 1.嵌套关系
+// 2.有相同的事件
+// 优势：
+// 1.减少使用for循环 
+// 2.运行效率更高 
+// 3.减少事件注册，占用更少的内容
+// 4.未来元素也可以添加事件
+
+// jQuery  $('.show').on('click','em',function(){})
+
+// 添加事件监听（兼容低本版IE）
+function addEvent(dom,type,callback){
+  if (dom.addEventListener) {
+    dom.addEventListener(type,callback)
+  } else {
+    dom.attachEvent('on'+type,callback)
+  }
+}
+function on(parent,type,selector,callback){
+  // 1.给父级绑定事件
+  addEvent(parent,type,function (ev){//父级的事件处理函数
+    var e = ev || event//事件对象
+    var target = e.target || e.srcElement//事件源
+    // 获取选择器第一个字符
+    var selector_first = selector.substr(0,1)
+    // 记录选择器第一个字符后面的内容
+    var selector_last = null
+    // 记录选择器类型（id class 标签）
+    var selector_type = null
+    // 根据第一个字符判断选择器类型
+    switch(selector_first){
+      case '.':
+        selector_type = 'className'
+        selector_last = selector.slice(1)//'tit'
+        break
+      case '#':
+        selector_type = 'id'
+        selector_last = selector.slice(1)//'tit'
+        break
+      default:
+        selector_type = 'tagName'
+        selector_last = selector.toUpperCase()//'EM'
+    }
+    // if (target.tagName === selector.toUpperCase()){
+    //   callback()
+    // }
+    // 判断点击元素是否为你希望触发事件的元素
+    if (target[selector_type] === selector_last){
+      callback.call(target,e)
+    }
+  })
+}
+
+// 用事件委托的方式给em添加点击事件
+on(show,'click','em',function (e){//事件处理函数
+  // console.log(e)
+  // console.log('点击。。。')
+  // console.log(this)//window
+  // this -> em
+  this.style.color = 'red'
+})
+
+/* document.body.onclick = function(ev){
+  // this -> show
+  var e = ev || event//事件对象
+  var target = e.target || e.srcElement//事件源
+  
+  // if (target.className !== 'add'){
+  //   target.style.color = 'red'
+  // }
+
+  if (target.tagName == 'DIV'){
+    target.style.color = 'red'
+  }
+  if (target.tagName == 'H5'){
+    target.style.color = 'blue'
+  }
+  if (target.tagName == 'SPAN'){
+    target.style.color = 'green'
+  }
+  if (target.tagName == 'P'){
+    target.style.color = 'orange'
+  }
+  if (target.tagName == 'EM'){
+    target.style.color = 'yellow'
+  }
+
+  if (target.className === 'add'){
+    var em = document.createElement('em')//动态元素/未来元素
+    em.innerText = 'em标签 '
+    show.appendChild(em)
+  }
+} */
+
+
+</script>
+</body>
+</html>

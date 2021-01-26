@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.wrap{
+  width: 300px;
+  margin: 50px auto 0;
+}
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <p>账号：<input type="text" class="user"></p>
+  <p>密码：<input type="text" class="pass"></p>
+  <p>
+    <button class="login">登录</button>
+    <button class="add">注册</button>
+  </p>
+</div>
+
+<script src="./utils.js"></script>
+<script>
+/* 
+  url: 'http://localhost/test/GP05/day21/user.php'
+  type: 'post'
+  params: 
+    type: login  登录
+          add    注册
+    username: 账号
+    password: 密码
+  return: '{"err":1,"msg":"登录成功"}'
+*/
+
+var user = $1('.user')
+var pass = $1('.pass')
+var login = $1('.login')
+var add = $1('.add')
+
+login.onclick = function (){
+  ajax({
+    url: 'http://localhost/test/GP05/day21/user.php',
+    type: 'post',
+    data: {
+      type: 'login',
+      username: user.value,
+      password: pass.value
+    },
+    dataType: 'json',
+    success: function (json){
+      alert(json.msg)
+    }
+  })
+}
+
+add.onclick = function (){
+  ajax({
+    url: 'http://localhost/test/GP05/day21/user.php',
+    type: 'post',
+    data: {
+      type: 'add',
+      username: user.value,
+      password: pass.value
+    },
+    dataType: 'json',
+    success: function (json){
+      alert(json.msg)
+    }
+  })
+}
+
+</script>
+</body>
+</html>

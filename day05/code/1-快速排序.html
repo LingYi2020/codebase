@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script>
+// 快速排序：
+// 1.找中点（元素及下标）
+// 2.分左右
+// 3.递归运算
+
+var arr = [27,11,8,35,25,28,31,2,6]
+
+/* // 1.找中点（元素及下标）
+var index = parseInt(arr.length/2)//4
+var middle = arr[index]
+// 2.分左右
+var left = []
+var right = []
+for(var i = 0; i< arr.length; i++){
+  if (index == i){
+    continue // 如果是中点，跳过本次循环
+  }
+  if (middle < arr[i]){//与中点比较，分左右
+    right.push(arr[i])
+  }else {
+    left.push(arr[i])
+  }
+}
+console.log( left.concat([middle],right) ) */
+
+/* // 1.找中点（元素及下标）
+var index = parseInt(left.length/2)//2
+var middle = left[index]
+// 2.分左右
+var left1 = []
+var right1 = []
+for(var i = 0; i< left.length; i++){
+  if (index == i){
+    continue // 如果是中点，跳过本次循环
+  }
+  if (middle < left[i]){//与中点比较，分左右
+    right1.push(left[i])
+  }else {
+    left1.push(left[i])
+  }
+}
+console.log( left1.concat([middle],right1) )
+console.log(left1)//[]
+console.log(right1)//[11,8,6] */
+
+
+function quickSort(arr){
+  if (arr.length <= 1) {//出口
+    return arr
+  }
+  // 1.找中点（元素及下标）
+  var index = parseInt(arr.length/2)//2
+  var middle = arr[index]
+  // 2.分左右
+  var left = []// [11,8,2,6]
+  var right = []
+  for(var i = 0; i< arr.length; i++){
+    if (index == i){
+      continue // 如果是中点，跳过本次循环
+    }
+    if (middle < arr[i]){//与中点比较，分左右
+      right.push(arr[i])
+    }else {
+      left.push(arr[i])
+    }
+  }
+  // console.log( left.concat([middle],right) )
+  return quickSort(left).concat([middle],quickSort(right))
+}
+console.log( quickSort(arr) )
+
+</script>
+</body>
+</html>

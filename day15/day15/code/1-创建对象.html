@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+// var abc = 123
+
+// function fn(){}
+
+// var obj = {
+//   abc: 456,
+//   fn: function (){}
+// }
+
+// 创建对象
+var obj1 = {}
+obj1.abc = 123
+obj1.fn = function (){}
+
+var obj2 = {//对象字面量
+  abc: 456,
+  fn: function (){}
+}
+
+var obj3 = new Object()
+obj3.abc = 789
+obj3.fn = function (){}
+
+var obj4 = {//对象字面量
+  abc: 666,
+  fn: function (){}
+}
+
+var obj5 = {//对象字面量
+  abc: 777,
+  fn: function (){}
+}
+// 创建多个对象，代码重复编写，不能复用
+
+
+// 工厂模式
+function factory(n,a,s){
+  // 原料
+  var obj = {}
+  // 加工
+  obj.name = n
+  obj.age = a
+  obj.sex = s
+  obj.say = function (){
+    console.log('hi，大家好')
+  }
+  // 出厂
+  return obj
+}
+var obj1 = factory('张三',21,'男')
+var obj2 = factory('李四',22,'女')
+// console.log( obj1 === obj2 )//false
+// console.log( obj1.say === obj2.say )//false
+// 多个不同对象的相同方法不能通用，占用更多内存
+
+// 所有对象的constructor属性返回创建这个对象的构造函数（类）对象的类型识别
+// console.log( obj1.constructor )// Object
+// console.log( obj2.constructor )// Object
+// var str1 = 'abc'
+// var str2 = new String('www')
+// console.log( str1.constructor )//String
+// console.log( str2.constructor )//String
+// console.log( str1.constructor === str2.constructor )//true
+// var num1 = 123
+// var num2 = new Number(456)
+// console.log( num1.constructor )//Number
+// console.log( num2.constructor )//Number
+// console.log( num1.constructor === num2.constructor )//true
+// var boo1 = true
+// var boo2 = new Boolean(false)
+// console.log( boo1.constructor === boo2.constructor )//true
+
+// 构造函数（类）
+// 任意一个函数通过new调用，并用于创建某一个类型的对象
+// 内置构造函数：Object Array String Number Boolean Date RegExp...
+// 内置构造函数首字母都是大写
+// js允许自定义构造函数（首字母大写，使用new调用）
+// 构造函数也是一种内置的工厂模式
+// function Human(n,a,s){// 类
+//   // this -> 实例对象
+//   // console.log(this)// 实例对象 obj1 obj2
+//   // var this = {}// 原料  new调用时自动完成
+//   // 加工
+//   this.name = n
+//   this.age = a
+//   this.sex = s
+//   this.say = function (){
+//     console.log('hi，大家好')
+//   }
+//   // 出厂  new调用时自动完成
+//   // return this
+// }
+// var obj1 = new Human('张三',21,'男')
+// var obj2 = new Human('李四',22,'女')
+// console.log( obj1 )
+// console.log( obj2 )
+// console.log( obj1.constructor )//Human 类型识别
+// console.log( obj2.constructor )//Human 类型识别
+// console.log( obj1.say === obj2.say )//false
+// 多个不同对象的相同方法不能通用，占用更多内存
+
+// var res = Human()//当成普通函数调用
+// var res = window.Human('王五',25,'男')//当成普通函数调用
+// console.log( res )//undefined
+// console.log( window.name )
+// window.say()//hi，大家好
+
+
+// 原型模式
+// 每一个函数对象都有一个属性prototype(原型)指向一个对象（原型对象）
+// prototype属性的作用：共享属性（实现继承）
+// function fn(){}
+// console.log( fn.prototype )//{constructor: ƒ} 原型对象
+// console.log( fn.prototype.constructor === fn )// true f fn(){}
+// fn()// 普通函数
+// new fn()// 构造函数
+
+// function Human(){}
+// console.log( Human.prototype )//{constructor: ƒ} 原型对象
+// console.log( Human.prototype.constructor === Human )//true
+// 原型对象也是构造函数的一个实例对象
+// Human.prototype.name = '老王'
+// Human.prototype.age = 23
+// Human.prototype.sex = '男'
+// Human.prototype.girlFriend = '马某'
+// Human.prototype.say = function (){
+//   console.log( 'hi，大家好' )
+// }
+// Human.prototype.fly = function (){
+//   console.log( '我要飞得更高。。。' )
+// }
+// console.log( Human.prototype )
+// console.log( Human.prototype.name )//'张三'
+// var obj1 = new Human()
+// var obj2 = new Human()
+// var obj3 = new Human()
+// console.log( obj1 )// Human {}
+// console.log( obj1.name )
+// console.log( obj2.name )
+// console.log( obj3.name )
+// console.log( obj1.say === obj2.say )//true
+
+// 纯原型模式创建对象，解决多个对象的相同方法创建多次的问题，但是
+// 属性共享会带来一些问题（无法区分不同对象的特征）
+
+
+// 混合模式（构造函数+原型模式）
+// function Human(n,a,s){
+//   this.name = n
+//   this.age = a
+//   this.sex = s
+// }
+// 需要共享的属性方法都添加到原型上
+// Human.prototype.animal = '动物'
+// Human.prototype.say = function (){
+//   console.log( this )
+//   console.log( 'hi，大家好' )
+// }
+// var obj1 = new Human('老王',34,'男')
+// var obj2 = new Human('老宋',32,'男')
+// console.log( obj1.constructor )//Human
+// console.log( obj2.constructor )//Human
+// console.log( obj1.say === obj2.say )//true
+// console.log( obj1.name )//'老王'
+// console.log( obj2.name )//'老宋'
+// obj1.say()//this->obj1
+// Human.prototype.say()//this->Human.prototype
+
+
+// this 指向：
+// 1.this所在函数被谁调用就指向谁
+// 2.this在事件处理函数中，指向绑定事件的元素
+// 3.在构造函数中一般指向构造函数创建的实例对象
+// 4.this在原型对象的方法中，一般指向实例对象，可指向原型对象
+// 5.如果找不到函数的调用对象则指向window对象
+
+function A () {
+  this.name = 'Bender'
+}
+
+A.prototype.say = function () {
+  console.log(this)
+}
+
+let a = new A()
+a.say()
+
+</script>
+</body>
+</html>

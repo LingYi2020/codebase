@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.box{
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: absolute;
+  left: 0px;
+  top: 50px;
+}
+p{
+  width: 1px;
+  height: 500px;
+  background-color: red;
+  position: absolute;
+  left: 532px;
+  top: 0;
+}
+</style>
+</head>
+<body>
+
+  <button class="btn">按钮</button>
+  <div class="box"></div>
+  <p></p>
+
+
+<script>
+var btn = document.querySelector('.btn')
+var box = document.querySelector('.box')
+// var timer
+// var current = 0 //当前位置
+// var target = 588 //目标位置
+// var speed = 5 //运动速度
+// 60hz  1000/60 = 16.667  30  1000/30 = 33.333
+
+btn.onclick = function (){
+  // animate(box,'left',0)
+  // animate(box,'left',1000)
+  animate(box,{
+    'width': 200,
+    'height': 200,
+    'left': 532,
+    'top': 500
+  },function (){
+    box.style.backgroundColor = 'red'
+  })
+}
+
+/** 
+* 运动函数
+* 参数：
+*   dom 要运动的元素
+*   attr 要运动的属性
+*   target 运动目标位置
+*   callback 运动完成的回调函数
+* 支持功能：
+*   支持多个带px单位的属性：left top right bottom marginLeft marginTop width height ...
+*   支持运动到任意位置
+*   支持透明度运动
+*   支持滚动条运动
+*   可以自定义速度
+*   支持多元素运动
+*   支持多属性同时运动
+*   支持运动完成之后进行其他操作（回调函数）
+*/
+function animate(dom,attrObj,callback){
+  // attrObj = {
+  //   'width': 200,
+  //   'height': 200,
+  //   'left': 532,
+  //   'top': 500
+  // }
+  // attrObj = {
+  //   'width':{
+  //     'current': parseInt(getComputedStyle(dom)['width']),
+  //     'target': attrObj['width']
+  //   },
+  //   'height':{
+  //     'current': parseInt(getComputedStyle(dom)['height']),
+  //     'target': attrObj['height']
+  //   },
+  //   'opacity':{
+  //     'current': parseInt(getComputedStyle(dom)['opacity']*100),
+  //     'target': attrObj['opacity']*100
+  //   },
+  //   ...
+  // }
+  for(var key in attrObj){
+    // 判断要运动的属性
+    if (key === 'opacity') {
+      var current = parseInt( getComputedStyle(dom)[key]*100 )
+      var target = attrObj[key]*100
+    } else if (key.indexOf('scroll') !== -1) {
+      var current = dom[key]// wrap.scrollTop
+      var target = attrObj[key]
+    } else {
+      var current = parseInt( getComputedStyle(dom)[key] )
+      var target = attrObj[key]
+    }
+    attrObj[key] = {
+      'current': current,
+      'target': target
+    }
+  }
+
+  /* // 判断要运动的属性
+  if (attr === 'opacity') {
+    // 属性的当前值
+    var current = parseInt( getComputedStyle(dom)[attr]*100 )
+    // 属性的目标值
+    target *= 100
+  // } else if (attr === 'scrollTop' || attr === 'scrollLeft') {
+  } else if (attr.indexOf('scroll') !== -1) {
+    // 属性的当前值
+    var current = dom[attr]
+  } else {
+    // 属性的当前值
+    var current = parseInt( getComputedStyle(dom)[attr] )
+  } */
+
+  clearInterval(dom.timer)
+  dom.timer = setInterval(function (){
+    for (var key in attrObj){
+      // 当前属性 key
+      // key属性的当前值 attrObj[key].current
+      var current = attrObj[key].current
+      // key属性的目标值 attrObj[key].target
+      var target = attrObj[key].target
+
+      // 持续变化的速度
+      var speed = (target-current)/10
+      // 根据运动方向进行取整
+      speed = speed>0?Math.ceil(speed):Math.floor(speed)
+
+      // 当前位置+速度
+      attrObj[key].current+=speed
+
+      // 临界值判断(运动停止条件：剩余运动量 <= 每次的运动量)
+      if ( Math.abs(target-current) <= Math.abs(speed) ) {
+        attrObj[key].current = target//到达目的地
+        
+        // 删除运动完成的属性
+        delete attrObj[key]
+
+        // 判断对象中是否还有其他属性
+        for (var attr in attrObj){//{}
+          // 能执行进来说明对象还有其他属性
+          return false//终止当前函数执行
+        }
+        
+        // 所有属性运动完成，清除计时器
+        clearInterval(dom.timer)
+
+        // 运动完成执行回调函数
+        typeof callback === 'function'?callback():''
+      } else {
+        // 持续改变运动属性
+        if (key === 'opacity') {
+          dom.style[key] = attrObj[key].current/100
+        } else if (key.indexOf('scroll') !== -1) {
+          dom[key] = attrObj[key].current
+        } else {
+          dom.style[key] = attrObj[key].current + 'px'
+        }
+      }
+    }
+  },20)
+}
+  
+</script>
+</body>
+</html>

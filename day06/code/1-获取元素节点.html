@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+span{
+  color: red;
+}
+#tit{
+  color: blue!important;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+  <!-- 注释内容 -->
+  <h1 id="tit">一个标题</h1>
+  <div class="div1">
+    <span>span1</span>
+    <span>span2</span>
+  </div>
+  <div class="div1 show">
+    <span>span3</span>
+    <span>span4</span>
+    <span>span5</span>
+  </div>
+  <input type="text" name="user">
+  <input type="text" name="user">
+</div>
+
+
+<script>
+// 获取元素节点
+var tit = document.getElementById('tit')// 单个元素
+var spans = document.getElementsByTagName('span')//元素集合，不能直接使用
+var user = document.getElementsByName('user')//元素集合
+
+// IE678不支持
+var divs = document.getElementsByClassName('div1')//元素集合
+var div1 = document.querySelector('.div1')// 单个元素
+var div1s = document.querySelectorAll('.div1')// 元素集合
+var sp = document.querySelectorAll('.show span')// 元素集合
+console.log(user)
+console.log(divs)
+console.log(div1)
+console.log(div1s)
+// js操作元素只能操作单个元素
+// console.log( tit.style )// {...}
+tit.style.color = 'red'
+// console.log(spans[2])
+// spans[2].style.color = 'blue'
+
+// console.log( tit )// <h1 id="tit">一个标题</h1>
+console.log( spans )//元素集合，类数组对象，伪数组
+// console.log( typeof tit )//object
+// console.log( typeof spans )//object
+
+
+// 1.获取到的是单个元素还是元素集合！！！
+// 2.单个元素可以直接操作，元素集合不能直接操作！！！
+var sp = document.querySelectorAll('.show span')// 元素集合
+for (var i = 0, len = sp.length; i < len; i++){
+  sp[i].style.color = 'red'
+}
+
+
+
+</script>
+</body>
+</html>

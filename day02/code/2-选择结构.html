@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// 选择结构
+// if (判断条件：逻辑点，返回布尔值){
+//   // 如果条件为true则执行这里面的代码
+// }
+
+// 判断条件经常用到比较运算符
+// if (2 > 3){
+//   console.log('真')
+// }
+// if (2 == 3){
+//   console.log('真')
+// }
+
+// 直接放任何数据进行判断，会发生隐式转换
+// if (''){
+//   console.log('真')
+// }
+// console.log('后面的其他程序')
+// ''&&console.log('真')
+
+// if/esle  二选一
+// if (''){//如果为true这些这里
+//   console.log(111)
+// } else {// 否则执行这里
+//   console.log(222)
+// }
+// ''?console.log(111):console.log(222)
+
+// 简写
+// if(123) console.log(123)
+// if(123)console.log(123)
+// if(0)
+// console.log(123)
+// console.log(456)
+
+// if(0)
+// console.log(111)
+// else
+// console.log(222)
+
+
+// var age = 23
+// if (age == 20){
+//   console.log(20)
+// } else if (age == 21){
+//   console.log(21)
+// } else if (age == 22){
+//   console.log(22)
+// } else {
+//   console.log(666)
+// }
+
+var age = 20
+// 多条件选择语句
+// switch (age){
+//   case 20:
+//     console.log(20)
+//     break // 结束switch语句
+//   case 21:
+//     console.log(21)
+//     break
+//   case 22:
+//     console.log(22)
+//     break
+//   default:
+//     console.log(666)
+// }
+
+
+
+// prompt() 输入提示框
+// var result = prompt('我喜欢什么颜色？','')
+// 点确定返回输入的内容，点取消返回null
+// console.log( result )
+// if (result === 'red'){
+//   console.log('可以查看个人博客')
+// } else {
+//   console.log('答案错误，无权访问')
+// }
+
+// 输入月份，显示当月的天数（要求：利用case穿透简化代码）
+var year = 2020
+var month = prompt('请输入月份的数字','')
+month = parseInt(month)//字符串转数字
+/* switch(month){
+  case 1:
+    console.log('1月31天')
+    break
+  case 2:
+    if ((year%4==0&&year%100!==0) || year%400===0) {
+      console.log('2月29天')
+    } else {
+      console.log('2月28天')
+    }
+    break
+  case 3:
+    console.log('3月31天')
+    break
+  case 4:
+    console.log('4月30天')
+    break
+  case 5:
+    console.log('5月31天')
+    break
+  case 6:
+    console.log('6月30天')
+    break
+  case 7:
+    console.log('7月31天')
+    break
+  case 8:
+    console.log('8月31天')
+    break
+  case 9:
+    console.log('9月30天')
+    break
+  case 10:
+    console.log('10月31天')
+    break
+  case 11:
+    console.log('11月30天')
+    break
+  case 12:
+    console.log('12月31天')
+    break
+  default:
+    console.log('输入月份数字错误')
+} */
+
+
+switch(month){
+  case 1:
+  case 3:
+  case 5:
+  case 7:
+  case 8:
+  case 10:
+  case 12:
+    console.log('31天')
+    break
+  case 4:
+  case 6:
+  case 9:
+  case 11:
+    console.log('30天')
+    break
+  case 2:
+    if ((year%4==0&&year%100!==0) || year%400===0) {
+      console.log('2月29天')
+    } else {
+      console.log('2月28天')
+    }
+    break
+  default:
+    console.log('输入月份错误')
+}
+
+</script>
+</body>
+</html>

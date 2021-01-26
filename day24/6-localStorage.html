@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+
+
+
+<script>
+// 设置localStorage
+localStorage.setItem('user1','zhangsan')
+localStorage.setItem('user2','lisi')
+localStorage.setItem('user3','wangwu')
+
+// 获取localStorage
+console.log( localStorage.getItem('user1') )
+
+// 通过索引获取localStorage的可以
+console.log( localStorage.key(0) )//'user3'
+// 获取所有数据条数
+console.log( localStorage.length )//3
+// 遍历所有的数据
+for (var i = 0, len = localStorage.length; i < len; i++){
+  console.log( localStorage.getItem( localStorage.key(i) ) )
+}
+
+// 删除所有数据
+// localStorage.clear()
+
+// 删除某一条数据
+// localStorage.removeItem('user2')
+
+// 存储数组、对象等数据
+// localStorage.setItem('user4',{name:'马六',age:26})
+// localStorage.setItem('user5',['a1','a2','a3'])
+
+localStorage.setItem('user4',JSON.stringify({name:'马六',age:26}))
+localStorage.setItem('user5',JSON.stringify(['a1','a2','a3']))
+
+var json = JSON.parse( localStorage.getItem('user4') )
+console.log( json.name )//马六
+
+</script>
+</body>
+</html>

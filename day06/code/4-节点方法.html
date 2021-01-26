@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+
+<button class="btn">按钮</button>
+<h1>一个标题</h1>
+<div class="show">
+  <!-- 前面添加 -->
+  <span>span1</span>
+  <!-- 中间添加 -->
+  <span>span2</span>
+  <span>span3</span>
+  <!-- 末尾添加 -->
+</div>
+<div class="user">
+  <span>张三</span>
+  <span>男</span>
+  <var>编辑</var>
+  <em>删除</em>
+</div>
+
+<script>
+var btn = document.querySelector('.btn')
+var show = document.querySelector('.show')
+var h1 = document.querySelector('h1')
+var body = document.querySelector('body')
+var body = document.body
+
+var user = document.querySelector('.user')
+var edit = document.querySelector('var')
+
+// 元素节点（增删改查）
+btn.onclick = function (){
+  // 创建元素节点
+  var newSpan = document.createElement('span')
+  // console.log( newSpan )//<span></span>
+  // 创建文本节点
+  var txt = document.createTextNode('新建的span4')
+  // console.log(txt)//'新建的span4'
+  // 把文件节点添加到元素节点中
+  newSpan.appendChild(txt)
+
+  // 新创建的节点一定要添加到文档中才会被渲染出来
+
+  // show.appendChild(newSpan)//在show内部末尾添加newSpan
+  // show.insertBefore(newSpan,show.children[0])//在第一个子元素之前添加newSpan
+  // show.insertBefore(newSpan,show.children[1])//在第二个子元素之前添加newSpan
+
+  // 删除h1元素
+  // body.removeChild(h1)
+
+  // 删除span1
+  // show.removeChild(show.children[0])
+
+  // 通过span2 删除span1
+  // show.children[1].parentNode.removeChild(show.children[0])
+
+  // 删除show
+  // show.remove() // IE678910不支持
+
+  // 替换节点span2
+  // show.replaceChild(newSpan,show.children[1])
+
+  // 复制节点
+  var cloneUser = user.cloneNode(true)//true深拷贝，false浅拷贝    默认浅拷贝，不拷贝子元素  事件不会被拷贝
+  // console.log(cloneUser)
+
+  // show.innerHTML += '<span>新建的span4</span>'
+}
+
+edit.onclick = function (){
+  var txt = user.children[0].innerText//当前显示的文本
+  var ipt = document.createElement('input')
+  user.replaceChild(ipt,user.children[0])
+  ipt.value = txt
+  ipt.focus()//获得焦点
+  // ipt.blur()//失去焦点
+  // ipt.onfocus = function (){}// 获得焦点触发事件
+  ipt.onblur = function (){//失去焦点触发事件
+    var val = ipt.value//当前输入的值
+    var span = document.createElement('span')
+    span.innerText = val
+    user.replaceChild(span,ipt)
+  }
+}
+
+
+
+</script>
+</body>
+</html>

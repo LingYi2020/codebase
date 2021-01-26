@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wrap{
+  width: 500px;
+  height: 340px;
+  margin: 50px auto 0;
+  position: relative;
+}
+.main{
+  width: 500px;
+  height: 340px;
+  position: relative;
+}
+.main img{
+  width: 500px;
+  height: 340px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  opacity: 0.1;
+}
+.prev{
+  width: 25px;
+  height: 24px;
+  background: url(./img/fx1.png);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 99;
+  margin-top: -12px;
+  cursor: pointer;
+}
+.next{
+  width: 25px;
+  height: 24px;
+  background: url(./img/fx2.png);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  z-index: 99;
+  margin-top: -12px;
+  cursor: pointer;
+}
+.list{
+  overflow: hidden;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 99;
+}
+.list li{
+  float: left;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: lightgreen;
+}
+
+.main img.show{
+  z-index: 10;
+}
+.list li.active{
+  background-color: lightpink;
+}
+</style>
+</head>
+<body>
+  
+<div class="wrap">
+  <div class="main">
+    <img class="show" src="./img/c1.jpg" alt="">
+    <img src="./img/c2.jpg" alt="">
+    <img src="./img/c3.jpg" alt="">
+    <img src="./img/c4.jpg" alt="">
+    <img src="./img/c5.jpg" alt="">
+  </div>
+  <p class="prev"></p>
+  <p class="next"></p>
+  <ul class="list">
+    <li class="active">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+</div>
+
+<script src="./utils.js"></script>
+<script>
+var imgs = $2('.main img')
+var prev = $1('.prev')
+var next = $1('.next')
+var lis = $2('.list li')
+var showIndex = 0 //当前显示图片的索引
+var prevIndex = 0 //上一张图片的索引
+var timer
+// 进入页面执行自动播放
+animate(imgs[showIndex],{'opacity':1},function (){
+  autoPlay()// 自定播放
+})
+
+// 自定播放
+function autoPlay(){
+  timer = setInterval(function (){
+    moveNext()//切换到下一张图片
+  },3000)
+}
+
+//切换到下一张图片
+function moveNext(){
+  // 清除上次显示y的元素类名
+  imgs[prevIndex].className = ''
+  lis[prevIndex].className = ''
+
+  // 上次显示图片的透明度设置为0.1
+  imgs[prevIndex].style.opacity = 0.1
+
+  // 当前索引递增
+  showIndex++
+  if (showIndex >= imgs.length) {//临界值判断
+    showIndex = 0
+  }
+  // 给当前显示的元素添加类名
+  imgs[showIndex].className = 'show'
+  lis[showIndex].className = 'active'
+
+  // 当前图片透明度运动到1
+  animate(imgs[showIndex],{'opacity':1})
+
+  // 更新上次显示的索引
+  prevIndex = showIndex
+}
+
+//切换到上一张图片
+function movePrev(){
+  // 清除上次显示y的元素类名
+  imgs[prevIndex].className = ''
+  lis[prevIndex].className = ''
+
+  // 上次显示图片的透明度设置为0.1
+  imgs[prevIndex].style.opacity = 0.1
+
+  // 当前索引递减
+  showIndex--
+  if (showIndex < 0) {//临界值判断
+    showIndex = imgs.length-1
+  }
+  // 给当前显示的元素添加类名
+  imgs[showIndex].className = 'show'
+  lis[showIndex].className = 'active'
+
+  // 当前图片透明度运动到1
+  animate(imgs[showIndex],{'opacity':1})
+
+  // 更新上次显示的索引
+  prevIndex = showIndex
+}
+
+// 点击下一页
+next.onclick = function (){
+  clearInterval(timer)//停止自定播放
+  clearInterval(imgs[showIndex].timer)//清除当前元素的计时器
+
+  moveNext()//切换到下一张图片
+
+  // 用户操作2秒后恢复自定播放
+  autoPlay()
+}
+// 点击上一页
+prev.onclick = function (){
+  clearInterval(timer)//停止自定播放
+  clearInterval(imgs[showIndex].timer)//清除当前元素的计时器
+
+  movePrev()//切换到上一张图片
+
+  // 用户操作2秒后恢复自定播放
+  autoPlay()
+}
+
+// 点击数字切换图片
+for (var i = 0, len = lis.length; i < len; i++){
+  lis[i].index = i
+  lis[i].onclick = function (){
+    clearInterval(timer)//停止自定播放
+    clearInterval(imgs[showIndex].timer)//清除当前元素的计时器
+
+    // 清除上次显示的元素类名
+    imgs[prevIndex].className = ''
+    lis[prevIndex].className = ''
+
+    // 上次显示图片的透明度设置为0.1
+    imgs[prevIndex].style.opacity = 0.1
+
+    // 当前索引
+    showIndex = this.index
+
+    // 给当前显示的元素添加类名
+    imgs[showIndex].className = 'show'
+    lis[showIndex].className = 'active'
+
+    // 当前图片透明度运动到1
+    animate(imgs[showIndex],{'opacity':1})
+
+    // 更新上次显示的索引
+    prevIndex = showIndex
+
+    // 用户操作2秒后恢复自定播放
+    autoPlay()
+  }
+}
+  
+</script>
+</body>
+</html>

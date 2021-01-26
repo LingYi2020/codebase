@@ -1,0 +1,26 @@
+<style>
+.list{
+  overflow: hidden;
+}
+.list li{
+  float: left;
+  line-height: 40px;
+  width: 100px;
+  text-align: center;
+  font-size: 20px;
+}
+</style>
+
+<ul class="list">
+  <li>首页</li>
+  <li>新闻</li>
+  <li>热点</li>
+  <li>关注</li>
+  <li>娱乐</li>
+</ul>
+
+<script>
+$('.list li').click(function (){
+  $(this).css('color','red')
+})
+</script>

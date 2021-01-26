@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<p>账号：<input type="text" class="user"></p>
+<p>密码：<input type="text" class="pass"></p>
+<button class="btn">登录</button>
+
+
+<script>
+/* 
+接口文档
+url: 'http://localhost/test/GP05/day20/data/post.php'
+type: 'post'
+params:
+  user 账号
+  pass 密码
+返回值：
+  '{"err":1,"msg":"登录成功"}'
+*/
+
+var btn = document.querySelector('.btn')
+var show = document.querySelector('.show')
+var user = document.querySelector('.user')
+var pass = document.querySelector('.pass')
+
+btn.onclick = function (){
+  // 参考 jQuery对ajax的封装
+  // $.ajax({
+  //   url: 'www.baidu.com',
+  //   type: 'get',
+  //   data: 'user=xiaocuo&pass=12345',
+  //   // data: {user:'xiaocuo',pass:'123456'},
+  //   dataType: 'text',// 'json'  'xml'
+  //   success: function (data){
+
+  //   },
+  //   error: function (err){
+      
+  //   }
+  // })
+  var data = 'user='+user.value+'&pass='+pass.value
+  ajax('get','./data/post.php',data,function (d){
+    var json = JSON.parse(d)
+    alert(json.msg)
+  },function (code){
+    alert('连接失败')
+  })
+  // 1.参数太多，容易混乱
+  // 2.多个参数一次传递代码结构不清晰，不方便阅读维护
+}
+
+function ajax(type,url,data,success,error){
+  // 1.创建数据交互对象（XMLHttpRequest）
+  var xhr = new XMLHttpRequest()//除了IE56其他都支持
+
+  if (type.toLowerCase() === 'get') {
+    // 2.初始化请求
+    xhr.open(type,url+'?'+data,true)
+    // 3.发送请求
+    xhr.send(null)
+  } else if (type.toLowerCase() === 'post'){
+    // 2.初始化请求
+    xhr.open(type,url,true)
+    // 设置请求头，模拟表单post提交数据
+    xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded")
+    // 3.发送请求
+    xhr.send(data)
+  } else {
+    alert('仅支持 get和post 请求方式！')
+    return //结束执行
+  }
+
+  // 4.请求响应状态
+  // xhr.readyState 属性值会从0-4发送变化
+  // 当xhr.readyState属性发生变化时，会触发onreadystatechange事件
+  xhr.onreadystatechange = function (){
+    // console.log( xhr.readyState )//2 3 4
+    if (xhr.readyState === 4) {//请求完成
+      // 响应状态码 xhr.status
+      if (xhr.status >=200 && xhr.status < 300) {// 响应就绪
+        // 可以拿到数据了
+        // xhr.responseText  接收文本字符串数据
+        // xhr.responseXML  接收xml数据
+        if (xhr.responseXML) {
+          success(xhr.responseXML)
+        } else {
+          success(xhr.responseText)
+        }
+      } else {
+        error(xhr.status)
+      }
+    }
+  }
+}
+
+</script>
+</body>
+</html>

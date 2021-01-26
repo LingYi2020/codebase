@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+// 递归函数 一个函数内部直接或间接调用自身
+
+// function fn1(){// 递归函数 （没有终止条件，死循环）
+//   console.log('fn1函数执行')
+//   fn1()//直接调用自身
+//   fn2()//间接调用自身
+// }
+// function fn2(){
+//   fn1()
+// }
+// fn1()
+
+
+// 递归函数重要的三点：
+// 1.递归前进阶段
+// 2.递归出口条件
+// 3.递归返回阶段
+
+// 老王有四个子女，老四比老三小2岁，老三比老二小2岁，老二比老大小2岁，老大现在16岁，问老四几岁？
+// 解：
+//   设 f(4)
+//   f(4) = f(3) - 2
+//   f(3) = f(2) - 2
+//   f(2) = f(1) - 2
+//   f(1) = 16 出口
+
+//   f(x) = f(x-1) - 2
+//   x == 1 return 16  出口
+
+// function f(x){
+//   if (x === 1) {//出口条件
+//     return 16
+//   }
+//   return f(x-1)-2
+// }
+// console.log( f(1) )//10
+
+
+// 阿里巴巴2015年前端面试题
+/**
+*@desc: fibonacci 斐波那契
+*@param: count {Number}
+*@return: result {Number} 第count个fibonacci值，计数从1开始
+  fibonacci数列为：[1, 1, 2, 3, 5, 8, 13, 21, 34 …]
+  getNthFibonacci(2) 返回值为1
+  getNthFibonacci(6) 返回值为8
+*/
+// 解：
+//   设 f(6)
+//   f(6) = f(5)+f(4)
+//   f(5) = f(4)+f(3)
+//   f(4) = f(3)+f(2)
+//   f(3) = f(2)+f(1)
+//   f(2) = 1
+//   f(1) = 1
+
+//   f(n) = f(n-1)+f(n-2)
+//   n <= 2 return 1 出口
+
+function getNthFibonacci(n){
+  if (n <= 2) {
+    return 1
+  }
+  return getNthFibonacci(n-1)+getNthFibonacci(n-2)
+}
+console.log( getNthFibonacci(2) )
+console.log( getNthFibonacci(6) )
+console.log( getNthFibonacci(9) )
+
+</script>
+</body>
+</html>

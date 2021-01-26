@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+html,body{
+  width: 100%;
+  height: 100%;
+  background: url(./005.jpg);
+  background-size: 100% 100%;
+}
+h1{
+  text-align: center;
+  padding: 20px;
+}
+.login{
+  position: fixed;
+  right: 30px;
+  top: 10px;
+  cursor: pointer;
+  color: red;
+}
+.center{
+  position: fixed;
+  right: 100px;
+  top: 10px;
+  cursor: pointer;
+  color: blue;
+}
+.wrap{
+  width: 300px;
+  height: 140px;
+  border: 1px solid paleturquoise;
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 99;
+  margin: -70px 0 0 -150px;
+  display: none;
+}
+.mask{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+}
+.close{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: red;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>首页</h1>
+<span class="login">登录</span>
+<span class="center">个人中心</span>
+<div class="mask"></div>
+<form class="wrap" action="./5-center.html">
+  <span class="close">X</span>
+  <p>账号：<input type="text" class="user"></p>
+  <p>密码：<input type="text" class="pass"></p>
+  <p>记住密码：<input type="checkbox" class="rem"></p>
+  <p><input type="submit" value="登录"></p>
+</form>
+
+<script src="./utils.js"></script>
+<script>
+var login = $1('.login')
+var center = $1('.center')
+var mask = $1('.mask')
+var wrap = $1('.wrap')
+var close = $1('.close')
+var user = $1('.user')
+var pass = $1('.pass')
+var rem = $1('.rem')
+
+center.onclick = function (){
+  // 判断是否已登录
+  if (getCookie('login')) {
+    // 已登录
+    location.href = './5-center.html'
+  } else {
+    mask.style.display = 'block'
+    wrap.style.display = 'block'
+  }
+}
+close.onclick = function (){
+  mask.style.display = 'none'
+  wrap.style.display = 'none'
+}
+login.onclick = function (){
+  mask.style.display = 'block'
+  wrap.style.display = 'block'
+  if (getCookie('user')) {
+    user.value = getCookie('user')
+    pass.value = getCookie('pass')
+    rem.checked = true
+  } else {
+    user.value = ''
+    pass.value = ''
+  }
+}
+wrap.onsubmit = function (){
+  var account = user.value
+  var password = pass.value
+  if (account==='xiaocuo'&&password==='123456') {
+    // 保存登录状态
+    setCookie({
+      key: 'login',
+      val: 'loginSuccess',
+      days: 3
+    })
+    // 判断是否勾选记住密码
+    if (rem.checked) {
+      // 保存账号密码
+      setCookie({
+        key: 'user',
+        val: account,
+        days: 15
+      })
+      setCookie({
+        key: 'pass',
+        val: password,
+        days: 15
+      })
+    } else {
+      // 删除账号密码数据
+      removeCookie('user')
+      removeCookie('pass')
+    }
+  } else {
+    alert('账号或密码错误！')
+    return false//阻止表单提交
+  }
+}
+</script>
+</body>
+</html>

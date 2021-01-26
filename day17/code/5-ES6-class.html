@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+// ES6 class
+
+// 语法糖：方便使用，
+// 不需关注原型，原型链，继承
+class Cat{
+  constructor(n,c){//构造器
+    this.name = n
+    this.color = c
+  }
+  skill(){//添加在原型上的方法
+    console.log('抓老鼠')
+  }
+  type = 'animal'//实例对象的属性
+  static say(){//静态方法
+    console.log('喵~')
+  }
+  static abc = 123//静态属性
+}
+// Cat.prototype.type = 'animal'
+// console.log( typeof Cat )//'function'
+// console.log( Cat.prototype )
+var cat1 = new Cat('小花','red')
+console.log(cat1)
+Cat.say()//调用静态方法
+console.log( Cat.abc )
+
+// 继承
+class Dog extends Cat{
+  constructor(f,n,c){
+    super(n,c)//继承的时候，内部一定要先执行super方法，然后才能使用this
+    // Cat.call(this,n,c)
+    this.food = f
+    // console.log( super )//报错
+    // console.log( super.type )//undefined
+    // super.skill()
+    // this.skill()
+    // Cat.prototype.skill()
+    // console.log( this === super )//报错
+  }
+  say(){
+    console.log('往往')
+  }
+}
+var dog1 = new Dog('骨头','小黑','black')
+console.log( dog1.name )
+Dog.say()
+console.log(Dog.abc)//123
+
+
+// ES5写法
+// function Cat(n,c){
+//   this.name = n
+//   this.color = c
+// }
+// Cat.prototype.type = 'animal'
+// Cat.prototype.skill = function (){
+//   console.log('抓老鼠')
+// }
+// function Dog(f,n,c){
+//   this.food = f
+//   Cat.call(this,n,c)
+// }
+// Dog.prototype = Object.create(Cat.prototype)
+// var dog1 = new Dog('骨头','大黄','yellow')
+// dog1.skill()
+
+
+// var obj = {
+//   say: function (){
+
+//   },
+//   say(){
+
+//   }
+// }
+
+
+
+</script>
+</body>
+</html>

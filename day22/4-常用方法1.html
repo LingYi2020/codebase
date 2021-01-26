@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+<div class="content">
+  content
+  <div class="wrap">
+    wrap
+    <div class="box1">box1</div>
+    <div class="box2">box2</div>
+    <div class="box3">box3</div>
+    <div class="box4">box4<span>box4-span</span></div>
+    <p>p标签11</p>
+    <p>p标签22</p>
+  </div>
+</div>
+<div class="div1">最后的div11</div>
+<div class="box2">box2222222</div>
+<div class="div2">最后的div22</div>
+<button class="btn" id="btn" title="一个按钮" hehe="呵呵">按钮</button>
+<input type="checkbox" name="" class="like" checked>
+<input type="checkbox" name="" class="like" >
+<input type="checkbox" name="" class="like">
+<div class="show">
+  <div>div1</div>
+  <div class="div2 red">div2</div>
+  <div>div3</div>
+</div>
+<div class="show">
+  <div>div4</div>
+  <div>div5</div>
+  <div>div6</div>
+</div>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// 常用方法
+// $('.wrap').children().css('color','red')
+
+// $('.box2').next().css('color','blue')
+// $('.box2').prev().css('color','blue')
+
+// $('.box1').parent().css('border','1px solid red')
+// $('.box1').closest('body').css('border','1px solid blue')
+
+// 不推荐太长的链式操作
+// $('.wrap').css('border','1px solid red').find('span').css('color','blue').end().css('border','5px solid red')
+
+// $('.box1').siblings().css('color','red')
+// $('.box1').siblings('div').css('color','red')
+
+// var index = 2
+// $('.wrap div').eq(index).css('color','blue')
+// $('.wrap div:eq(1)').css('color','blue')
+
+/* $('.show div').click(function (){
+  // console.log( this )//原生dom
+  // console.log( $(this) )//jq对象
+  // 获取点击元素的索引
+  var index = $(this).index()// 返回元素在当前结构中的索引
+  // var index = $('.show div').index(this)// 返回所有选中元素中当前点击元素的索引
+  console.log(index)
+}) */
+
+$('.show div').each(function (index,item){
+  // console.log(index)
+  // console.log(item)//原生dom
+  $(item).click(function (){
+    // console.log(index)// 当前点击元素的索引
+    if ($(item).is('.div2')) {//判断当前元素是否为.div2
+      $(item).css('color','red')
+    } else {
+      $(item).css('color','blue')
+    }
+  })
+})
+
+// 操作元素类名
+// $('.div2').addClass('blue')
+// $('.div2').removeClass('red')
+// $('.div2').toggleClass('red')
+// console.log( $('.div2').hasClass('blue') )
+
+
+// .attr() 设置或返回被选元素的属性和值(操作标签的属性)
+// console.log( $('.btn').attr('id') )//btn
+// console.log( $('.btn').attr('title') )//一个按钮
+// console.log( $('.btn').attr('hehe') )//呵呵
+
+// .prop() 设置或返回被选元素的属性和值(dom对象的属性)
+$('.btn').click(function (){
+  // $('.like').prop('checked','true')// 设置多选框选中
+  // console.log( $('.like').prop('checked') )// 获取第一匹配元素的选中状态
+  $('.btn').removeAttr('id')//删除id属性节点
+})
+
+
+</script>
+</body>
+</html>

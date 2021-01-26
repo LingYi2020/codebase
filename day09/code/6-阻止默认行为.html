@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.menu{
+  width: 120px;
+  height: 200px;
+  background-color: #ccc;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: none;
+}
+</style>
+</head>
+<body>
+  
+<a href="https://www.baidu.com/">百度</a>
+<form action="https://www.baidu.com/">
+  账号：<input type="text"><br>
+  <input type="submit" value="提交">
+</form>
+
+<div class="menu">
+  <p>刷新</p>
+  <p>返回顶部</p>
+</div>
+
+
+<script>
+var menu = document.querySelector('.menu')
+document.oncontextmenu = function (ev){
+  var e = ev || event
+  // 阻止默认菜单弹出
+  e.preventDefault()//阻止默认行为
+  // 显示自定义菜单
+  menu.style.display = 'block'
+  // 设置自定义菜单的位置
+  menu.style.left = e.clientX + 'px'
+  menu.style.top = e.clientY + 'px'
+}
+document.onclick = function (){
+  menu.style.display = 'none'
+}
+
+// 阻止a标签默认行为
+var a = document.querySelector('a')
+a.onclick = function (e){
+  var ev = e || event
+  // ev.preventDefault()
+  // return false//也可以阻止默认行为
+  // 低版本IE不支持ev.preventDefault，支持ev.returnValue=false
+  // 兼容写法
+  ev.preventDefault?ev.preventDefault():ev.returnValue=false
+}
+
+// 表单验证，通过就允许提交，验证不通过不提交
+var form = document.querySelector('form')
+var ipt = document.querySelector('input')
+form.onsubmit = function (e){
+  var val = ipt.value
+  if (val.length<6||val.length>18) {
+    // e.preventDefault()//阻止表单提交
+    alert('输入长度错误')
+    return false//也可以阻止默认行为
+  } else {
+    alert('提交成功')
+  }
+}
+
+</script>
+</body>
+</html>

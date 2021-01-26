@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 800px;
+      margin: 100px auto 0;
+    }
+
+    .title h3 {
+      float: left;
+      width: 200px;
+      text-align: center;
+      line-height: 40px;
+      font-weight: normal;
+      font-size: 14px;
+      color: #333333;
+      background-color: #eeeeee;
+      border-top: 2px solid #66c8a5;
+      cursor: pointer;
+    }
+
+    .title .active {
+      background-color: #66c8a5;
+      color: #ffffff;
+    }
+
+    .show img {
+      float: left;
+      width: 200px;
+    }
+
+    .content>div {
+      display: none;
+    }
+
+    .content .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="title">
+      <h3 class="active">喜剧</h3>
+      <h3>动作</h3>
+      <h3>爱情</h3>
+      <h3>青春</h3>
+    </div>
+    <div class="content">
+      <div class="show">
+        <img src="img/e1.png" alt="">
+        <img src="img/e1.png" alt="">
+        <img src="img/e1.png" alt="">
+        <img src="img/e1.png" alt="">
+      </div>
+      <div>
+        <img src="img/e2.png" alt="">
+        <img src="img/e2.png" alt="">
+        <img src="img/e2.png" alt="">
+        <img src="img/e2.png" alt="">
+      </div>
+      <div>
+        <img src="img/e3.png" alt="">
+        <img src="img/e3.png" alt="">
+        <img src="img/e3.png" alt="">
+        <img src="img/e3.png" alt="">
+      </div>
+      <div>
+        <img src="img/e4.png" alt="">
+        <img src="img/e4.png" alt="">
+        <img src="img/e4.png" alt="">
+        <img src="img/e4.png" alt="">
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    (function () {
+      function Tab(options) {
+        this.init(options)
+      }
+
+      Tab.prototype = {
+        constructor: Tab,
+        getElement: function(selector) {
+          return document.querySelectorAll(selector)
+        },
+        init: function(options) {
+          this.prevIndex = 0
+          this.title = this.getElement(options.title)
+          this.content = this.getElement(options.content)
+          this.addClick()
+        },
+        addClick: function() {
+          for (var i = 0, len = this.title.length; i < len; i++) {
+            this.title[i].onclick = function(i) {
+              this.title[this.prevIndex].className = ''
+              this.content[this.prevIndex].className = ''
+
+              this.title[i].className = 'active'
+              this.content[i].className = 'show'
+              this.prevIndex = i
+              console.log( this )
+            }.bind(this, i)
+          }
+        }
+      }
+      function factory(options) {
+        return new Tab(options)
+      }
+      window.tab = factory
+    })()
+    tab({
+      title: '.title>h3',
+      content: '.content>div'
+    })
+  </script>
+</body>
+</html>

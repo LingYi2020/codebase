@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+
+
+<!-- async异步加载脚本，不需要等到dom渲染完成才执行，加载完成立即执行，乱序 -->
+<script src="./load1.js" async></script>
+<!-- defer异步加载脚本，需要等到dom渲染完成才执行，顺序执行 -->
+<script src="./load2.js" defer></script>
+<!-- type="module" 异步加载模块，效果和defer一样 -->
+<script type="module" src="./load3.js"></script>
+<script>
+// 最佳实践：脚本放在/body之前，前面的dom渲染完成执行
+document.addEventListener('DOMContentLoaded',function (){
+  // 相当于jQuery中的ready方法
+  console.log( 'dom loaded.....4' )
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<input type="text" class="ipt">
+<h3 class="show"></h3>
+
+
+<script>
+var data = {
+  phone: '13522229999',
+  msg: 'hello',
+  arr: [1,2,3]
+}
+addGetSet()
+// console.log( data )
+function addGetSet(){
+  for (var key in data){
+    data['_'+key] = data[key]
+    ;(function (attr){
+      Object.defineProperty(data,attr,{
+        configurable: true,
+        enumerable: true,
+        get (){
+          return this['_'+attr]
+        },
+        set (val){
+          setter(val)
+          this['_'+attr] = val
+        }
+      })
+    })(key)
+  }
+}
+var ipt = document.querySelector('.ipt')
+var show = document.querySelector('.show')
+ipt.oninput = function (){
+  // addGetSet()
+  var iptVal = this.value
+  data.msg = iptVal//触发msg的setter
+}
+function setter(val){
+  show.innerHTML = val
+}
+
+
+
+</script>
+</body>
+</html>

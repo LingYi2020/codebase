@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#box{
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+</style>
+</head>
+<body>
+
+<button id="pt">prototype</button>
+<button id="jq">jquery</button>
+<div id="box"></div>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script src="./prototype-1.6.0.js"></script>
+<!-- prototype最后引入，所以$符所有权归prototype所有 -->
+<script>
+// prototype通过id获取元素，返回的是元素dom节点
+$('pt').onclick = function (){//$有效
+  $('box').style.backgroundColor = 'blue'
+}
+
+// $ === jQuery
+// jQuery通过id获取元素，返回jQuery对象
+// $('#jq').click(function (){//$无效
+//   $('#box').css('backgroundColor','green')
+// })
+
+jQuery('#jq').click(function (){//有效
+  jQuery('#box').css('backgroundColor','green')
+})
+
+</script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+// 开启严格模式：'use strick'
+// 'use strict'
+// console.log( '全局严格模式' )
+
+// function fn(){
+//   'use strict'
+//   console.log( '局部严格模式' )
+// }
+// fn()
+
+
+// 严格模式的限制规范：
+
+// 1.变量声明必须使用var，否则报错
+// 'use strict'
+// abc = 123
+// console.log(abc)
+
+// function fn(){
+//   hehe = '呵呵'
+// }
+// fn()
+// console.log(hehe)
+
+
+// 2.对不合理的操作显示报错，不再做静默失败处理
+// 'use strict'
+// NaN = 123
+// console.log(NaN)
+
+// var abc = 123
+// delete window.abc
+// console.log(abc)
+
+// var str = 'abc'
+// console.log( str.length )
+// str.length = 4
+// console.log( str.length )
+
+
+// 3.禁止对象属性重名（IE）
+// 'use strict'
+// var obj = {
+//   name: '张三',
+//   age: 24,
+//   sex: '男',
+//   name: '李四'
+// }
+// console.log(obj.name)
+
+
+// 4.禁止函数参数重名
+// 'use strict'
+// function test(a,b,c,a){
+//   console.log(a+b+c)
+// }
+// test(1,2,3,4)
+
+
+// 5.禁止使用以0开头的八进制数字
+// ES6新的语法标准，八进制以0o来表示，与16进制的0x形成统一的语法格式
+// 'use strict'
+// var num1 = 0o17
+// var num2 = 0x17
+
+
+// 6.禁止使用with语句(普通模式也不建议使用)
+
+
+// 7.强制为eval创建新作用域
+// eval() 函数计算 JavaScript 字符串，并把它作为脚本代码来执行。
+// 如果参数是一个表达式，eval() 函数将执行表达式。
+// 如果参数是Javascript语句，eval()将执行 Javascript 语句。
+// 严格模式为JavaScript程序创建了第三种作用域：eval作用域
+// var str = 'alert("123")'
+// eval(str)//将字符串解析成js代码并执行
+// 'use strict'
+// eval('var a = 123; console.log(a)')
+// console.log(a)
+
+
+// 8.arguments不再追踪参数变化
+// 'use strict'
+// var a = 1
+// function fn(x){
+//   x = 2
+//   console.log( arguments[0] )//1
+//   arguments[0] = 3
+//   console.log( x )//2
+// }
+// fn(a)
+
+
+// 9.禁止使用arguments.callee
+// 'use strict'
+// function test(){
+//   console.log( arguments )
+//   console.log( arguments.callee )//指向函数本身 f test(){}
+//   // arguments.callee()//等价于 test()
+// }
+// test(1,2,3)
+
+// var arr = [5]
+// var result = arr.map(function (item){
+//   if (item === 1) {
+//     return 1
+//   } else {
+//     return arguments.callee(item-1)*item
+//   }
+// })
+// console.log( result )
+
+
+// 10.函数中禁止this指向全局对象window，this变成undefined
+// 'use strict'
+// console.log(this)//window
+// function show(){
+//   console.log(this)
+// }
+// show()
+
+// setTimeout(function (){
+//   console.log(this)//window
+// },1000)
+
+
+// 11.函数必须声明在整个脚本或函数层面
+// 'use strict'
+// function fn1(){
+//   console.log(11)
+//   function fn2(){
+//     console.log(22)
+//   }
+//   fn2()
+// }
+// fn1()
+
+// if (123) {
+//   function f1(){
+//     console.log(11111)
+//   }
+// } else {
+//   function f1(){
+//     console.log(22222)
+//   }
+// }
+// f1()
+
+
+// 12.新增一些保留字，不能使用他们作为标识符命名
+// implements, interface, let, package, private, protected, public, static, yield ......
+
+</script>
+</body>
+</html>

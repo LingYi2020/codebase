@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.box{
+  width: 200px;
+  height: 200px;
+  background-color: #8bd459;
+}
+
+</style>
+</head>
+<body>
+<div class="box"></div>
+
+
+<script>
+// 随机数 random() [0,1)  0.00000000001 ~ 0.99999999999
+// console.log( Math.random() )// 0.5069173993151792
+
+// 生成0-1的随机整数
+// console.log( Math.round( Math.random() ) )
+
+// 生成0-5的随机整数
+// console.log( Math.round(Math.random()*5) )
+
+// 生成5-10的随机整数
+// console.log( Math.round(Math.random()*(10-5))+5 )
+
+// 生成8-24的随机整数
+// console.log( Math.round(Math.random()*(24-8))+8 )
+
+// 封装一个函数 randomInt(min,max) 生成 min~max区间的随机整数
+function randomInt(min,max){
+  return Math.round(Math.random()*(max-min))+min
+}
+// console.log( randomInt(100,200) )
+
+// 生成随机16进制颜色值  #+6个16进制数
+// 16进制数：0123456789abcdef
+function randomColor(){
+  var str = '0123456789abcdef'// 0-15
+  var color = '#'
+  for (var i = 0, len = 6; i < len; i++){
+    var index = randomInt(0,15)
+    color += str[index]
+  }
+  return color
+}
+// console.log( randomColor() )
+
+
+// 写一个函数 randomCode() 生成6位随机验证码（数字、字母（大小））
+// 随机范围：48-122
+function randomCode(){
+  var num = ''
+  for (var i = 0, len = 6; i < len; i++){
+    do {
+      var ascii = randomInt(48,122)
+    } while(ascii>57&&ascii<65 || ascii>90&&ascii<97)
+    num += String.fromCharCode(ascii)
+  }
+  return num
+}
+console.log( randomCode() )
+</script>
+</body>
+</html>

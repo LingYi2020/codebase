@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+// 基本包装类型：Number String Boolean
+// 所有对象类型都可以动态添加属性方法
+// 基本类型不可以动态添加属性方法
+var str1 = 'abc' // 基本类型 string
+var letter = str1.charAt(2)
+// 上面的代码执行时，底层完成了以下工作：
+// 1.创建与匹配类型相同的对象类型(临时对象)
+// var _str1 = new String('abc')// object
+// 2.使用该对象执行对应的方法并返回值
+// var letter = _str1.charAt(2)//'c'
+// 3.销毁临时对象
+// _str1 = null
+
+
+</script>
+</body>
+</html>

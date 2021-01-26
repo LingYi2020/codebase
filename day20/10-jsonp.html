@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<!-- <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.css"> -->
+</head>
+<body>
+<!-- <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg" alt=""> -->
+<!-- <iframe src="https://www.baidu.com/" frameborder="1" width="600" height="300"></iframe> -->
+
+<!-- <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script> -->
+
+<script>
+// jsonp与ajax没有半毛钱关系！！
+// 浏览器的同源策略限制了js的跨域能力！
+// 浏览器的同源策略限制所有跨域行为嘛？ 不是，link img iframe script 
+// script标签加载回来的资源会被当成js在全局执行
+// '123456'
+// var str = "hello world"
+// var data = {"name":"张三","age":23}
+
+function test(obj){
+  console.log(obj.name)
+}
+
+</script>
+<script src="http://localhost/test/GP05/day20/data/jsonp.php?cb=test"></script>
+</body>
+</html>

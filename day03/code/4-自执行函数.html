@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// 在js中不允许单独定义匿名函数
+// function (){
+//   console.log('匿名函数')
+// }
+// setTimeout(function (){//匿名函数
+
+// },2000)
+// div.onclick = function (){//匿名函数
+
+// }
+
+
+// 匿名自执行函数(立即执行函数 IIFE)
+var num1 = 123 // 全局变量
+console.log(num1)
+
+
+
+;(function (){
+  // 独立的作用域
+  var num2 = 456 // 局部变量
+  console.log(num2)
+})()
+// console.log(num2)//报错
+
+;(function (){
+  // 独立的作用域
+  var num2 = 456 // 局部变量
+  console.log(num2)
+}())
+
+// +function (){
+//   console.log('自执行函数')
+// }()
+
+// -function (){
+//   console.log('自执行函数')
+// }()
+// ...
+
+;(function (a,b){
+  console.log(a+b)
+})(2,3)
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  .box{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+</style>
+</head>
+<body>
+  
+<div class="box"></div>
+<script>
+var box = document.querySelector('.box')
+box.onmousedown = function (e){
+  // 获取点击位置到box左侧的距离
+  var to_left = e.clientX - box.offsetLeft
+  // 获取点击位置到box顶部的距离
+  var to_top = e.clientY - box.offsetTop
+  document.onmousemove = function (e){
+    // 计算移动后box的定位left值
+    var box_left = e.clientX - to_left
+    // 计算移动后box的定位top值
+    var box_top = e.clientY - to_top
+    // 给box定位赋值
+    box.style.left = box_left + 'px'
+    box.style.top = box_top + 'px'
+  }
+  document.onmouseup = function (){
+    // 移除document的mousemove事件
+    document.onmousemove = null
+  }
+}
+
+
+
+</script>
+
+</body>
+</html>

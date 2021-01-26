@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn">请求数据</button>
+<div class="show"></div>
+
+<!-- <script src="./utils.js"></script> -->
+<script>
+
+var btn = document.querySelector('.btn')
+var show = document.querySelector('.show')
+function ajax(options) {
+  var xhr = new XMLHttpRequest()
+  var data = ''
+  if (typeof options.data === 'string') {
+    data = options.data
+  }
+  if (Object.prototype.toString.call(options.data) === '[object Object]') {
+    for (var key in options.data) {
+      data += (key + '=' + options.data[key] + '&')
+    }
+    data = data.substring(0, data.length - 1)
+  }
+  if (options.type.toLowerCase() === 'get') {
+    if ((options.dataType.toLowerCase() === 'jsonp')) {
+      window[options.jsonpCallback] = options.success
+      var oScript = document.createElement('script')
+      oScript.src = options.url + '?' + options.jsonp + '=' + options.jsonpCallback + '&' + data
+      document.body.appendChild(oScript)
+      oScript.onload = function () {
+        document.body.removeChild(oScript)
+      }
+      return
+    }
+    if (options.cache) {
+      xhr.open(options.type, options.url + '?' + data, true)
+    } else {
+      xhr.open(options.type, options.url + '?' + data + '&_=' + Date.now(), true)
+    }
+    xhr.send(null)
+  } else if (options.type.toLowerCase() === 'post') {
+    xhr.open(options.type, options.url, true)
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    xhr.send(data)
+  } else {
+    alert('仅支持 get/post/jsonp 请求方式！')
+    return
+  }
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        if (options.dataType === 'json') {
+          var json = JSON.parse(xhr.responseText)
+          options.success(json)
+        } else if (options.dataType === 'xml') {
+          options.success(xhr.responseXML)
+        } else {
+          options.success(xhr.responseText)
+        }
+      } else if(options.error!=null){
+        options.error(xhr.status)
+      }
+    }
+  }
+}
+// ajax不能跨域请求！！！！！
+btn.onclick = function (){
+  ajax({
+    url: '.data/post.php',
+    type: 'get',
+    data: 'user=xiaocuo&pass=123456',
+    dataType: 'json',
+    success: function (json){
+      console.log(json.msg)
+    }
+  })
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  .parent{
+    padding: 50px;
+    width: 400px;
+    height: 200px;
+    background-color: lightblue;
+  }
+  .child{
+    width: 200px;
+    height: 100px;
+    background-color: lightgreen;
+  }
+</style>
+</head>
+<body>
+
+<div class="parent">
+  <div class="child"></div>
+</div>
+
+
+<script>
+// 事件流：事件触发的顺序
+// 1.元素有嵌套关系
+// 2.父子元素有相同的事件
+// 事件捕获：事件从外到里触发  网景
+// 事件冒泡：事件从里向外触发  IE
+// W3C标准的事件流：规定触发事件先进入捕获阶段，再到冒泡阶段
+
+// 不管是捕获还是冒泡都有传播的特征！！！
+
+var doc = document
+var html = document.documentElement
+var body = document.body
+var parent = document.querySelector('.parent')
+var child = document.querySelector('.child')
+
+// 主流浏览器默认的事件流：事件冒泡
+
+// doc.onclick = function (){
+//   console.log('document被点击')
+// }
+// body.onclick = function (){
+//   console.log('body被点击')
+// }
+// parent.onclick = function (){
+//   console.log('parent被点击')
+// }
+// child.onclick = function (){
+//   console.log('child被点击')
+// }
+
+
+// 设置事件流
+child.addEventListener('click',function (){//事件处理函数
+  console.log('child被点击')
+},true)// true事件捕获
+parent.addEventListener('click',function (){//事件处理函数
+  console.log('parent被点击')
+},true)// true事件捕获
+body.addEventListener('click',function (){//事件处理函数
+  console.log('body被点击')
+},true)// true事件捕获
+</script>
+</body>
+</html>

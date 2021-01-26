@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// 1.this所在函数被谁调用就执行谁
+// 2.在事件处理函数中，指向绑定事件的元素
+// 3.在构造函数中，指向实例对象
+var name = '老王'
+function test(a,b){
+  console.log( this.name )
+  console.log( a+b )
+}
+// window.test(2,4)// '老王'  6
+
+
+// 改变this指向
+
+var obj = {
+  name: '小明',
+  age: 23
+}
+// test.bind(obj,参数1，参数2，...) 
+// 将test函数内部的this指向obj，返回改变this指向之后的新函数，不会执行test
+// var newTest = test.bind(obj,2,4)
+// newTest()
+
+// setTimeout(function (){
+//   console.log(this)
+// }.bind(obj),2000)
+
+
+// 两个方法的作用一样，不同的是传参的方式不一样
+// call(obj,参数1，参数2，...)
+// apply(obj,[参数1，参数2，...])
+// test.call(obj,3,4)
+// test.apply(obj,[3,5])
+// 执行test函数，并将内部的this指向obj，并传递两个参数
+
+var arr = [12,32,7,18,25,45,21]
+// console.log( Math.max(12,32,7,18,25,45,21) )//45
+// console.log( Math.max.apply([],arr) )//45
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.wrap{
+  width: 500px;
+  height: 357px;
+  position: relative;
+  margin: 50px auto 0;
+}
+.main{
+  width: 500px;
+  height: 357px;
+  overflow: hidden;
+  /* overflow-x: scroll; */
+}
+.content{
+  width: 6000px;
+  overflow: hidden;
+}
+.main img{
+  width: 500px;
+  height: 340px;
+  float: left;
+}
+.prev{
+  width: 25px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -12px;
+  cursor: pointer;
+  background: url('./img/fx1.png');
+}
+.next{
+  width: 25px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -12px;
+  cursor: pointer;
+  background: url('./img/fx2.png');
+}
+.pages{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  overflow: hidden;
+}
+.pages span{
+  float: left;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  margin: 0 5px;
+  background-color: lightblue;
+  cursor: pointer;
+}
+.pages span.show{
+  background-color: lightgreen;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="main">
+    <div class="content">
+      <!-- <img src="./img/c5.jpg" alt=""> -->
+      <img src="./img/c1.jpg" alt="">
+      <img src="./img/c2.jpg" alt="">
+      <img src="./img/c3.jpg" alt="">
+      <img src="./img/c4.jpg" alt="">
+      <img src="./img/c5.jpg" alt="">
+      <!-- <img src="./img/c1.jpg" alt=""> -->
+    </div>
+  </div>
+  <p class="prev"></p>
+  <p class="next"></p>
+  <div class="pages">
+    <span class="show">1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+  </div>
+</div>
+
+<script src="./utils.js"></script>
+<script>
+var main = $1('.main')
+var content = $1('.content')
+var imgs = $2('.content img')//5
+var img1 = imgs[0]
+var prev = $1('.prev')
+var next = $1('.next')
+var nums = $2('.pages span')
+var timer
+var imgIndex = 0 // 当前显示图片的索引
+var pageIndex = 0 // 当前页码的索引
+var imgWidth = img1.clientWidth//一张图片的宽度
+
+// 在末尾添加第一张图片
+var firstImg = img1.cloneNode(true)
+content.appendChild(firstImg)
+
+// 进入页面开启自动播放
+autoPlay()
+
+// 自动播放函数
+function autoPlay(){
+  timer = setInterval(function (){
+    moveNext()//移动到下一页
+  },3000)
+}
+
+// 移动到下一页
+function moveNext(){
+  imgIndex++
+  if (imgIndex > imgs.length) {
+    imgIndex = 1//到达最后一张，接下来应该显示第二张图片
+    main.scrollLeft = 0//滚动条设置到0的位置
+  }
+  // 滚动条执行动画
+  animate(main,{'scrollLeft':imgIndex*imgWidth})
+
+  // 清除上次的类名
+  nums[pageIndex].className = ''
+  // 当前点击的页码添加类名
+  pageIndex++
+  if (pageIndex >= nums.length) {
+    pageIndex = 0
+  }
+  // 当前页码添加类名
+  nums[pageIndex].className = 'show'
+}
+
+// 移动到上一页
+function movePrev(){
+  imgIndex--
+  if (imgIndex < 0) {
+    imgIndex = imgs.length-1//到达第一张，接下来应该显示倒数第二张图片
+    main.scrollLeft = imgs.length*imgWidth//滚动条设置到最后一张图片的位置
+  }
+  // 滚动条执行动画
+  animate(main,{'scrollLeft':imgIndex*imgWidth})
+  // 清除上次的类名
+  nums[pageIndex].className = ''
+  // 当前点击的页码添加类名
+  pageIndex--
+  if (pageIndex < 0) {
+    pageIndex = nums.length-1
+  }
+  // 当前页码添加类名
+  nums[pageIndex].className = 'show'
+}
+
+// 点击下一页
+next.onclick = function (){
+  // 停止自动播放
+  clearInterval(timer)
+  // 切换到下一张
+  moveNext()
+  // 启动自动播放
+  autoPlay()
+}
+
+// 点击上一页
+prev.onclick = function (){
+  // 停止自动播放
+  clearInterval(timer)
+  // 切换到下一张
+  movePrev()
+  // 启动自动播放
+  autoPlay()
+}
+
+// 点击页码切换图片
+for (var i = 0, len = nums.length; i < len; i++){
+  nums[i].index = i
+  nums[i].onclick = function (){
+    // 停止自动播放
+    clearInterval(timer)
+    // 切换图片
+    imgIndex = this.index
+    animate(main,{'scrollLeft':imgIndex*imgWidth})
+    // 启动自动播放
+    autoPlay()
+    // 清除上次的类名
+    nums[pageIndex].className = ''
+    // 当前点击的页码添加类名
+    nums[this.index].className = 'show'
+    // 更新上次的页码
+    pageIndex = this.index
+  }
+}
+
+
+</script>
+</body>
+</html>

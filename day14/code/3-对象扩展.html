@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+
+var obj = {
+  name: '阿锦',
+  age: 20,
+  sex: '女'
+}
+
+// Object的静态方法
+
+// 返回对象的属性的描述符(对象)
+// Object.getOwnPropertyDescriptor(object, property)
+// var propObj = Object.getOwnPropertyDescriptor(obj,'name')
+// console.log( propObj )//属性描述符（对象）
+// propObj = {
+//   configurable: true,// true属性可配置可删除，false不可配置不可删除
+//   enumerable: true,// true属性可枚举，false不可枚举
+//   writable: true,// true可以修改属性值，false只读
+//   value: '阿锦' // 属性的值
+// }
+
+// for(var key in obj){// 一一列举出可枚举属性
+//   console.log(key)// 'name'  'age'  'sex'
+// }
+
+// 显式声明变量和隐式声明变量的区别
+// 1.显式声明变量在全局为全局变量，在函数为局部变量
+// 2.隐式声明变量在全局或局部都是全局变量
+// 3.显式声明变量不可删除，隐式声明变量可删除
+var hehe = '呵呵'
+haha = '哈哈'
+// delete window.hehe
+// delete window.haha
+// console.log(hehe)// '呵呵' 不能删除
+// console.log(haha)//报错，已被删除
+
+// var prop1 = Object.getOwnPropertyDescriptor(window,'hehe')
+// var prop2 = Object.getOwnPropertyDescriptor(window,'haha')
+// console.log( prop1 )
+// console.log( prop2 )
+
+
+var obj = {
+  name: '阿锦',
+  age: 20,
+  sex: '女'
+}
+// Object.defineProperty() 定义对象的属性及属性描述符
+Object.defineProperty(obj,'name',{//属性描述符对象
+  configurable: false,//不可配置，不可删除
+  enumerable: true,
+  writable: true,
+  value: '阿锦2'
+})
+// delete obj.name
+// console.log( obj.name )//'阿锦2'
+
+// for (var key in obj){
+//   console.log(key)
+// }
+
+// 通过直接赋值添加的新属性，configurable、enumerable、writable默认都是true
+// obj.abc = 'www'
+// // 等价于如下操作
+
+// Object.defineProperty(obj,'abc',{
+//   configurable: true,//可配置，可删除
+//   enumerable: true,//可枚举
+//   writable: true,//可读写
+//   value: 'www'
+// })
+// console.log( obj.abc )
+
+// 通过defineProperty添加的新属性，不设置configurable、enumerable、writable时，默认都是false
+
+
+/* Object.defineProperty(obj,'name',{//属性描述符对象
+  // configurable: true,//可配置，可删除
+  // enumerable: true,//不可枚举
+  // writable: true,
+  value: '阿锦3'
+})
+// console.log( obj.name )//'阿锦3'
+for (var key in obj){
+  console.log(key)
+} */
+
+
+// getter setter  属性访问器 可以监听对象属性值的变化
+// 属性描述符对象不能同时有getter/setter 和 writable/value
+var obj = {
+  name: '阿锦',
+  age: 20,
+  sex: '女',
+  _age: 20
+}
+Object.defineProperty(obj,'age',{
+  configurable: true,
+  enumerable: true,
+  get (){//访问属性age时，触发该函数
+    console.log('getter...')
+    // return 'abc'
+    // return this.age// 导致死循环
+    return this._age // 中间变量
+  },
+  set (val){//设置属性age时，触发该函数
+    console.log('setter...')
+    // this -> obj
+    this._age = val
+  }
+})
+// console.log( obj.age ) // 触发getter
+// obj.age = 21 // 触发setter
+// console.log( obj.age ) // 触发getter
+
+
+var obj2 = {
+  name: '李四',
+  _age: 23,
+  get age(){
+    console.log('getter...')
+    return this._age
+  },
+  set age(val){
+    console.log('setter...')
+    this._age = val
+  }
+}
+// console.log(obj2)
+// console.log( obj2.age )
+// obj2.age = 25
+
+
+
+// 添加或更改多个对象属性
+// Object.defineProperties(object, descriptors)
+var obj = {
+  name: '阿锦',
+  age: 20,
+  sex: '女',
+  _age: 20
+}
+Object.defineProperties(obj,{
+  name: {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    value: '阿锦'
+  },
+  age: {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    value: 20
+  },
+  sex: {
+    configurable: true,
+    enumerable: true,
+    writable: true,
+    value: '男'
+  }
+})
+</script>
+</body>
+</html>

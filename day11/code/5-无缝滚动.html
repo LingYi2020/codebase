@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .wrap{
+    width: 800px;
+    height: 157px;
+    overflow: auto;
+    border: 1px solid #000;
+    margin: 50px auto 0;
+  }
+  .main{
+    width: 3000px;
+    height: 140px;
+  }
+  .main img{
+    width: 200px;
+    height: 140px;
+    float: left;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="main">
+    <img src="./img/b1.jpg" alt="">
+    <img src="./img/b2.jpg" alt="">
+    <img src="./img/b3.jpg" alt="">
+    <img src="./img/b4.jpg" alt="">
+    <img src="./img/b1.jpg" alt="">
+    <img src="./img/b2.jpg" alt="">
+    <img src="./img/b3.jpg" alt="">
+    <img src="./img/b4.jpg" alt="">
+  </div>
+</div>
+
+<script>
+var wrap = document.querySelector('.wrap')
+var imgWidth = document.querySelector('.main img').clientWidth
+setInterval(function(){
+  wrap.scrollLeft+=2
+  if (wrap.scrollLeft >= imgWidth*4) {
+    wrap.scrollLeft = 0
+  }
+},20)
+
+</script>
+</body>
+</html>

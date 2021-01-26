@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<script src="./utils.js"></script>
+<script>
+// promise 承诺
+// promise是ES6新出用于解决异步编程的问题
+// promise可以看成一个容器，里面放异步程序
+// 好处：可以让异步编程按照同步程序的方式书写
+
+// promise三种状态：pending进行中，fulfilled成功，rejected失败
+// promise状态改变：
+// pending进行中 -> fulfilled成功
+// pending进行中 -> rejected失败
+// promise对象的状态一旦改变，状态永远保持不变
+
+// 创建promise对象，必须传入回调函数，否则报错
+// let p1 = new Promise(function(){})
+/* let p1 = new Promise((resolve,reject)=>{//创建是同步的
+  console.log('创建promise对象。。。')
+  // resolve 函数执行 -> fulfilled成功
+  // resolve()//返回默认值undefined
+  // resolve('成功')//返回指定值 成功
+
+  // reject 函数执行 -> rejected失败
+  // reject()//返回默认值undefined
+  reject('失败')//返回指定值 失败
+
+  // 内部出错
+  // console.lag('123456')
+}) */
+// console.log( p1 )// Promise {<pending>}
+
+// promise对象的方法：then 然后。。。之后。。。 这里是异步
+// then( 成功的回调,失败的回调(可选) ) 返回一个新的promise对象
+/* p1.then((res)=>{
+  // promise内部执行resolve时，会执行这里面的代码
+  console.log('1承诺：',res)
+},(res)=>{
+  // promise内部执行reject时，会执行这里面的代码
+  // promise内部出错，也会执行这里面的代码
+  console.log('2承诺：',res)
+}) */
+
+// promise对象的方法：catch() 捕获失败状态或异常，返回新的promise对象
+/* p1.then((res)=>{
+  // promise内部执行resolve时，会执行这里面的代码
+  console.lag('1承诺：',res)
+}).catch((err)=>{
+  // catch之前的错误都能捕获，失败状态也可以进入这里
+  console.log(err)
+}) */
+
+// promise对象的方法：finally() 不管成功还是失败，最后都会执行此方法
+/* p1.then((res)=>{
+  // promise内部执行resolve时，会执行这里面的代码
+  console.lag('1承诺：',res)
+}).catch((err)=>{
+  // catch之前的错误都能捕获，失败状态也可以进入这里
+  console.log(err)
+}).finally(()=>{
+  console.log('执行完成。。。')
+}) */
+
+
+/* let p2 = new Promise((resolve,reject)=>{
+  setTimeout(()=>{
+    resolve('成功2')
+  },1200)
+})
+let p3 = new Promise((resolve,reject)=>{
+  setTimeout(()=>{
+    // resolve('成功3')
+    reject('失败3')
+  },1800)
+})
+let p4 = new Promise((resolve,reject)=>{
+  setTimeout(()=>{
+    resolve('成功4')
+  },2200)
+}) */
+// Promise静态方法：all  race
+// all()方法将多个promise实例对象组合成一个新的promise对象
+// 当p2 p3 p4都成功时，p5成功，所有成功返回值组成的数组
+// p2 p3 p4任意一个失败，p5失败，失败的promise对象的返回值
+/* let p5 = Promise.all([p2,p3,p4])
+p5.then((res)=>{
+  console.log(res)//['成功2'，'成功3'，'成功4']
+},(err)=>{
+  console.log(err)
+}) */
+
+// race()方法将多个promise实例对象组合成一个新的promise对象
+// 当p2 p3 p4中任意一个完成时，p6就跟着先完成的子promise对象的状态
+// let p6 = Promise.race([p2,p3,p4])
+// p6.then((res)=>{
+//   console.log(res)
+// },(err)=>{
+//   console.log(err)
+// })
+
+
+// 1.有多个异步程序，如何保证他们的执行顺序？
+// setTimeout(()=>{
+//   console.log('程序1')
+// },800)
+// setTimeout(()=>{
+//   console.log('程序2')
+// },500)
+// setTimeout(()=>{
+//   console.log('程序3')
+// },1000)
+
+// 回调地狱
+// setTimeout(()=>{
+//   console.log('程序1')
+//   setTimeout(()=>{
+//     console.log('程序2')
+//     setTimeout(()=>{
+//       console.log('程序3')
+//     },1000)
+//   },500)
+// },800)
+
+// function test(msg){
+//   return new Promise((resolve,reject)=>{
+//     setTimeout(()=>{
+//       console.log(msg)
+//       resolve()
+//     },800)
+//   })
+// }
+// test('程序1')
+// .then(()=>{
+//   return test('程序2')
+// })
+// .then(()=>{
+//   return test('程序3')
+// })
+// .then(()=>{
+//   console.log('程序123依次执行完成')
+// })
+// .catch((err)=>{
+//   console.log(err)
+// })
+
+
+// 2.有三个数据接口，如何保证三个数据都拿到之后再执行后面的操作？
+var arr = []
+promiseAjax({
+  url: './promise.php',
+  type: 'get',
+  data: 'code=a1',
+  dataType: 'json'
+})
+.then((json)=>{
+  arr.push(json)
+  return promiseAjax({
+    url: './promise.php',
+    type: 'get',
+    data: 'code=a2',
+    dataType: 'json'
+  })
+})
+.then((json)=>{
+  arr.push(json)
+  return promiseAjax({
+    url: './promise.php',
+    type: 'get',
+    data: 'code=a3',
+    dataType: 'json'
+  })
+})
+.then((json)=>{
+  arr.push(json)
+  console.log(arr)
+})
+.catch((err)=>{
+  console.log(err)
+})
+
+let p1 = promiseAjax({
+  url: './promise.php',
+  type: 'get',
+  data: 'code=a1',
+  dataType: 'json'
+})
+let p2 = promiseAjax({
+  url: './promise.php',
+  type: 'get',
+  data: 'code=a2',
+  dataType: 'json'
+})
+let p3 = promiseAjax({
+  url: './promise.php',
+  type: 'get',
+  data: 'code=a3',
+  dataType: 'json'
+})
+let p4 = Promise.all([p1,p2,p3])
+p4.then((res)=>{
+  console.log(res)
+})
+.catch((err)=>{
+  console.log(err)
+})
+</script>
+</body>
+</html>

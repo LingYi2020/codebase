@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.nav{
+  position: fixed;
+  right: 0;
+  top: 200px;
+}
+.box{
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin: 5px 0;
+}
+.box p{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  background-color: #ccc;
+}
+.box div{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  width: 100px;
+  line-height: 50px;
+  text-align: center;
+  background-color: #ccc;
+}
+</style>
+</head>
+<body>
+  
+<div class="nav">
+  <div class="box">
+    <p>标题1</p>
+    <div>内容111</div>
+  </div>
+  <div class="box">
+    <p>标题2</p>
+    <div>内容222</div>
+  </div>
+  <div class="box">
+    <p>标题3</p>
+    <div>内容333</div>
+  </div>
+  <div class="box">
+    <p>标题4</p>
+    <div>内容444</div>
+  </div>
+</div>
+
+<script>
+var box = document.querySelectorAll('.box')
+var ps = document.querySelectorAll('.box p')
+var divs = document.querySelectorAll('.box div')
+
+for (var i = 0, len = box.length; i < len; i++){
+  box[i].index = i
+  box[i].onmouseenter = function (){
+    ps[this.index].style.backgroundColor = 'pink'
+    divs[this.index].style.backgroundColor = 'pink'
+    animate(divs[this.index],'left',-1000)
+  }
+  box[i].onmouseleave = function (){
+    ps[this.index].style.backgroundColor = '#ccc'
+    divs[this.index].style.backgroundColor = '#ccc'
+    animate(divs[this.index],'left',0)
+  }
+}
+
+/** 
+* 运动函数
+* 参数：
+*   dom 要运动的元素
+*   attr 要运动的属性
+*   target 运动目标位置
+*   speed 运动速度
+* 支持功能：
+*   支持多个带px单位的属性：left top right bottom marginLeft marginTop width height ...
+*   支持运动到任意位置
+*   支持透明度运动
+*   支持滚动条运动
+*   可以自定义速度
+*/
+function animate(dom,attr,target,speed){
+  // 判断要运动的属性
+  if (attr === 'opacity') {
+    // 属性的当前值
+    var current = parseInt( getComputedStyle(dom)[attr]*100 )
+    // 属性的目标值
+    target *= 100
+  // } else if (attr === 'scrollTop' || attr === 'scrollLeft') {
+  } else if (attr.indexOf('scroll') !== -1) {
+    // 属性的当前值
+    var current = dom[attr]
+  } else {
+    // 属性的当前值
+    var current = parseInt( getComputedStyle(dom)[attr] )
+  }
+  
+  // 设置speed默认值
+  speed = speed || 5
+  //判断运动方向
+  if (current > target){
+    speed = -Math.abs(speed)
+  } else {
+    speed = Math.abs(speed)
+  }
+
+  clearInterval(dom.timer)
+  dom.timer = setInterval(function (){
+    // 当前位置+速度
+    current += speed
+    // 临界值判断(运动停止条件：剩余运动量 <= 每次的运动量)
+    if ( Math.abs(target-current) <= Math.abs(speed) ) {
+      current = target//到达目的地
+      clearInterval(dom.timer)
+    }
+    // 持续改变运动属性
+    if (attr === 'opacity') {
+      dom.style[attr] = current/100
+    } else if (attr.indexOf('scroll') !== -1) {
+      dom[attr] = current
+    } else {
+      dom.style[attr] = current + 'px'
+    }
+  },20)
+}
+
+</script>
+</body>
+</html>

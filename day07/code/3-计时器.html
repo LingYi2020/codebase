@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.box{
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: absolute;
+  left: 0;
+  top: 50px;
+}
+</style>
+</head>
+<body>
+
+<button class="start">走两步</button>
+<button class="stop">停止</button>
+<div class="box"></div>
+
+<script>
+// 计时器
+// 1秒 = 1000毫秒
+// setInterval(回调函数,毫秒数) 重复执行，每隔一段时间执行一次回调函数
+// setTimeout(回调函数,毫秒数) 延时器，到达指定时间之后执行一次回调函数
+
+// 每一个计时器启动都会返回一个数字id
+// var timer1 = setInterval(function (){
+//   console.log('程序执行。。。1')
+// },2000)
+
+// var timer2 = setTimeout(function (){
+//   console.log('程序执行。。。2')
+// },2000)
+
+// console.log( timer1 )// 1
+// console.log( timer2 )// 2
+// 清除计时器
+// clearInterval(计时器id)
+// clearTimeout(计时器id)
+var start = document.querySelector('.start')
+var stop = document.querySelector('.stop')
+var box = document.querySelector('.box')
+var l = 0
+var timer3
+start.onclick = function (){
+  // 先清除计时器再启动计时器，避免重复启动计时器，造成多个计时器叠加
+  clearInterval(timer3)// 清除计时器
+  timer3 = setInterval(function (){
+    l++
+    box.style.marginLeft = l + 'px'
+  },30)
+}
+stop.onclick = function (){
+  clearInterval(timer3)// 清除计时器
+}
+
+</script>
+</body>
+</html>

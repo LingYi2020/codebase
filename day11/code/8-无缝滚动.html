@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+  }
+  .wrap{
+    width: 800px;
+    height: 157px;
+    overflow: auto;
+    border: 1px solid #000;
+    margin: 50px auto 0;
+  }
+  .main{
+    width: 3000px;
+    height: 140px;
+  }
+  .con1,.con2{
+    float: left;
+  }
+  .main img{
+    width: 200px;
+    height: 140px;
+    float: left;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="main">
+    <div class="con1">
+      <img src="./img/b1.jpg" alt="">
+      <img src="./img/b2.jpg" alt="">
+      <img src="./img/b3.jpg" alt="">
+      <img src="./img/b4.jpg" alt="">
+    </div>
+    <div class="con2"></div>
+  </div>
+</div>
+<div style="text-align: center;">
+  <button class="left">向左</button>
+  <button class="right">向右</button>
+</div>
+<script>
+var wrap = document.querySelector('.wrap')
+var con1 = document.querySelector('.con1')
+var con2 = document.querySelector('.con2')
+var left = document.querySelector('.left')
+var right = document.querySelector('.right')
+var imgWidth = document.querySelector('.con1 img').clientWidth
+// 复制一份图片
+con2.innerHTML = con1.innerHTML
+var maxWidth = con1.clientWidth
+var timer,flag = 1
+function moveLeft(){
+  clearInterval(timer)
+  timer = setInterval(function(){
+    wrap.scrollLeft+=2
+    // 临界值判断
+    if (wrap.scrollLeft >= maxWidth) {
+      wrap.scrollLeft = 0
+    }
+    if (wrap.scrollLeft%imgWidth == 0) {
+      clearInterval(timer)
+      setTimeout(function (){
+        moveLeft()
+      },2000)
+    }
+  },20)
+}
+function moveRight(){
+  clearInterval(timer)
+  timer = setInterval(function(){
+    wrap.scrollLeft-=2
+    // 临界值判断
+    if (wrap.scrollLeft <= 0) {
+      wrap.scrollLeft = maxWidth
+    }
+    if (wrap.scrollLeft%imgWidth == 0) {
+      clearInterval(timer)
+      setTimeout(function (){
+        moveRight()
+      },2000)
+    }
+  },20)
+}
+moveLeft()//进入页面自动执行
+
+left.onclick = function (){
+  flag = 1
+  moveLeft()
+}
+right.onclick = function (){
+  flag = 0
+  moveRight()
+}
+
+wrap.onmouseenter = function (){
+  clearInterval(timer)
+}
+wrap.onmouseleave = function (){
+  if (flag) {
+    moveLeft()
+  } else {
+    moveRight()
+  }
+}
+</script>
+</body>
+</html>

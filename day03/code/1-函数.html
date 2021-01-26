@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// 函数：可以重复执行的代码块
+// 作用：1.函数可以封装任意多条语句，方便随时随地调用；2.可以避免非必要直接执行
+// 使用function关键字定义函数
+// function 函数名(形参){
+//   函数体
+// }
+// 函数需要调用才会执行：函数名(实参)
+// 形参：形式参数，在函数定义时写的参数，是函数内部的变量
+// 实参：实际参数，在函数调用时传递的参数，实参要有具体的值
+
+function fn1(){
+  console.log( '程序1' )
+  console.log( '程序2' )
+  console.log( '程序3' )
+}
+// fn1()// 调用执行函数
+// fn1()// 调用执行函数
+// fn1()// 调用执行函数
+
+// 形参和实参都可以没有
+function fn3(){
+  console.log( 3+5 )
+}
+// fn3()
+// fn3()
+
+
+// 参数可以让函数更灵活
+// 函数调用传递的实参和定义函数时的形参一一对应
+function fn2(a,b){// a,b 形参
+  console.log( a+b )// 3+5
+}
+// fn2(3,5)// 3,5 实参
+// fn2(32,15)// 47
+
+// 函数有一个属性length，返回函数形参的个数
+// console.log( fn2.length )// 2
+
+// 形参和实参个数可以不一致
+// function fn4(a,b,c,d){//函数的形参默认值为undefined
+//   // d = undefined
+//   // c = undefined
+//   console.log(a+b+c)//NaN
+// }
+// fn4(2,3)
+
+function fn5(a,b){
+  console.log(a+b)//5
+  // 如果想获取4 5这两个实参怎么办？
+}
+// fn5(2,3,4,5)
+
+
+function fn6(a,b){
+  console.log(a+b)//5
+  // 如果想获取4 5这两个实参怎么办？
+  console.log( arguments )
+  // 在函数中 arguments实参的副本对象，类数组对象，伪数组
+  // 所有传递的实参都将被arguments对象接收
+  // 访问arguments对象的元素，通过下标（索引从0开始）访问
+  console.log( arguments[0] )// 2
+  console.log( arguments[1] )// 3
+  console.log( arguments[2] )// 4
+  console.log( arguments[3] )// 5
+}
+// fn6(2,3,4,5)
+
+
+function fn7(num){
+  num = 5
+  console.log(num)//5
+  console.log(arguments[0])//5
+  // arguments中的值会追踪形参的变化
+}
+// fn7(3)
+
+
+function fn8(num){
+  arguments[0] = 5
+  console.log(num) // 5
+  console.log(arguments[0]) // 5
+  // arguments中的值会追踪形参的变化
+}
+// fn8(3)
+
+
+// 函数返回值 
+
+
+// 函数分类: 带名函数、匿名函数
+function f1(){} // 函数声明
+var f2 = function (){} // 函数表达式
+
+// 匿名自执行函数（立即执行函数）
+
+// 作用域
+
+// 回调函数
+
+// 递归函数
+
+// 构造函数
+
+
+
+// console.log( '程序1' )
+// console.log( '程序2' )
+// console.log( '程序3' )
+
+// console.log( '程序1' )
+// console.log( '程序2' )
+// console.log( '程序3' )
+
+// console.log( '程序1' )
+// console.log( '程序2' )
+// console.log( '程序3' )
+
+</script>
+</body>
+</html>

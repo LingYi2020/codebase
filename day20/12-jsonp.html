@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      box-sizing: border-box;
+    }
+
+    .wrap {
+      width: 500px;
+      margin: 50px auto 0;
+    }
+
+    .wrap input {
+      width: 500px;
+      font-size: 16px;
+      padding: 5px 8px;
+    }
+
+    .list li {
+      line-height: 34px;
+      background-color: #eee;
+      padding: 0 10px;
+    }
+
+    .list li:hover {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+    <input type="text" class="ipt">
+    <ul class="list">
+      <!-- <li>123</li>
+    <li>12306</li> -->
+    </ul>
+  </div>
+
+  <script>
+    // jsonp与ajax没有半毛钱关系！！
+    // 浏览器的同源策略限制了js的跨域能力！
+    // 浏览器的同源策略限制所有跨域行为嘛？ 不是，link img iframe script 
+    // script标签加载回来的资源会被当成js在全局执行
+
+    var ipt = document.querySelector('.ipt')
+    var list = document.querySelector('.list')
+
+    function ajax(options) {
+  var xhr = new XMLHttpRequest()
+  var data = ''
+  if (typeof options.data === 'string') {
+    data = options.data
+  }
+  if (Object.prototype.toString.call(options.data) === '[object Object]') {
+    for (var key in options.data) {
+      data += (key + '=' + options.data[key] + '&')
+    }
+    data = data.substring(0, data.length - 1)
+  }
+  if (options.type.toLowerCase() === 'get') {
+    if ((options.dataType.toLowerCase() === 'jsonp')) {
+      window[options.jsonpCallback] = options.success
+      var oScript = document.createElement('script')
+      oScript.src = options.url + '?' + options.jsonp + '=' + options.jsonpCallback + '&' + data
+      document.body.appendChild(oScript)
+      oScript.onload = function () {
+        document.body.removeChild(oScript)
+      }
+      return
+    }
+    if (options.cache) {
+      xhr.open(options.type, options.url + '?' + data, true)
+    } else {
+      xhr.open(options.type, options.url + '?' + data + '&_=' + Date.now(), true)
+    }
+    xhr.send(null)
+  } else if (options.type.toLowerCase() === 'post') {
+    xhr.open(options.type, options.url, true)
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+    xhr.send(data)
+  } else {
+    alert('仅支持 get/post/jsonp 请求方式！')
+    return
+  }
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        if (options.dataType === 'json') {
+          var json = JSON.parse(xhr.responseText)
+          options.success(json)
+        } else if (options.dataType === 'xml') {
+          options.success(xhr.responseXML)
+        } else {
+          options.success(xhr.responseText)
+        }
+      } else if(options.error!=null){
+        options.error(xhr.status)
+      }
+    }
+  }
+}
+    ipt.onkeyup = function () {
+      if (!ipt.value) {
+        list.innerHTML = ''
+        return
+      }
+
+      ajax({
+        url: 'http://suggestion.baidu.com/su',
+        type: 'get',
+        data: 'wd=' + ipt.value,
+        // data: {'wd':'123'},
+        dataType: 'jsonp', //text json xml jsonp
+        jsonp: 'cb', //回调函数的参数
+        jsonpCallback: 'hehe', //回调函数名
+        success: function (json) { //请求成功执行的回调函数
+          // 展示数据
+          var str = ''
+          json.s.forEach(function (item) {
+            str += '<li>' + item + '</li>'
+          })
+          list.innerHTML = str
+        }
+      })
+    }
+
+    // function jsonp(options){
+    //   // 把success添加为全局方法hehe
+    //   window[options.jsonpCallback] = options.success
+
+    //   // 格式data数据
+    //   var data = ''
+    //   if (typeof options.data === 'string') {
+    //     data = options.data
+    //   }
+    //   if (Object.prototype.toString.call(options.data) === '[object Object]') {
+    //     for (var key in options.data){
+    //       data += (key+'='+options.data[key]+'&')
+    //     }
+    //     data = data.substring(0,data.length-1)
+    //   }
+
+    //   // 动态添加script标签
+    //   var oScript = document.createElement('script')
+    //   oScript.src = options.url+'?'+options.jsonp+'='+options.jsonpCallback+'&'+data
+    //   // 'http://suggestion.baidu.com/su?cb=hehe&wd='+ipt.value
+    //   document.body.appendChild(oScript)
+    //   // 数据加载完成删除 script 标签
+    //   oScript.onload = function (){
+    //     document.body.removeChild(oScript)
+    //   }
+    // }
+
+    // function hehe(json){//请求成功执行的函数
+    //   var str = ''
+    //   json.s.forEach(function (item){
+    //     str += '<li>'+item+'</li>'
+    //   })
+    //   list.innerHTML = str
+    // }
+    // window.hehe = function (json){//请求成功执行的函数
+    //   var str = ''
+    //   json.s.forEach(function (item){
+    //     str += '<li>'+item+'</li>'
+    //   })
+    //   list.innerHTML = str
+    // }
+  </script>
+</body>
+
+</html>

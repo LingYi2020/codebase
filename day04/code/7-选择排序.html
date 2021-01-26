@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+
+<script>
+// 选择排序：
+// 1.假设最小值及最小值的下标
+// 2.找出真正的最小值和最小值的下标
+// 3.换位置
+var arr = [80,61,85,110,20,95,79,90]
+
+/* // 1.假设最小值及最小值的下标
+var min = arr[0]
+var index = 0
+// 2.找出真正的最小值和最小值的下标
+for (var i = 1, len = arr.length; i < len; i++){
+  if (min > arr[i]) {
+    min = arr[i]
+    index = i
+  }
+}
+// console.log( index,min )//4,20
+// 3.换位置
+var tmp = arr[0]
+arr[0] = min
+arr[index] = tmp
+
+
+// 1.假设最小值及最小值的下标
+var min = arr[1]
+var index = 1
+// 2.找出真正的最小值和最小值的下标
+for (var i = 2, len = arr.length; i < len; i++){
+  if (min > arr[i]) {
+    min = arr[i]
+    index = i
+  }
+}
+// console.log( index,min )//4,20
+// 3.换位置
+var tmp = arr[1]
+arr[1] = min
+arr[index] = tmp
+
+
+// 1.假设最小值及最小值的下标
+var min = arr[2]
+var index = 2
+// 2.找出真正的最小值和最小值的下标
+for (var i = 3, len = arr.length; i < len; i++){
+  if (min > arr[i]) {
+    min = arr[i]
+    index = i
+  }
+}
+// console.log( index,min )//4,20
+// 3.换位置
+var tmp = arr[2]
+arr[2] = min
+arr[index] = tmp */
+
+function selectSort(arr){
+  for (var n = 0, l = arr.length-1; n < l; n++){
+    // 1.假设最小值及最小值的下标
+    var min = arr[n]
+    var index = n
+    // 2.找出真正的最小值和最小值的下标
+    for (var i = n+1, len = arr.length; i < len; i++){
+      if (min > arr[i]) {
+        min = arr[i]
+        index = i
+      }
+    }
+    // console.log( index,min )//4,20
+    // 3.换位置
+    var tmp = arr[n]
+    arr[n] = min
+    arr[index] = tmp
+  }
+  return arr
+}
+
+console.log( selectSort(arr) )
+
+
+</script>
+</body>
+</html>

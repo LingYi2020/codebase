@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link class="link" rel="stylesheet" href="./pink.css">
+</head>
+<body>
+
+<h1>个人博客</h1>
+<div class="color">
+  选择主题：
+  <select class="sel">
+    <option value="-1">选择主题</option>
+    <option value="pink">粉色主题</option>
+    <option value="blue">蓝色主题</option>
+    <option value="green">绿色主题</option>
+  </select>
+</div>
+
+<script src="./utils.js"></script>
+<script>
+var link = document.querySelector('.link')
+var sel = document.querySelector('.sel')
+// 读取之前保存的cookie数据
+switch(getCookie('color')){
+  case 'pink':
+    link.href = './pink.css'
+    break
+  case 'blue':
+    link.href = './blue.css'
+    break
+  case 'green':
+    link.href = './green.css'
+    break
+}
+
+sel.onchange = function (){
+  // console.log(this.value)
+  switch(this.value){
+    case 'pink':
+      link.href = './pink.css'
+      setCookie({
+        key:'color',
+        val:'pink',
+        days:30
+      })
+      break
+    case 'blue':
+      link.href = './blue.css'
+      setCookie({
+        key:'color',
+        val:'blue',
+        days:30
+      })
+      break
+    case 'green':
+      link.href = './green.css'
+      setCookie({
+        key:'color',
+        val:'green',
+        days:30
+      })
+      break
+  }
+}
+
+
+</script>
+</body>
+</html>

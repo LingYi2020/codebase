@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<h1>个人中心</h1>
+<h2>上次登录时间：<span>2021年1月21日 14:30:21</span></h2>
+
+<script src="./utils.js"></script>
+<script>
+var span = $1('h2 span')
+if (getCookie('lastTime')) {
+  span.innerText = getCookie('lastTime')
+} else {
+  span.innerText = '您最近一周未登录过！'
+}
+
+// 保存当前时间，下次使用
+// 2021年1月21日 14:30:21
+var d = new Date()
+var dateStr = d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds()
+setCookie({
+  key: 'lastTime',
+  val: dateStr,
+  days: 7
+})
+
+</script>
+</body>
+</html>

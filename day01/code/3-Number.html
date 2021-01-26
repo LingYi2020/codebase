@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+// Number类型：正数、负数、整数、浮点数、NaN 都叫 Number
+// NaN -> Not a Number 非数字，代表错误的计算结果
+// console.log( 2 + 3 )// 5
+// console.log( 5 - 'a' )// 错误的计算结果 NaN
+
+// NaN两个特征：
+// 1、任何与NaN进行计算结果都是NaN
+// console.log( 2 + NaN )// NaN
+// console.log( 2 - NaN )// NaN
+// 2.NaN与任何值都不相等，包括它自己也不相等
+// console.log( NaN === NaN )// false
+
+// isNaN() 判断一个数据是否为NaN，返回布尔值
+// console.log( isNaN(NaN) )//true
+// console.log( isNaN(5-'a') )//true
+// console.log( isNaN(123) )//false
+// console.log( isNaN('123') )//false
+// console.log( isNaN('a123') )//true
+// console.log( isNaN( Number('123') ) )
+// console.log( isNaN( Number('a123') ) )
+// console.log( Number('123') )//123
+// console.log( Number('a123') )//NaN
+
+// isNaN 判断一个值是否为纯数字字符串
+// var phone = '13520559717'
+// console.log( isNaN(phone) )
+
+
+// console.log( 0.1 + 0.2 )// 0.30000000000000004
+// console.log( 0.1 + 0.7 )// 0.7999999999999999
+// 进制：进位计数制，缝进制加一，原位归零
+// 10进制：0 1 2 3 4 5 6 7 8 9 10
+// 2进制：0 1 10 11 100 101 110 。。。
+// 8进制：0 1 2 3 4 5 6 7 10
+// 16进制：0 1 2 3 4 5 6 7 8 9 a b c d e f 10  #333333 #cccccc  #f0ee32
+
+// 10进制小数转2进制：小数位乘以2，取整数部分，如果还有小数部分继续。。
+// 0.1 * 2 = 0.2  --- 0
+// 0.2 * 2 = 0.4  --- 0
+// 0.4 * 2 = 0.8  --- 0
+// 0.8 * 2 = 1.6  --- 1
+// 0.6 * 2 = 1.2  --- 1
+
+// 0.2 * 2 = 0.4  --- 0
+// 0.4 * 2 = 0.8  --- 0
+// 0.8 * 2 = 1.6  --- 1
+// 0.6 * 2 = 1.2  --- 1
+
+// 0.2 * 2 = 0.4  --- 0
+// 0.4 * 2 = 0.8  --- 0
+// 0.8 * 2 = 1.6  --- 1
+// 0.6 * 2 = 1.2  --- 1
+
+// 0.2 * 2 = 0.4  --- 0
+// 0.4 * 2 = 0.8  --- 0
+// 0.8 * 2 = 1.6  --- 1
+// 0.6 * 2 = 1.2  --- 1
+
+// 。。。
+
+// 涉及货币计数
+// var val = 0.1+0.2
+// console.log( 0.40 )
+// console.log( 12.40 )
+// console.log( '12.40' )
+// 0.40元
+
+
+// 转成整数计数，转成字符串输出
+// var price = (0.1*100 + 0.2*100)/100
+// console.log( price/100 )
+// var v = price.toFixed(2)//将数字转成字符串，并保留2位小数
+// console.log( v )// '0.30'
+
+
+// parseInt  解析整数
+// console.log( parseInt(23.45) )// 23
+// console.log( parseInt('23.45') )// 23
+// console.log( parseInt('200px') )// 200
+// console.log( parseInt('a200px') )// NaN
+// 从左往右解析，如果第一个字符是非数字，则返回NaN
+// 从左往右解析，一直解析到非数字，解析结束，并返回前面解析到的整数
+
+
+// parseFloat  解析浮点数，解析规则基本同上
+// console.log( parseFloat(23.45) )// 23.45
+// console.log( parseFloat('23.45') )// 23.45
+// console.log( parseFloat('200px') )// 200
+// console.log( parseFloat('a200px') )// NaN
+
+
+</script>
+</body>
+</html>

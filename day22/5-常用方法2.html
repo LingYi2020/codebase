@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+  width: 2000px;
+  height: 3000px;
+}
+.wrap{
+  width: 600px;
+  height: 400px;
+  border: 1px solid #000;
+  position: relative;
+  overflow: auto;
+}
+.box{
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  background-color: pink;
+  position: absolute;
+  left: 120px;
+  top: 50px;
+}
+.show{
+  width: 2000px;
+  height: 1500px;
+  background-color: #ccc;
+}
+</style>
+</head>
+<body>
+<button class="btn">按钮</button>
+<div class="wrap">
+  <div class="show"></div>
+  <div class="box"><h3>box123456</h3></div>
+  <input type="text" class="ipt">
+</div>
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// .html() 设置或取得第一个匹配元素的html内容 -> innerHTML
+// .text() 设置或取得第一个匹配元素的文本内容 -> innerText
+// .val() 设置或返回匹配元素的值(表单元素) -> value
+
+// $('.box').html('添加文本')//设置值
+// $('.box').html('<p>新添加的结构</p>')//设置值
+// console.log( $('.box').html() )//获取值
+
+// $('.box').text('添加文本')//设置值
+// $('.box').text('<p>新添加的结构</p>')//设置值
+// console.log( $('.box').text() )//获取值
+
+// $('.ipt').val('请输入电话')////设置值
+// console.log( $('.ipt').val() )//获取值
+
+
+// console.log( $('.box').css('width') )//获取样式 '200px'
+// $('.box').css('width','300px')//设置单个属性值
+// $('.box').css({
+//   width: '300px',
+//   height: '100px',
+//   backgroundColor: 'blue'
+// })//设置多个属性值
+
+
+// width()  height()
+// $('.box').width(400)// 设置宽为400
+// console.log( $('.box').width() )// 获取宽度 200
+// $('.box').height(400)// 设置宽为400
+// console.log( $('.box').height() )// 获取宽度 200
+
+$('.btn').click(function (){
+  // console.log( $('.wrap').scrollLeft() )//获取  289
+  // console.log( $('.wrap').scrollTop() )//获取 345
+  // $('.wrap').scrollLeft(300)//设置
+  // $('.wrap').scrollTop(300)//设置
+
+  // console.log( $('.box').position() )//{top: 50, left: 120}
+  // console.log( $('.box').position().left )//120
+  // console.log( $('.box').position().top )//50
+
+  // console.log( $('.box').offset() )//{top: 82, left: 129}
+  // console.log( $('.box').offset().left )//129
+  // console.log( $('.box').offset().top )//82
+
+  // 给btn添加一个父元素
+  // $('.btn').wrap('<div class="btns"></div>')
+
+  // 去掉字符串的前后空格
+  // var str = '    abdasef1231   ';
+  // str = $.trim(str)
+  // console.log(str)
+
+  // 遍历数组
+  var arr = [3,4,5,6,7]
+  $.each(arr,function (index,item){
+    console.log( index,item )
+  })
+})
+
+
+</script>
+</body>
+</html>

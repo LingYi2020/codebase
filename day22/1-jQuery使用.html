@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<div class="box">一个块</div>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// 在jQuery中 $ === jQuery(类)
+// $('.box') === jQuery('.box')
+// window.jQuery = window.$ = jQuery;
+
+// window.onload = function(){
+  // 页面dom、其他资源加载完成执行
+// }
+
+// ready方法完整写法：
+$(document).ready(function (){
+  // 在页面dom加载完成执行
+})
+// ready方法的简写：
+$(function (){
+  // 在页面dom加载完成执行
+})
+
+// 2以下版本兼容IE678
+(function(window,undefined){
+
+})(window)
+var undefined = 123
+console.log( undefined )//在地本版IE 123
+</script>
+</body>
+</html>

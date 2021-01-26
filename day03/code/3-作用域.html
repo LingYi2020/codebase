@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<!-- <script src="./test.js"></script> -->
+<script>
+// 作用域：程序中某个名称起作用的范围
+// js中作用域有两种：全局作用域，局部作用域（函数作用域）
+// 在js中，函数是唯一拥有自身作用域的代码块
+// 全局作用域: 整个 script 标签内，在所有函数之外
+// 局部作用域：在函数内部
+
+// console.log(hehe)//undefined
+// var hehe = '呵呵' // 全局变量，任何地方都可以访问
+// console.log(hehe)//'呵呵'
+
+// function fn1(){
+//   var haha = '哈哈' // 局部变量，只能在fn1局部访问
+//   console.log(hehe)//'呵呵'
+//   function fn2(){
+//     console.log(hehe)// 变量访问
+//     console.log(haha)
+//   }
+// }
+// fn1()
+
+
+// 显式声明变量和隐式声明变量的区别？
+// 在全局基本没什么区别
+// var num1 = 12 //显式声明变量  全局变量
+// num2 = 34 //隐式声明变量  全局变量
+// console.log(num1)
+// console.log(num2)
+function f1(){
+  var num3 = 56 // 局部变量
+  num4 = 67 // 全局变量
+  console.log(num1)
+  console.log(num2)
+  console.log(num3)//56
+  console.log(num4)//67
+}
+// f1()
+// console.log( num4 )//67 
+// console.log( num3 )//num3 is not defined
+
+
+// 在全局作用域中有个全局对象 window对象
+// 在全局声明的函数或变量都被挂在window下面（作为window对象的属性）
+// window对象下的属性方法，访问时可以省略 window.
+// var a123456789 = '一个全局变量'
+// b123456789 = '另一个全局变量'
+// function a987654321(){
+//   console.log('一个全局函数')
+// }
+// console.log( window )
+// console.log( a123456789 )
+// console.log( window.a123456789 )
+// a987654321()
+// window.a987654321()
+
+// alert(123)
+// window.alert(456)
+
+
+// window对象下的name属性
+// var name = '张三'
+// console.log(name)//'张三'
+
+// var name = 0
+// console.log( name+20 )// '1020'
+// console.log( String(name)+20 )// '1020'
+
+
+// var str1 = 'a1'
+// function abc(){
+//   var str1 = 'a2'
+//   console.log(str1) // 'a2' 就近原则
+// }
+
+
+// var str1 = 'a1'
+// function abc(str3){
+//   str2 = 'a2' // 隐式声明变量
+//   str3 = 'a2' // 不是隐式声明变量，形参
+//   console.log(str3) // 'a2' 就近原则
+// }
+// abc('a3')
+// console.log(str3)//报错
+
+
+// 变量的生命周期
+var x = 1 // 全局变量
+function ff(){
+  x++
+  console.log(x)
+}
+// ff()//2  2
+// ff()//3  2
+// ff()//4  2
+// 全局变量的生命周期，进入页面产生，离开页面销毁
+
+function ft(){
+  var y = 1 // 局部变量
+  y++
+  console.log(y)
+}
+ft()//2
+// console.log(y)//报错
+ft()//2
+ft()//2
+// 局部变量的生命周期，函数调用时产生，函数执行结束销毁
+
+</script>
+</body>
+</html>

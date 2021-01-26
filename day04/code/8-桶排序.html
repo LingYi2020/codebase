@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+
+<script>
+
+var arr = [80,61,85,110,20,95,79,90]
+// 桶排序：
+// 1.创建桶
+var bucket = []
+// 2.往对应数字的下标的位置灌水
+// bucket[80] = 'water'
+// bucket[61] = 'water'
+// bucket[85] = 'water'
+// ...
+for (var i = 0, len = arr.length; i < len; i++){
+  var index = arr[i]
+  bucket[index] = 'water'
+}
+// console.log( bucket )
+// 3.取出有水的桶
+arr.length = 0 // 清空原数组
+for (var key in bucket){
+  // console.log(key)
+  arr.push(Number(key))
+}
+console.log(arr)
+
+</script>
+</body>
+</html>

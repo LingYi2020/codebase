@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.box{
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: absolute;
+  left: 532px;
+  top: 50px;
+}
+p{
+  width: 1px;
+  height: 500px;
+  background-color: red;
+  position: absolute;
+  left: 532px;
+  top: 0;
+}
+</style>
+</head>
+<body>
+
+  <button class="btn">按钮</button>
+  <div class="box"></div>
+  <p></p>
+
+
+<script>
+var btn = document.querySelector('.btn')
+var box = document.querySelector('.box')
+// var timer
+// var current = 0 //当前位置
+// var target = 588 //目标位置
+// var speed = 5 //运动速度
+// 60hz  1000/60 = 16.667  30  1000/30 = 33.333
+
+btn.onclick = function (){
+  // animate(box,'left',0)
+  animate(box,'left',1000)
+}
+
+/** 
+* 运动函数
+* 参数：
+*   dom 要运动的元素
+*   attr 要运动的属性
+*   target 运动目标位置
+* 支持功能：
+*   支持多个带px单位的属性：left top right bottom marginLeft marginTop width height ...
+*   支持运动到任意位置
+*   支持透明度运动
+*   支持滚动条运动
+*   可以自定义速度
+*   支持多元素运动
+*/
+function animate(dom,attr,target){
+  // 判断要运动的属性
+  if (attr === 'opacity') {
+    // 属性的当前值
+    var current = parseInt( getComputedStyle(dom)[attr]*100 )
+    // 属性的目标值
+    target *= 100
+  // } else if (attr === 'scrollTop' || attr === 'scrollLeft') {
+  } else if (attr.indexOf('scroll') !== -1) {
+    // 属性的当前值
+    var current = dom[attr]
+  } else {
+    // 属性的当前值
+    var current = parseInt( getComputedStyle(dom)[attr] )
+  }
+
+  clearInterval(dom.timer)
+  dom.timer = setInterval(function (){
+    // 持续变化的速度
+    var speed = (target-current)/10
+    // 根据运动方向进行取整
+    speed = speed>0?Math.ceil(speed):Math.floor(speed)
+
+    // 当前位置+速度
+    current += speed
+    // 临界值判断(运动停止条件：剩余运动量 <= 每次的运动量)
+    if ( Math.abs(target-current) <= Math.abs(speed) ) {
+      current = target//到达目的地
+      clearInterval(dom.timer)
+    }
+    // 持续改变运动属性
+    if (attr === 'opacity') {
+      dom.style[attr] = current/100
+    } else if (attr.indexOf('scroll') !== -1) {
+      dom[attr] = current
+    } else {
+      dom.style[attr] = current + 'px'
+    }
+  },20)
+}
+  
+</script>
+</body>
+</html>

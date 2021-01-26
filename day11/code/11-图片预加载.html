@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<div class="show">
+  <!-- <img class="showImg" src="./img/loading7.gif" alt=""> -->
+  <!-- <img class="loadImg" src="https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0bd162d9f2d3572c75676abf8a13632763d0c3c8.jpg" alt=""> -->
+</div>
+
+<script>
+// var name = '张三'
+// var age = 24
+// var sex = '男'
+// var say = function (){
+//   console.log('hidden-print')
+// }
+
+
+// 模块化
+// var loadModule = (function (){
+//   var name = '张三'//公有属性
+//   var age = 24//私有属性
+//   var sex = '男'//私有属性
+//   var say = function (){//公有属性
+//     console.log('hi')
+//   }
+//   return {
+//     name: name,
+//     say: say
+//   }
+// })()
+// loadModule.say()
+
+// 图片预加载
+var loadImg = (function (){
+  var showImg = document.createElement('img')//要显示的图片
+  var loadImg = new Image()//负责加载图片的对象
+  loadImg.onload = function (){
+    // 图片加载完成时替换图片地址
+    showImg.src = this.src
+  }
+  return {
+    setSrc: function (dom,src){
+      // 在真正要显示的图片没加载完成之前先显示本地的loading图
+      showImg.src = './img/loading7.gif'
+      loadImg.src = src
+      dom.appendChild(showImg)
+    }
+  }
+})() 
+var show = document.querySelector('.show')
+loadImg.setSrc(show,'https://ss1.baidu.com/-4o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/0bd162d9f2d3572c75676abf8a13632763d0c3c8.jpg')
+
+</script>
+
+</body>
+</html>

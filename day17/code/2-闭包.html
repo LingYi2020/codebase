@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+
+// function outer(x){
+//   var a = 1
+//   function inner(){
+//     a++
+//     console.log(a)
+//     // console.log(x)
+//     // console.log(456)//没有引用上层作用域的变量，不形成闭包
+//   }
+//   inner()
+// }
+// inner()//报错
+// console.log(a++)//报错
+// outer(222)//2
+// outer(333)//2
+// outer(444)//2
+
+// 浏览器形成闭包的条件：
+// 1.函数嵌套
+// 2.内部函数保持对上层作用域的引用（变量 参数）
+// 3.闭包由内部函数及外层执行上下文共同构成
+
+// 闭包的作用：
+// 1.在外部访问函数内部的变量
+// 2.让局部变量的值一直保存下来
+// 3.模块化私有属性和公共属性
+
+function outer(){
+  var a = 1
+  function inner(){
+    a++
+    console.log(a)
+  }
+  return inner
+}
+var res = outer()
+res()//2
+res()//3
+res()//4
+
+// outer()()
+// outer()()
+// outer()()
+
+// 我们平时使用的闭包：
+// 1.函数嵌套
+// 2.内部函数保持对上层作用域的引用（变量 参数）
+// 3.闭包由内部函数及外层执行上下文共同构成
+// 4.在外部有对内部函数的引用关系，内部函数在外部被调用
+</script>
+</body>
+</html>

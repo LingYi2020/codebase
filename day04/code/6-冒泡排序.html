@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+
+<script>
+// 冒泡排序：两两比较，互换位置
+// 0 1
+// 1 2
+// 2 3
+// 3 4
+// 4 5
+// 5 6
+var arr = [80,61,85,110,20,95,79,90]
+
+// 一轮比较能找出一个最大数
+// for (var i = 0, len = arr.length-1; i < len; i++){
+//   if (arr[i] > arr[i+1]){// 两两比较
+//     // 互换位置
+//     var tmp = arr[i] // 中间变量
+//     arr[i] = arr[i+1]
+//     arr[i+1] = tmp
+//   }
+// }
+
+// for (var i = 0, len = arr.length-1-1; i < len; i++){
+//   if (arr[i] > arr[i+1]){// 两两比较
+//     // 互换位置
+//     var tmp = arr[i] // 中间变量
+//     arr[i] = arr[i+1]
+//     arr[i+1] = tmp
+//   }
+// }
+
+// for (var i = 0, len = arr.length-1-1-1; i < len; i++){
+//   if (arr[i] > arr[i+1]){// 两两比较
+//     // 互换位置
+//     var tmp = arr[i] // 中间变量
+//     arr[i] = arr[i+1]
+//     arr[i+1] = tmp
+//   }
+// }
+
+function bubbleSort(arr){
+  for (var n = 0, l = arr.length-1; n < l; n++){//比较轮数
+
+    for (var i = 0, len = arr.length-(n+1); i < len; i++){
+      if (arr[i] > arr[i+1]){// 两两比较
+        // 互换位置
+        var tmp = arr[i] // 中间变量
+        arr[i] = arr[i+1]
+        arr[i+1] = tmp
+      }
+    }  
+
+  }
+  return arr
+}
+
+console.log( bubbleSort(arr) )
+
+</script>
+</body>
+</html>

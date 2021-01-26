@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+
+<script>
+// ES6中用于处理异步编程的问题
+// Generator函数 -> 提供了一种可暂停执行的函数
+// Generator函数 迭代器生成器/遍历器生成函数
+
+// 普通函数
+function test(){
+  console.log('程序1')
+  console.log('程序2')
+  console.log('程序3')
+}
+// console.log( test() )//undefiend
+
+// Generator函数
+// function*test1(){}
+// function * test2(){}
+// function* test3(){}
+// function *test4(){}
+// var test5 = function *(){}
+// console.log( test1() )//返回迭代器对象 test1{...}
+// console.log(test5())//返回迭代器对象 test5{...}
+
+function*test1(){
+  console.log('程序1')
+  yield '产出值1'
+  console.log('程序2')
+  yield '产出值2'
+  console.log('程序3')
+  yield '产出值3'
+}
+let iterator = test1()//返回迭代器对象
+console.log( iterator )
+console.log( iterator.next() )//{value: "产出值1", done: false}
+console.log( iterator.next() )//{value: "产出值2", done: false}
+console.log( iterator.next() )//{value: "产出值3", done: false}
+console.log( iterator.next() )//{value: undefined, done: true}
+
+let arr = ['a1','a2','a3','a4']
+console.log( arr )
+console.log( arr[Symbol.iterator] )//Generator函数
+let iterator2 = arr[Symbol.iterator]()//返回迭代器对象
+console.log( iterator2.next() )//{value: "a1", done: false}
+console.log( iterator2.next() )//{value: "a2", done: false}
+console.log( iterator2.next() )//{value: "a3", done: false}
+console.log( iterator2.next() )//{value: "a4", done: false}
+console.log( iterator2.next() )//{value: undefiend, done: true}
+
+// 数组 字符串 arguments 元素集合 Set Map 等这些数据
+// 当我们使用 for/of遍历  ...展开运算符 时
+// for (let val of arr){
+//   console.log(val)
+// }
+// console.log( ...arr )
+
+let obj = {
+  name: '李四',
+  age: 24,
+  sex: '女'
+}
+// 给对象部署迭代器
+Object.prototype[Symbol.iterator] = function *(){
+  for(let key in this){
+    // yield key
+    // yield this[key]
+    yield [key,this[key]]
+  }
+}
+// obj[Symbol.iterator] = function *(){
+//   for(let key in this){
+//     // yield key
+//     // yield this[key]
+//     yield [key,this[key]]
+//   }
+// }
+
+for(let [key,val] of obj){
+  console.log(key,val)
+}
+console.log( ...obj )
+
+</script>
+</body>
+</html>

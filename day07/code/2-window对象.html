@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+  width: 2000px;
+  height: 3000px;
+}
+</style>
+</head>
+<body>
+
+<!-- <a href="./link.html" target="_self">百度</a> -->
+<a href="./link.html" target="_blank">百度</a>
+<button class="btn">按钮</button>
+<button class="btn2">关闭</button>
+
+<script>
+// BOM 五大对象：
+// window = {
+//   history:{},
+//   location:{},
+//   navigator:{},
+//   screen:{}
+// }
+
+
+// window对象
+var btn = document.querySelector('.btn')
+var btn2 = document.querySelector('.btn2')
+btn.onclick = function (){
+  // window.open('./link.html')//默认新窗口打开
+  // window.open('./link.html','_self')//当前窗口打开
+  // window.open('./link.html','_blank','width=400,height=400,left=200,top=100')//新窗口打开
+
+  // 设置滚动条距离
+  // window.scrollTo(100,200)
+  // console.log( window.scrollX )//100
+  // console.log( window.scrollY )//200
+
+
+}
+
+// 点击关闭窗口
+btn2.onclick = function (){
+  window.close()//只能关闭新打开的窗口
+}
+
+
+// 提示框 window.alert (“ ”);
+// confirm(“需要确认的内容”);
+// 输入框 prompt(“ ”,“ ”);
+
+// 计时器
+
+</script>
+</body>
+</html>

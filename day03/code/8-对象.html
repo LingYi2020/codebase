@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// 对象{}: 无序的键值对（数据集合） key:value
+// 对象作用：在一个变量中保存多个数据
+// 对象的属性可以用引号包裹，也可以不加引号
+// 对象的属性值可以是任意数据类型
+// var name = '张三'
+// var age = 24
+// var sex = '男'
+var obj1 = {}
+var obj2 = new Object()
+// console.log(obj1)
+// console.log(obj2)
+var obj3 = {//对象字面量
+  'age': 24,
+  name: '张三',
+  "sex": "男",
+  sayHi: function (){
+    console.log('HI~')
+  },
+  friends: ['jack','tony']
+}
+// 对象类型可以动态添加属性方法
+obj1.name = '李四'
+obj1.age = 25
+obj1.sex = '女'
+obj1.sayHi = function (){
+  console.log('hi~')
+}
+console.log( obj1.sex )//'女'
+
+
+// var attr = 'age'
+// 访问对象属性
+// 1.通过.访问
+// 2.通过[]访问，属性名必须为字符串
+// console.log( obj1.name )// '李四'
+// console.log( obj1['name'] )// '李四'
+// console.log(obj1.abc)// undefined
+// console.log( obj1[attr] )
+// obj1.sayHi()
+// obj1['sayHi']()
+
+
+// 遍历对象属性
+// for/in
+// for (var key in obj1){
+//   console.log( key )// 对象的属性  name age sex sayHi
+//   console.log( obj1[key] )// 输出对象的属性值
+// }
+
+// 删除对象属性  
+// delete obj1.sex
+// console.log( obj1.sex )// undefined
+
+
+// 显式声明变量和隐式声明变量的区别？
+// 1.隐式声明变量始终是全局变量，显式声明变量有全局有局部
+// 2.隐式声明变量可以被删除，显式声明变量不能删除
+// var num1 = 123
+// num2 = 456
+// delete window.num1
+// delete window.num2
+// console.log(num1)//123
+// console.log(num2)// num2 is not defined
+
+
+// 对象类型都可以动态添加属性方法
+var obj = {}
+var arr = [1,2,3]
+var fun = function (){}
+arr.hehe = '呵呵'
+fun.haha = '哈哈'
+fun.say = function (){
+  console.log('大家好')
+}
+console.log( arr.hehe )
+console.log( fun.haha )
+fun.say()
+
+// 基本类型不可以动态添加属性方法
+var str = 'abc'
+str.abc = '123'
+console.log( str.abc )//undefined
+
+</script>
+</body>
+</html>

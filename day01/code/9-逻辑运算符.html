@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// 逻辑运算符，返回布尔值
+// 与 &&    或 ||   非 !
+// console.log( true&&true )// true
+// console.log( false&&true )// false
+// console.log( true&&false )// false
+// console.log( false&&false )// false
+
+// console.log( true||true )//true
+// console.log( true||false )//true
+// console.log( false||true )//true
+// console.log( false||false )//false
+
+// console.log( !true )//false
+// console.log( !false )//true
+
+
+// 短路操作
+// 通往天堂的钥匙
+var a = 3
+var b = 4
+var c = 5
+// a>b&&(c=6)
+// console.log( c )//5
+
+// a<b&&(c=6)
+// console.log( c )//6
+
+
+// a<b&&console.log(123)
+// if (a<b) {
+//   console.log(123)
+// }
+
+
+// a>b||(c=7)
+// console.log(c)//7
+
+// a<b||(c=7)
+// console.log(c)//5
+
+var d = 0||2
+console.log( d )//2
+
+var d = 1||2
+console.log( d )//1
+
+var d = a<b||2
+console.log( d )//true
+
+var d = a>b||2
+console.log( d )//2
+
+</script>
+</body>
+</html>

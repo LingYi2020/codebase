@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<input type="text" class="ipt">
+<button class="btn">验证</button>
+
+<script>
+
+// 正则表达式（规则表达式）
+// 逻辑字符串，规则字符串 如 \d  代表0-9中任意一个数字
+// 主要作用：用于匹配字符串
+
+// 创建正则
+var reg1 = new RegExp('abc','im')//构造函数方式创建
+var reg2 = /abc/igm//普通方式创建
+// 属性：可选
+// i   不区分大小写
+// g   全局匹配
+// m   多行匹配
+// 区别1：构造函数方式创建可以传入变量，普通方式创建不能传入变量
+var name = 'abc'
+var reg3 = new RegExp(name,'g')//全局匹配变量name对应的字符串
+var reg4 = /name/g//全局匹配字符串'name'
+
+全局匹配会对lastIndex赋值
+
+var str1 = '123abc456ab789abcd'
+// reg.test(str1)//true/false
+// console.log( reg1.test(str1) )//true
+// 上次匹配结束的索引  reg.lastindex
+// console.log( reg1.lastIndex )//6
+// reg1.lastIndex = 15 // 全局模式，匹配结束后索引归零
+// console.log( reg1.test(str1) )//true
+// console.log( reg1.lastIndex )//17
+
+
+// 元字符
+// \d 代表0-9中的任意一个字符
+// \s 代表一个空白字符
+// \b 代表单词边界
+// var str2 = 'are you123 ok'
+// var reg5 = /\byou\b/g
+// console.log( reg5.test(str2) )//false
+// byClass()
+// \w 代表数字、字母、下划线_中的一个字符
+// . 代表除了换行符之外的所有字符
+// var str3 = '1234abcd\n5678wwwww'
+// console.log(str3)
+// \n 代表换行符
+// \u 用于匹配汉字  [\u4e00-\u9fa5]
+// 元字符大写代表相反的含义，如：
+// \d 代表一个数字  \D 代表非数字
+
+// 方括号 []
+// [abc]  匹配中括号中的任意一个字符
+// [0-9] === \d 匹配0-9中的任意一个数字
+// [a-z] 匹配26个小写字母中的任意一个
+// [0-9a-zA-Z] 匹配所有的数字或字母中的一个字符
+// [^abc] 匹配除了abc之外的其他字符
+
+// 量词
+// \d+  匹配一个或多个连续数字  \d{1,}
+// \d?  匹配零个或一个数字  \d{0,1}
+// \d*  匹配任意个数字   \d{0,}    *?
+// \d{2,4} 匹配2个到4个连续的数字  '2a34bas5'
+// \d{2,}  匹配2个或2个以上连续的数字
+// \d{2}  匹配2个连续的数字
+// ^\d  匹配开头为数字的字符  '2a34bas5'  true
+// \d$  匹配结尾为数字的字符串  'w2a34bas'  false
+
+// 其他
+// a|b 匹配a或b  
+// \ 转义符 把字符转义为字符本身
+// var reg = /\^123/
+// var str = '^123.abcd'
+// console.log( reg.test(str) )
+// 区别2：
+// var reg = new RegExp('\\d','g')// 第一个\是转义符
+// var reg = /\d/g
+// console.log( reg.test(str) )
+
+// 匹配数字 \d  [0-9]  
+// 匹配中文 [\u4e00-\u9fa5] 常用的中文范围
+// var str = 'abc43578dcs'
+// var reg = /[\u4e00-\u9fa5]+/
+// console.log( reg.test(str) )
+
+// 分组 ()
+// var email = 'zhangsan_123@qq.com'
+// var regEmail = /^(\w{4,20})@[0-9a-zA-Z]{1,10}(\.[a-z]{2,3}){1,2}$/
+// console.log( regEmail.test(email) )//执行匹配，匹配之后分组内容会被缓存下来
+// 访问分组匹配的内容：RegExp.$1  RegExp.$2 ...
+// console.log( RegExp.$1 )// 'zhangsan_123'
+// console.log( RegExp.$2 )// '.com'
+
+
+// var ipt = document.querySelector('.ipt')
+// var btn = document.querySelector('.btn')
+// var regEmail = /^(\w{4,20})@[0-9a-zA-Z]{1,10}(\.[a-z]{2,3}){1,2}$/
+// btn.onclick = function (){
+//   var val = ipt.value.replace(/\s+/g,'')//去掉空格
+//   if (regEmail.test(val)) {
+//     alert('格式正确')
+//   } else {
+//     alert('格式错误')
+//   }
+// }
+
+
+// 正则对象方法
+var str = '123abb你好def456'
+var reg = /\d{3}/g
+// console.log( reg.test(str) )//true
+// console.log( reg.exec(str) )//null
+// reg.compile('\\d{2}','g')//用于修改正则规则
+// console.log( reg.exec(str) )//[...]
+
+// // 字符串方法
+// // console.log( str.indexOf('abc') )//-1
+// // console.log( str.search('abc') )//-1
+// // var reg = /[a-z]{3}/g
+// // console.log( str.search(reg) )//2
+
+// // console.log( str.match(reg) )//返回匹配内容组成的数组
+
+// // replace：看和谐敏感字案例
+
+// var str = '123=asd=232=asda=57787'
+// // console.log( str.split('=') )
+// var str = '123+asd=232-asda*57787'
+// console.log( str.split(/\+|=|-|\*/g) )
+</script>
+</body>
+</html>

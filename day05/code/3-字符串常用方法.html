@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+// 常用方法：
+var str1 = 'sdfkKJkhkQWWqq'
+var str2 = '666'
+var res1 = str1.toLowerCase()//转成小写字母
+var res1 = str1.toUpperCase()//转成大写字母
+var res1 = str1.indexOf('k')// 返回在str1中字母'k'第一次出现的索引，没有返回-1
+var res1 = str1.lastIndexOf('k')// 返回在str1中字母'k'最后一次出现的索引，没有返回-1
+var res1 = str1.slice(3,6)//'kKJ' 从索引3开始拷贝到索引6的子串，不包含索引为6的字符
+var res1 = str1.slice()//全部拷贝
+var res1 = str1.slice(1)//从索引1的位置拷贝到最后
+var res1 = str1.split('k')//字符串转成数组
+var res1 = str1.split('')//字符串转成数组
+var res1 = str1.split()//字符串转成数组
+var res1 = str1.split('*')//字符串转成数组
+var res1 = str1.substr(10,4)// 'WWqq' 从索引10的位置截取4个字符
+var res1 = str1.substr(10)// 'WWqq' 从索引10的位置截取到末尾
+var res1 = str1.substr()// // 截取所有
+var res1 = str1.substring(10,13)// 'WWq' 从索引10的位置截取到索引为13的字符，不包含13索引位置的字符
+var res1 = str1.substring(10)// 'WWq' 从索引10的位置截取到末尾
+var res1 = str1.substring()// 截取所有
+var res1 = str1.concat(str2)// str1+str2
+var res1 = str1.charAt(1)// 'd'  str1[1]
+var res1 = str1.replace('k','**')//用'**'替换字母k
+var res1 = str1.search('WW')//效果和indexOf一样，可以与正则配合使用
+
+// console.log( res1 )
+// console.log( str1 )
+
+var str3 = 'hello你好埄' // 57C4
+var res2 = str3.charCodeAt(1)// 101 十进制
+var res2 = str3.charCodeAt(7)// 22468 十进制
+var res3 = String.fromCharCode(22468)//根据传入的unicode编码返回对应的字符
+console.log( (22468).toString(16) )// 16进制 '57c4'
+console.log( res2 )// 
+console.log( res3 )// '埄'
+
+// 随时产生一个数字，把该数字转成对应的字符
+var num1 = 54
+var letter1 = String.fromCharCode(num1) 
+console.log( letter1 )
+
+
+
+
+</script>
+</body>
+</html>

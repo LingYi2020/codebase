@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+<ul class="list">
+  <li>a1</li>
+  <li>a2</li>
+  <li>a3</li>
+  <li>a4</li>
+</ul>
+
+<script>
+// Array.from(likeArray) 将类数组对象转成真正的数组
+// 类数组对象：arguments  元素集合  有数字索引和length长度的对象  Set  Map
+
+var lis = document.querySelectorAll('.list li')
+console.log(lis)
+// lis.push(123)//报错
+// var arr = []
+// for (var i = 0, len = lis.length; i < len; i++){
+//   arr.push(lis[i])
+// }
+// console.log(arr)
+
+// var arr = Array.from(lis)
+// arr.push(123)
+// console.log(arr)
+
+// var obj = {
+//   0: 'a1',
+//   1: 'a2',
+//   2: 'a3',
+//   length: 3
+// }
+// console.log(obj)
+// for (var key in obj){
+//   console.log(key)
+// }
+// var arr2 = Array.from(obj)
+// console.log(arr2)
+
+
+// var arr3 = [12,23,6,52,18,7,27]
+// var res = arr3.findIndex((item,index,self)=>{
+//   return item < 10//true时，查找结束
+// })
+// console.log(res)//2
+
+// console.log( arr3.indexOf(6) )//2
+</script>
+</body>
+</html>

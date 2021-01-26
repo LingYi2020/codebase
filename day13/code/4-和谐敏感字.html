@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<textarea class="txt" cols="30" rows="10"></textarea>
+<button class="send">发布</button>
+<div class="show"></div>
+
+<script>
+var txt = document.querySelector('.txt')
+var send = document.querySelector('.send')
+var show = document.querySelector('.show')
+var reg = /麻花藤|马华疼|马化腾|腾讯|藤训|疼训|代练|小学生/g // 敏感字库
+send.onclick = function (){
+  // var iptVal = txt.value.replace(reg,'**')
+  var iptVal = txt.value.replace(reg,function (word){
+    console.log(word)
+    var str = ''
+    for (var i = 0, len = word.length; i < len; i++){
+      str += '*'
+    }
+    return str
+  })
+  show.innerHTML = iptVal
+}
+
+
+</script>
+</body>
+</html>

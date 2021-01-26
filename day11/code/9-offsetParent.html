@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.box1{
+  width: 500px;
+  height: 300px;
+  padding: 20px;
+  border: 10px solid #000;
+  background-color: lightblue;
+  position: relative;
+}
+.box2{
+  width: 300px;
+  height: 100px;
+  padding: 20px;
+  border: 10px solid red;
+  background-color: lightgreen;
+  position: relative;
+}
+.box3{
+  width: 100px;
+  height: 50px;
+  border: 10px solid blue;
+  background-color: lightpink;
+}
+
+</style>
+</head>
+<body>
+  
+
+<div class="box1">
+  <div class="box2">
+    <div class="box3"></div>
+  </div>
+</div>
+
+<script>
+// offsetLeft/offsetTop 返回元素左侧/顶部到最近的定位父级的距离
+var box1 = document.querySelector('.box1')
+var box2 = document.querySelector('.box2')
+var box3 = document.querySelector('.box3')
+
+// console.log( box3.offsetLeft )// 目标值：68
+var num = box3.offsetLeft + box2.clientLeft + box2.offsetLeft + box1.clientLeft + box1.offsetLeft
+console.log( num )//68
+
+// dom.offsetParent 指向离dom最近的定位父级
+// dom.parentNode 指向dom的父元素
+// console.log( box3.parentNode )//box2
+// console.log( box3.offsetParent )
+// console.log( document.body.offsetParent )//null
+
+// 获取某个元素到最外层左侧/顶部的距离
+function offset(dom,bool){
+  var l = 0
+  var t = 0
+  var domBDL = dom.clientLeft
+  var domBDT = dom.clientTop
+  while(dom){
+    l += dom.clientLeft+dom.offsetLeft
+    t += dom.clientTop+dom.offsetTop
+    dom = dom.offsetParent
+  }
+  // return [l,t]
+  if (bool) {// 带自身边框
+    return {left: l,top: t}
+  } else {// 不带自身边框
+    return {left: l-domBDL,top: t-domBDT}
+  }
+}
+console.log( offset(box3) )//{left: 68, top: 68}
+console.log( offset(box3).left )
+
+</script>
+
+</body>
+</html>

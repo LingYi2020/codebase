@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0; 
+} 
+body{
+  width: 2000px;
+  height: 3000px;
+}
+.box{
+  width: 200px;
+  height: 200px;
+  background-color: #ccc;
+}
+
+</style>
+</head>
+<body>
+
+<div class="box"></div>
+<p>离开时建档立卡福建师范圣诞福利咖啡色安慰法离开时建档立卡福建师范圣诞福利咖啡色安慰法离开时建档立卡福建师范圣诞福利咖啡色安慰法</p>
+
+<script>
+// event事件对象：保存所有与事件相关的信息的一个对象
+// 什么时候用到这个对象？ 在你需要获取与事件相关的信息时使用
+// event事件对象只有在事件触发时，在事件处理函数中能访问到
+var box = document.querySelector('.box')
+box.onclick = function (e){
+  // 谷歌、火狐等浏览器 由js引擎提供event事件对象
+  // console.log( e )//event事件对象
+  // IE浏览器不会传入事件对象，但是在IE中事件对象作为window对象的一个属性
+  // console.log(window.event)//event事件对象
+  // console.log(event)//event事件对象
+
+  // 兼容获取
+  var ev = e || event
+  console.log(ev)//event事件对象
+
+}
+
+document.onmousedown = function (ev){
+  var e = ev || event
+  // 返回点击位置的坐标，到可视区左侧和可视区顶部的距离（不包含滚动条部分）
+  // console.log( e.clientX,e.clientY )
+  // 返回点击位置的坐标，到触发事件元素的左侧和顶部的距离
+  // console.log( e.offsetX,e.offsetY )
+  // 返回点击位置的坐标，到页面左侧和顶部的距离
+  // console.log( e.pageX,e.pageY )
+
+  // 返回鼠标的按键码
+  // console.log( e.button )// 0 1 2
+  console.log( e.which )// 1 2 3
+
+}
+
+document.onkeydown = function (ev){
+  var e = ev || event
+  console.log(e)
+  console.log( e.keyCode )//返回键盘的按键码（ASCII）
+  // console.log( e.which )//返回键盘的按键码（ASCII）
+  var kc = e.keyCode || e.which
+  // if (kc === 13){//监听回车键
+  //   alert('提交成功')
+  // }
+
+  // 监听组合键 ctrl+c
+  // 监听组合键时，一些功能键不能使用按键码（ctrl alt shift ...）
+  // 功能键直接使用属性：e.altKey  e.ctrlKey   e.shiftKey
+  // if (kc === 17 && kc === 67) {
+  // if (e.ctrlKey && kc === 67) {
+  //   alert('123')
+  // }
+
+}
+
+// e.keyCode 返回ASCII码 65
+// String.fromCharCode(65) // 'A'
+
+</script>
+</body>
+</html>

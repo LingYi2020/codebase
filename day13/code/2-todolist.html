@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wrap{
+  width: 800px;
+  margin: 50px auto 0;
+  padding: 20px;
+  background-color: #eee;
+}
+.wrap h1{
+  text-align: center;
+  margin: 20px;
+}
+.ipt{
+  width: 720px;
+  padding: 4px 6px;
+  font-size: 18px;
+}
+.add{
+  font-size: 16px;
+  padding: 4px 10px;
+}
+.todolist{
+  padding: 20px;
+}
+.todolist li{
+  line-height: 34px;
+  padding: 0 15px;
+  background-color: #ccc;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.delete,.edit{
+  float: right;
+  line-height: 34px;
+  color: red;
+  cursor: pointer;
+  margin-left: 15px;
+  display: none;
+}
+.todolist li:hover .delete{
+  display: block;
+}
+.todolist li:hover .edit{
+  display: block;
+}
+.btns{
+  color: blue;
+}
+.btns span{
+  margin-right: 15px;
+}
+.donelist{
+  background-color: #ccc;
+}
+.donelist li{
+  line-height: 34px;
+  padding: 0 20px;
+  background-color: #999;
+  color: #666;
+  margin-bottom: 10px;
+}
+.editinput{
+  width: 400px;
+  padding: 3px 6px;
+}
+</style>
+</head>
+<body>
+  
+<div class="wrap">
+  <h1>待办任务列表</h1>
+  <div>
+    <input type="text" class="ipt">
+    <button class="add">添加</button>
+  </div>
+  <ul class="todolist">
+    <li>
+      <input type="checkbox">
+      <span>任务一</span>
+      <!-- <input type="text" class="editinput"> -->
+      <span class="delete">删除</span>
+      <span class="edit">编辑</span>
+    </li>
+    <li>
+      <input type="checkbox">
+      <span>任务二</span>
+      <span class="delete">删除</span>
+      <span class="edit">编辑</span>
+    </li>
+    <li>
+      <input type="checkbox">
+      <span>任务三</span>
+      <span class="delete">删除</span>
+      <span class="edit">编辑</span>
+    </li>
+  </ul>
+  <div class="btns">
+    <em>
+      <input type="checkbox" class="all">
+      <span>全部</span>
+    </em>
+    <span class="done">处理</span>
+    <span class="remove">删除</span>
+  </div>
+  <h1>已处理任务列表</h1>
+  <ol class="donelist">
+    <!-- <li>任务一</li>
+    <li>任务二</li> -->
+  </ol>
+</div>
+
+<script src="./utils.js"></script>
+<script>
+var ipt = $1('.ipt')
+var add = $1('.add')
+var todolist = $1('.todolist')
+var all = $1('.all')
+var done = $1('.done')
+var remove = $1('.remove')
+var donelist = $1('.donelist')
+
+// 添加任务
+add.onclick = function (){
+  var txt = ipt.value//输入的任务内容
+  if (!txt) {//空值判断
+    alert('内容不能为空')
+    return
+  }
+  var newLi = document.createElement('li')
+  newLi.innerHTML = '<input type="checkbox"><span>'+txt+'</span><span class="delete">删除</span><span class="edit">编辑</span>'
+  todolist.appendChild(newLi)
+
+  // 判断全选是否勾选
+  if (all.checked) {
+    var checks = $2('.todolist input')
+    for (var i = 0, len = checks.length; i < len; i++){
+      checks[i].checked = true
+    }
+  }
+
+  // 清空输入框
+  ipt.value = ''
+}
+
+// 编辑(事件委托)
+on(todolist,'click','.edit',function (){
+  // 获取当前任务文本
+  var txt = this.parentNode.children[1].innerText
+  // 创建编辑输入框
+  var input = document.createElement('input')
+  input.className = 'editinput'
+  input.value = txt
+  // 输入框替换span
+  this.parentNode.replaceChild(input,this.parentNode.children[1])
+  input.focus()//自动获得焦点
+
+  // 完成编辑
+  input.onblur = function (){
+    // 获取当前输入的文本
+    var txt = this.value
+    // 创建span
+    var span = document.createElement('span')
+    span.innerText = txt
+    // span替换输入框
+    this.parentNode.replaceChild(span,this)
+  }
+})
+
+// 删除单条任务(事件委托)
+on(todolist,'click','.delete',function (){
+  // 删除li
+  this.parentNode.parentNode.removeChild(this.parentNode)
+  // 判断是否需要全选
+  var checks = $2('.todolist input')
+  for (var i = 0, len = checks.length; i < len; i++){
+    if (!checks[i].checked) {
+      return
+    }
+  }
+  all.checked = true
+})
+
+// 点击勾选任务(事件委托)
+on(todolist,'click','input',function (){
+  // 判断是否需要全选
+  var checks = $2('.todolist input')
+  var flag = 1
+  for (var i = 0, len = checks.length; i < len; i++){
+    if (!checks[i].checked) {
+      flag = 0
+    }
+  }
+  if (flag) {
+    all.checked = true
+  } else {
+    all.checked = false
+  }
+})
+
+// 点击全部
+all.onclick = function (){
+  var checks = $2('.todolist input')
+  for (var i = 0, len = checks.length; i < len; i++){
+    if (this.checked) {
+      checks[i].checked = true
+    } else {
+      checks[i].checked = false
+    }
+  }
+}
+
+// 批量处理
+done.onclick = function (){
+  var checks = $2('.todolist input')
+  for (var i = 0, len = checks.length; i < len; i++){
+    if (checks[i].checked) {
+      // 当前任务文本
+      var txt = getNextNode(checks[i]).innerText
+      var newLi = document.createElement('li')
+      newLi.innerText = txt
+      donelist.appendChild(newLi)
+      // 删除当前任务
+      checks[i].parentNode.parentNode.removeChild(checks[i].parentNode)
+    }
+  }
+}
+
+// 批量删除
+remove.onclick = function (){
+  var checks = $2('.todolist input')
+  for (var i = 0, len = checks.length; i < len; i++){
+    if (checks[i].checked) {
+      // 删除当前任务
+      checks[i].parentNode.parentNode.removeChild(checks[i].parentNode)
+    }
+  }
+}
+
+</script>
+</body>
+</html>

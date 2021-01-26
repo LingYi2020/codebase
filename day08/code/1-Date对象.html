@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+
+<h1 class="show">2020年12月29日 09时50分32秒</h1>
+
+<script>
+// Date对象 用于日期与时间相关的操作
+// 创建日期对象
+var d = new Date()
+// console.log( typeof d )//'object'
+// console.log( d )// Tue Dec 29 2020 09:58:30 GMT+0800 (中国标准时间)
+// js中的时间起点：1970/1/1 00:00:00  
+// 北京时间的起点：1970/1/1 08:00:00
+
+// 获取时间信息
+// console.log( d.getFullYear() )// 2020 获取年份
+// console.log( d.getMonth() )// 11 获取月份 0-11  +1
+// console.log( d.getDate() )// 29 获取日期 1-31
+// console.log( d.getHours() )// 10 获取小时 0-23
+// console.log( d.getMinutes() )// 10 获取分钟 0-59
+// console.log( d.getSeconds() )// 37 获取秒数 0-59
+// console.log( d.getMilliseconds() )// 获取毫秒 0-999
+// console.log( d.getDay() )// 获取星期几 0-6  0星期天
+// console.log( d.getTime() )// 1609208301684 返回1970/1/1到当前的总毫秒数
+// console.log( Date.now() )// 1609208301684 返回1970/1/1到当前的总毫秒数
+// console.log( Date.parse('2020/10/1 07:00:00') )//返回1970/1/1到指定时间的好秒数 1601506800000 
+// console.log( d.toLocaleString() )// '2020/12/29 上午10:48:11'
+// console.log( d.toLocaleDateString() )// '2020/12/29'
+
+
+// 显示数字时间在页面？
+var show = document.querySelector('.show')
+// setInterval(function (){
+//   var d = new Date()
+//   var year = d.getFullYear()
+//   var month = d.getMonth()+1
+//   var date = d.getDate()
+//   var hour = d.getHours()
+//   var minutes = d.getMinutes()
+//   var second = d.getSeconds()
+//   // 2020年12月29日 09时50分32秒
+//   hour = hour>9?hour:'0'+hour
+//   minutes = minutes>9?minutes:'0'+minutes
+//   second = second>9?second:'0'+second
+
+//   show.innerText = year+'年'+month+'月'+date+'日 '+hour+'时'+minutes+'分'+second+'秒'
+// },1000)
+
+// 1秒 = 1000
+// 1分 = 1000*60
+// 1时 = 1000*60*60
+// 1天 = 1000*60*60*24
+// 设置时间信息
+var d = new Date()
+// console.log( d.getFullYear() )//2020
+// d.setFullYear(2021)
+// d.setMonth(10)//2020/11
+// d.setMonth(12)//2021/1
+// ...
+// d.setTime(1000*60*60*24)//从时间起点开始添加传入的毫秒 1970/1/1 08:00:00 + 一天的时间
+// console.log( d )
+
+// 创建指定时间点的日期对象
+// var d1 = new Date(1609208301684)
+// console.log( d1 )// 2020/12/29 10:18:21
+// var d2 = new Date('2021/2/11 00:00:00')
+// console.log( d2 )
+
+
+// 1秒 = 1000
+// 1分 = 1000*60
+// 1时 = 1000*60*60
+// 1天 = 1000*60*60*24
+// 2021年春节倒计时
+function time(x){
+var now = new Date()//当前的日期对象
+var chunjie = new Date('2021/2/11 08:00:00')//除夕日期对象
+var timeNow = now.getTime()//1970到现在的总毫秒
+var timeCj = chunjie.getTime()//1970到春节的总毫秒
+var allTime = timeCj - timeNow //现在到春节的总毫秒
+var dates = parseInt( allTime/(1000*60*60*24) )//天数
+var hours = 23 - now.getHours()//小时
+// var hour2 = parseInt((allTime%(1000*60*60*24))/(1000*60*60))//小时
+var minutes = 59 - now.getMinutes()// 分钟
+var seconds = 59 - now.getSeconds()// 秒
+var mseconds = 999 - now.getMilliseconds()//毫秒
+// console.log( hours )
+// console.log( hour2 )
+show.innerText = '距离2021年春节还有'+dates+'天'+hours+'时'+minutes+'分'+seconds+'秒'+mseconds
+}
+// setInterval(time,1)
+// setInterval('time(123)',1)//计时器调用函数并传参
+
+// var d3 = new Date(2020,12,20)// 月份0-11  12 年份加一
+// console.log( d3 )// 2021/1/20
+
+// 时区计算
+var d4 = new Date()
+console.log( d4.getTimezoneOffset() )// -480 与零时区的时间错差（分钟）
+var Timezone = d4.getTimezoneOffset()/60
+if (Timezone>0) {
+  console.log('西'+Math.abs(Timezone)+'时区')
+} else {
+  console.log('东'+Math.abs(Timezone)+'时区')
+}
+
+// 操作零时区日期对象 其他方法中间加个UTC
+// var d5 = new Date()
+// console.log( d5.getHours() )//14
+// console.log( d5.getUTCHours() )//6
+// d5.setUTCHours(10)
+
+</script>
+</body>
+</html>

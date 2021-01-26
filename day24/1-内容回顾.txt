@@ -1,0 +1,68 @@
+
+jQuery是辅助js开发的类库
+$ === jQuery
+jQuery() -> 返回jq实例对象
+常见的原生dom对象
+this  e.target  document  $('div').each(function(index,ele){})
+ready方法：$(function(){})
+jQuery可以直接操作元素集合
+
+选择器：$('css选择器') 返回jq实例对象
+
+jQuery中的DOM操作：增删改查
+常用方法
+
+jQuery动画
+sildeUp/slideDown
+toggle()
+show/hide
+fadeIn/fadeOut
+animate()
+
+事件
+添加事件/移除事件
+不考虑移除事件：click()  mouseover() ...
+考虑移除事件：bind/unbind  live/die  delegate/undelegate  on/off
+$('.list').on('click','li',function(){
+
+})
+$('.btn').on('click',function(){
+
+})
+
+事件流：事件捕获  事件冒泡
+
+事件对象：jQuery中的事件对象已经做了兼容处理，可以直接使用
+
+$符冲突：$===jQuery  $.noConflict()
+
+jQuery扩展接口：
+$.extend({})    $.extend({},obj1,obj2)
+$.fn.extend({})  $.fn.extend({},obj1,obj2)
+
+jQuery AJAx
+$.ajax({
+  url:'',
+  type:'',
+  data:'',
+  cache: ,
+  dataType:'',
+  timeout: ,
+  success: ,
+  error: ,
+  complete: 
+})
+$.ajax({
+  url:'',
+  data:'',
+  dataType:'jsonp',
+  jsonp:'callback',
+  jsonpCallback:'mycb',
+  success: ,
+  error: 
+})
+$.get(url,data,fn,'json')
+$.post()
+$.getJSON()
+$.getScript()
+$('.wrap').load('./abc.html')

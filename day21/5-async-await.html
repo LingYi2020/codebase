@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<script src="./utils.js"></script>
+<script>
+// ES7中用于处理异步编程的问题
+// async 异步函数 是generator函数的语法糖
+// async 异步函数 意味着函数内部有异步操作
+// async替代generator函数的星号*，await替代generator函数的yeild
+
+// async函数的各种形式：
+// async function test1(){}
+// let test2 = async function (){}
+// let test3 = async ()=>{}
+// let obj = {
+//   name: '张三',
+//   async say(){}
+// }
+// class Cat{
+//   constructor(){
+//     this.name = 'xiaohei'
+//   }
+//   async skill(){
+
+//   }
+// }
+// (async function (){
+
+// })()
+
+
+// async异步函数执行后返回一个promise对象
+/* async function test(){
+  // resolve('成功')//在异步函数中没有次函数
+  console.lag('异步函数执行')
+  return '成功'//返回成功的值
+}
+console.log( test() )//Promise {<fulfilled>: '成功'}
+test().then((val)=>{
+  console.log(val)
+})
+.catch((err)=>{
+  console.log(err)
+}) */
+
+
+// await必须使用在async函数中
+// await等待 等待await后面表达式的值
+// await 等待异步程序的结果(promise的结果)
+// await 后面也可以是一个普通表达式
+/* (async function (){
+  // return await 2+3
+  // return 2+3
+  return await new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      console.log('异步程序执行完成。。。')
+      resolve('异步程序的结果')
+    },3000)
+  })
+})().then((val)=>{
+  console.log(val)//'异步程序的结果'
+}) */
+
+/* (async function (){
+  console.log('同步程序1')
+  let res1 = await new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      console.log('异步程序。。。1')
+      resolve('异步程序的结果1')
+    },3000)
+  })
+  console.log(res1)//'异步程序的结果1'
+  let res2 = await new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      console.log('异步程序。。。2')
+      resolve('异步程序的结果2')
+    },3000)
+  })
+  console.log(res2)//'异步程序的结果2'
+})() */
+
+console.log('11111');
+(async function (){
+  let arr = []
+  let res1 = await promiseAjax({
+    url: './promise.php',
+    type: 'get',
+    data: 'code=a1',
+    dataType: 'json'
+  })
+  arr.push(res1)
+  try{
+    var res2 = await promiseAjax({
+      url: './promise1.php',
+      type: 'get',
+      data: 'code=a2',
+      dataType: 'json'
+    })
+  }catch(e){console.log(e)}
+  arr.push(res2)
+  let res3 = await promiseAjax({
+    url: './promise.php',
+    type: 'get',
+    data: 'code=a3',
+    dataType: 'json'
+  })
+  arr.push(res3)
+  console.log(arr)
+})();
+console.log('222222')
+
+// 错误处理
+// try{
+//   // 一般将容易出错的代码放这里执行
+// }catch(e){
+//   // try中的代码出错时，执行这里
+// }
+
+</script>
+</body>
+</html>

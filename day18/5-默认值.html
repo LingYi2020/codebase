@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+// 默认值
+
+// function fn1(a){
+//   a = a || 1//默认值
+//   console.log( a*2 )
+// }
+// fn1()
+
+// function fn1(a=1,b=2){
+//   console.log( a*b )
+// }
+// fn1()//2
+// fn1(2)//4
+// fn1(2,3)//6
+
+// function fn1({a=1,b=2}){
+//   console.log( a*b )
+// }
+// fn1()//报错  {a=1,b=2} = undefiend
+// fn1({})//2 {a=1,b=2} = {}
+// fn1({a:2})//4 {a=1,b=2} = {a:2}
+// fn1({a:2,b:3})//6 {a=1,b=2} = {a:2,b:3}
+
+// function fn1({a=1,b=2}={}){
+//   console.log( a*b )
+// }
+// fn1()//2
+
+var obj = {
+  name: '张三丰',
+  age: 101,
+  // sex: '男'
+}
+var {name,age,sex='男'} = obj
+console.log(name)
+console.log(age)
+console.log(sex)
+</script>
+</body>
+</html>

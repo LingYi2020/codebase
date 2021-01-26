@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+#box1{
+  width: 200px;
+  height: 100px;
+  background-color: blue;
+}
+</style>
+</head>
+<body>
+<!-- 非行间样式 -->
+<div id="box1"></div>
+<!-- 行间样式 -->
+<div id="box2" style="width: 200px;height: 100px;background-color: pink;"></div>
+
+<script>
+var box1 = document.getElementById('box1')
+var box2 = document.getElementById('box2')
+// box1.style.width = '300px'
+// console.log( box1.style.width )//''
+// console.log( box2.style.width )//'200px'
+
+// IE678不支持
+// console.log( getComputedStyle(box1).width )//'200px'
+// console.log( getComputedStyle(box2).width )//'200px'
+
+// IE678支持
+// console.log( box1.currentStyle.width )
+// console.log( box2.currentStyle.width )
+
+// 获取元素样式 兼容IE678
+function getStyle(dom,attr){
+  if (dom.currentStyle) {
+    return dom.currentStyle[attr]
+  } else {
+    return getComputedStyle(dom)[attr]
+  }
+}
+
+console.log( getStyle(box1,'width') )
+console.log( getStyle(box2,'width') )
+
+</script>
+</body>
+</html>

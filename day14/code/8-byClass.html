@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+<div class="box">box</div>
+<div class="box">box</div>
+<div class="box red">box</div>
+<div class="boxred">box</div>
+<div class="box">box</div>
+
+<script>
+// var boxs = document.querySelectorAll('.box')
+// var boxs = document.getElementsByClassName('box')
+// IE 6 7 8不支持
+function byClass(oClass){
+  var arr = []
+  var tags = document.all||document.getElementsByTagName('*')
+  // console.log( tags )
+  // var reg = /\boClass\b/
+  var reg = new RegExp('\\b'+oClass+'\\b')
+  for (var i = 0, len = tags.length; i < len; i++){
+    // if (tags[i].className === oClass) {// 'box red' === 'box'
+    // if (tags[i].className.indexOf(oClass) !== -1) {// 'boxred'.indexOf('box')
+    if ( reg.test(tags[i].className) ){
+      arr.push(tags[i])
+    }
+  }
+  return arr
+}
+var boxs = byClass('box')
+console.log( boxs )
+
+</script>
+</body>
+</html>

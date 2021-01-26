@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn">按钮</button>
+<div class="box">一个块</div>
+<span>span标签</span>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// $.extend = $.fn.extend = function (){}
+// jQuery.extend = jQuery.fn.extend = function() {}
+// $.extend($.fn,{
+//   drag: function (){
+
+//   }
+// })
+$.fn.extend({
+  drag: function (){
+    $(this).css({
+      position: 'absolute'
+    })
+    var $this = $(this)
+    $(this).mousedown(function (e){
+      var toLeft = e.clientX - $(this).offset().left
+      var toTop = e.clientY - $(this).offset().top
+      $(document).bind('mousemove',function (e){
+        var left = e.clientX - toLeft
+        var top = e.clientY - toTop
+        $this.css({
+          left: left+'px',
+          top: top + 'px'
+        })
+      })
+      $(document).mouseup(function (){
+        $(this).unbind('mousemove')
+      })
+    })
+  }
+})
+
+$('.btn').drag()
+$('.box').drag()
+$('span').drag()
+</script>
+</body>
+</html>

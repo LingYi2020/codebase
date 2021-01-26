@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.wrap{
+  width: 1120px;
+  margin: 50px auto 0;
+}
+.wrap span{
+  float: left;
+  width: 120px;
+  line-height: 50px;
+  text-align: center;
+  background-color: lightblue;
+  color: #333;
+  margin: 10px;
+  font-size: 26px;
+}
+.wrap .show{
+  background-color: lightpink;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <!-- <span>张三</span>
+  <span>张三</span>
+  <span>张三</span>
+  <span>张三</span>
+  <span>张三</span>
+  <span>张三</span>
+  <span>张三</span>
+  <span>张三</span>
+  <span>张三</span>
+  <span>张三</span> -->
+</div>
+
+
+<script>
+var students = ['李盛龙','陈斌斌','傅龙华','李建','张勇泉','刘铭豪','梁永强','吕国林','王晖','涂鹏晖','肖裕东','徐啸峰','曾鸿','吴兵燕','何嘉悦','杨世浩','苏腾飞','曾善庭','戴峻峰','蓝辉燕','谭畅','曾子聪','刘学成','杨柳','李健','陈佳伟','陈俊杰','懂健坤','魏子轩','谭文','贾存庆','陈展鹏','陈艳夏','候青卓','杜宇枫','刘欢','陈书嘉','许洋','陈勇凯','王江']
+
+var wrap = document.querySelector('.wrap')
+var str = ''
+var timer
+// 渲染数据
+for (var i = 0, len = students.length; i < len; i++){
+  str += '<span>'+ students[i] +'</span>'
+}
+wrap.innerHTML = str
+
+// 获取所有的span
+var spans = wrap.children
+
+function clear(){
+  // 清空所有选中项
+  for (var n = 0; n < len; n++){
+    spans[n].className = ''
+  }
+}
+
+// 点击文档开始抽奖
+document.onclick = function (){
+  timer = setInterval(function (){
+    clear()
+    // 生成随机数
+    var num = parseInt(Math.random()*len)
+    // 随机数对应索引的元素添加类名
+    spans[num].className = 'show'
+  },1000)
+  // 5秒之后停止
+  setTimeout(function (){
+    clearInterval(timer)
+  },5000)
+}
+
+</script>
+</body>
+</html>

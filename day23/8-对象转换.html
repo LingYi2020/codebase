@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn1">原生对象</button>
+<button class="btn2">JQ对象</button>
+
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// 对象转换
+var btn1 = document.querySelector('.btn1')
+var $btn2 = $('.btn2')
+
+// 原生dom对象转JQ对象 $(dom)
+// btn1.css('color','red')//报错
+// $(btn1).css('color','red')
+
+// JQ对象转成原生dom对象
+// $btn2.style.color = 'blue'//报错
+// console.log( $btn2 )// init [...]
+// $btn2[0].style.color = 'blue'
+// $btn2.get(0).style.color = 'blue'
+
+// 在JQ中以下对象为 原生dom对象
+// $(this)
+// $(e.target)
+// $(document)
+
+// $('body')
+// $('html')
+</script>
+</body>
+</html>

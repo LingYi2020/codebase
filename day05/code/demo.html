@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+//1.统计字符串中每个字母的个数 'asdfljlasaAakjjjbbbSkljDDqwe'
+         var str="asdfljlasaAakjjjbbbSkljDDqwe";
+         var tempObj = {};
+         for(var i=0,len=str.length;i<len;i++){//遍历字符串
+         	var charAt=str.charAt(i);
+         	if(tempObj[charAt]){
+         		tempObj[charAt]++;
+         	}else{
+         		tempObj[charAt]=1;
+         	}
+         }
+         console.log(tempObj);
+//2.密码强度验证，6-18个字符
+//强：包含数字、字母、特殊字符中的三种字符
+//中：包含数字、字母、特殊字符中的两种字符
+//弱：包含数字、字母、特殊字符中的一种字符
+
+//var str = prompt()
+
+
+//3.写一个函数 randomInt(min,max) 随机生成[min,max]区间的整数
+
+//4.写一个函数 randomColor 生成随机的十六进制颜色值
+
+//5.写一个函数 randomCode() 生成6位随机验证码（数字、字母（大小））
+//  1).改造：根据参数生成n位验证码
+//  2).改造：随机生成验证码（位数随机4-8）
+		</script>
+	</body>
+</html>

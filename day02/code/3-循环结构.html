@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+<script>
+// console.log('hello world')
+// console.log('hello world')
+// console.log('hello world')
+// console.log('hello world')
+// console.log('hello world')
+// console.log('hello world')
+// console.log('hello world')
+// console.log('hello world')
+// console.log('hello world')
+
+// for循环: 只要 表达式2 为true 循环就继续执行
+// for(表达式1；表达式2；表达式3){
+//   循环体4（重复，多次执行的内容）
+// }
+// for(var i = 0; i < 5; i++){
+//   console.log(i)//0 1 2 3 4
+//   console.log('hello world')
+// }
+// console.log(i)// 5
+
+// 1 2 4 3
+// 2 4 3
+// 2 4 3
+// 2 4 3
+// 2 4 3
+
+
+// 表达式123都可省略，但是分号不能省略，省略表达式2会造成死循环
+var n = 0
+// for(;;){// 死循环
+//   console.log(n)// 0 0 0 。。。。
+// }
+
+// for(;n<5;){// 死循环
+//   console.log(n)// 0 0 0 。。。。
+// }
+
+// for(;n<5;){
+//   console.log(n)// 0 1 2 3 4
+//   n++
+// }
+
+// var num = 0
+// for(var i=0,v=0;i<5,v<8;i+=2,v++){
+//   num = i+v
+// }
+// console.log(num)//21
+
+
+// 求1-99中的单数的和
+var sum = 0
+// for(var i = 1; i < 100; i++){
+//   if (i%2) {
+//     sum += i
+//   }
+// }
+
+// for(var i = 1; i < 100; i+=2){
+//   sum += i
+// }
+
+// continue // 在循环中使用，会跳过当前循环，继续执行后面的循环
+// for(var i = 1; i < 100; i++){
+//   if (i%2==0) {
+//     continue // 跳过所有偶数
+//   }
+//   sum += i
+// }
+
+// console.log(sum)
+
+
+// break在循环中使用，会终止循环
+// for(var n = 0; n < 9; n++){
+//   if (n == 5) {
+//     break // 终止循环
+//   }
+//   console.log(n)// 0 1 2 3 4
+// }
+
+
+// for (var i = 0; i < 9; i++){// 控制行
+//   for (var n = 0; n < 5; n++){// 控制列
+//     document.write('hello ')
+//   }
+//   document.write('<br>')
+// }
+
+
+// for (var i = 1; i <= 9; i++){// 控制行
+//   for (var n = 1; n <= i; n++){// 控制列
+//     document.write('1x1=1 ')
+//   }
+//   document.write('<br>')
+// }
+
+
+// for (var i = 1; i <= 9; i++){// 控制行
+//   for (var n = 1; n <= i; n++){// 控制列
+//     document.write(n+'x'+i+'='+n*i+' ')
+//   }
+//   document.write('<br>')
+// }
+
+
+// 只要判断条件为true，while循环就会继续执行
+// while(判断条件，逻辑点){
+//   循环体
+// }
+// for(var i = 0; i < 5; i++){
+//   console.log(i)//0 1 2 3 4
+// }
+
+// var i = 0
+// while(i < 5){
+//   console.log(i)
+//   i++
+// }
+
+// while不知道明确的循环次数时使用
+// var money = 78
+// while(money >= 12){
+//   console.log('吃了一碗面')
+//   money -= 12
+// }
+
+
+// do/while
+// var i = 0
+// do{// 先执行再判断
+//   console.log(i)// 0 1 2 3 4
+//   i++
+// } while(i < 5)
+
+
+var money = 9
+// while(money >= 12){// 有可能一次都不执行
+//   console.log('吃面')
+//   money -= 12
+// }
+
+// do{// 至少执行一次
+//   console.log('吃面')
+//   money -= 12
+// } while(money >= 12)
+
+
+// 打印出100-999所有的水仙花数 153
+for (var i = 100; i <= 999; i++){
+  var b = parseInt(i/100)//百位
+  var s = parseInt((i%100)/10)//十位
+  var g = i%10// 个位
+  var sum = b*b*b+s*s*s+g*g*g
+  if (sum === i) {
+    console.log(i)
+  }
+}
+
+
+</script>
+</body>
+</html>

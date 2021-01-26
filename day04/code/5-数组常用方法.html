@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+
+// 以下方法不会改变原数组
+var arr1 = ['a1','a2','a3','a4']
+
+// var res1 = arr1.slice()//拷贝arr1，返回拷贝的内容
+// var res1 = arr1.slice(2)//从索引2的位置开始拷贝arr1，返回拷贝的内容组成的数组
+// var res1 = arr1.slice(1,3)//从索引1的位置开始拷贝到索引为3的元素，不包含索引3的元素，返回拷贝的内容组成的数组
+// console.log(res1)
+
+var arr2 = [11,22]
+var arr3 = [33,44]
+
+// var res2 = arr1.concat(arr2)// 把arr2合并到arr1中，返回合并之后的新数组
+// var res2 = arr1.concat(arr2,arr3)// 把arr2，arr3合并到arr1中，返回合并之后的新数组
+// console.log( res2 )
+
+var res3 = arr2.toString()
+console.log(res3)//'11,22'
+// var res4 = arr2.join()//'11,22'
+// var res4 = arr2.join('-')//'11-22'
+// var res4 = arr2.join(',')//'11,22'
+var res4 = arr2.join('')//'1122'
+// console.log(res4)
+
+// console.log(arr1)
+
+
+// 清空数组
+var arr4 = [1,2,3,4]
+// arr4 = []
+arr4.length = 0 // 推荐
+// console.log( arr4 )
+
+
+// 对象数组
+var arr5 = [
+  {name:'张三',age:25},
+  {name:'李四',age:20},
+  {name:'王五',age:31},
+  {name:'马六',age:15},
+  {name:'全七',age:20}
+]
+
+// 多维数组
+var arr6 = [1,2,[3,4,[5,6]],7,8]
+console.log( arr6[2][2][1] )//6
+
+
+</script>
+</body>
+</html>

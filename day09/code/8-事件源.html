@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  .box{
+    padding: 50px;
+    width: 500px;
+    height: 200px;
+    border: 1px solid #000;
+  }
+</style>
+</head>
+<body>
+  
+<div class="box">
+  <h5>h5标题</h5>
+  <p>p内容是大佬看风景的说法</p>
+  <span>span1</span>
+  <div>div1</div>
+</div>
+
+<script>
+var box = document.querySelector('.box')
+var childs = box.children
+// for (var i = 0, len = childs.length; i < len; i++){
+//   childs[i].onclick = function (){
+//     this.style.color = 'red'
+//   }
+// }
+
+box.onclick = function (e){
+  // console.log(this)//始终指向box
+  // console.log( e.target )//事件源/事件目标 你点击哪个元素，就执行哪个元素
+  // e.target.style.color = 'blue'
+
+  // 兼容
+  var target = e.target || e.srcElement
+  target.style.color = 'red'
+}
+
+
+</script>
+</body>
+</html>

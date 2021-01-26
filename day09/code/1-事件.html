@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  .box{
+    width: 200px;
+    height: 200px;
+    background-color: #ccc;
+  }
+</style>
+<script>
+// var box = document.querySelector('.box')
+// console.log(box)//null
+
+// 页面所有资源加载完成触发（html css js img DOM ...）
+// window.onload = function (){
+//   var box = document.querySelector('.box')
+//   console.log(box)// box
+// }
+</script>
+</head>
+<body>
+
+<input type="text" class="ipt">
+<div class="box"></div>
+<form action="https://www.baidu.com/">
+  账号：<input type="text">
+  <input type="submit" value="提交">
+</form>
+<img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fa4.att.hudong.com%2F27%2F67%2F01300000921826141299672233506.jpg&refer=http%3A%2F%2Fa4.att.hudong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1611886192&t=985d988713d1cb1ae07ef0c4c78ecff0" alt="">
+
+<script>
+
+var ipt = document.querySelector('.ipt')
+var box = document.querySelector('.box')
+// 添加事件/注册事件/添加事件监听
+// 输入有输入值就会触发
+// ipt.oninput = function (){// 事件处理程序
+//   // 事件驱动
+//   console.log(this.value)
+// }
+
+// 输入的值和之前的值有变化并失去焦点时触发
+// ipt.onchange = function (){// 事件处理程序
+//   // 事件驱动
+//   console.log(this.value)
+// }
+
+// 右键点击触发
+// box.oncontextmenu = function (){
+//   console.log('右键点击')
+// }
+
+//按下任何键都会触发
+// document.onkeydown = function (){
+//   console.log('keydown...')
+// }
+
+//一些功能键不会触发如：ctrl 方向键 alt ..
+// document.onkeypress = function (){
+//   console.log('onkeypress...')
+// }
+
+// 鼠标移动时 多次 连续触发事件
+// box.onmousemove = function (){
+//   console.log(1234)
+// }
+
+// 鼠标进入触发
+// box.onmouseenter = function (){
+//   console.log('enter..')
+// }
+// 鼠标离开触发
+// box.onmouseleave = function (){
+//   console.log('leave..')
+// }
+
+// 鼠标移上触发
+// box.onmouseover = function (){
+//   console.log('over..')
+// }
+// 鼠标移出触发
+// box.onmouseout = function (){
+//   console.log('out..')
+// }
+
+// var form = document.querySelector('form')
+// 点击 submit 按钮时，触发表单的提交事件
+// form.onsubmit = function (){
+//   alert('表单提交')
+// }
+
+
+// 非用户行为事件
+// var img = document.querySelector('img')
+// img.onload = function (){
+//   alert('图片加载完成。。。')
+// }
+
+// 页面所有资源加载完成触发（html css js img DOM ...）
+// window.onload = function (){
+//   alert('资源加载完成。。。')
+// }
+
+// setTimeout(function (){
+//   alert('恭喜您被抽中为今天的幸运儿')
+// },2000)
+
+
+</script>
+</body>
+</html>

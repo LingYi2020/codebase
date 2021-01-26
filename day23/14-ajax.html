@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn">请求数据</button>
+<div class="wrap">
+  <div class="header"></div>
+  <div class="main">
+    <h1>主要内容</h1>
+    <p>我克里斯讲道理福建省萨拉的法律设计费路撒地方</p>
+  </div>
+  <div class="footer"></div>
+</div>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+
+$('.btn').click(function (){
+  // $.get('./ajax.php','code=abc',function (json){
+  //   console.log(json)
+  // },'json')
+
+  // $.post('./ajax.php','code=abc',function (json){
+  //   console.log(json)
+  // },'json')
+
+  // $.getJSON('./ajax.json',function (json){
+  //   console.log(json)
+  // })
+
+  // $.getScript('./ajax.js',function (res){
+  //   console.log(res)
+  // })
+
+  // 加载header.html到.header中显示
+  $('.header').load('./header.html')
+
+})
+
+
+
+
+
+</script>
+</body>
+</html>

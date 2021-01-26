@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<div id="box1">一个块111</div>
+<div id="box2">一个块222</div>
+<ul class="list">
+  <li>a1</li>
+  <li>a2</li>
+  <li>a3</li>
+  <li>a4</li>
+</ul>
+
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// JQ支持cs1.0-css3.0的选择器
+// $('css选择器')
+var box1 = document.querySelector('#box1')
+var lis = document.querySelectorAll('.list li')
+console.log(box1)//原生dom对象
+console.log(typeof box1)//'object'
+box1.style.color = 'red'
+// box1.css('color','blue')//报错，原生dom不能使用jq的方法
+console.log( lis )//js元素集合不能直接操作
+// for (var i = 0, len = lis.length; i < len; i++){
+//   lis[i].style.color = 'pink'
+// }
+
+var $box2 = $('#box2')
+var $lis = $('.list li')
+console.log( $box2 )//jq对象 也是一个集合
+console.log( typeof $box2 )//'object'
+// $box2.style.color = 'blue'//报错，jq对象不能使用原生的API
+$box2.css('color','blue')
+console.log( $lis )//jq对象 也是一个集合，但是jq中可以直接操作这个集合
+$lis.css('color','red')
+$lis.click(function (){
+  console.log(111)
+})
+
+</script>
+</body>
+</html>

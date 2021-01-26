@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn">请求数据</button>
+<div class="show"></div>
+
+<script>
+// ajax是一种局部刷新技术
+// 异步操作
+// 在服务器环境运行
+
+var btn = document.querySelector('.btn')
+var show = document.querySelector('.show')
+
+btn.onclick = function (){
+
+  // 1.创建数据交互对象（XMLHttpRequest）
+  var xhr = new XMLHttpRequest()//除了IE56其他都支持
+  // var xhr = new ActiveXObject('Microsoft.XMLHTTP')//IE56支持
+
+  // 2.初始化请求
+  // 参数：
+    // 1请求方式get/post 
+    // 2数据接口地址 
+    // 3布尔值，默认true异步，false同步
+    // get请求会有缓存问题
+  xhr.open('get','./data/test.txt',true)
+
+  // 3.发送请求
+  xhr.send(null)//get请求时为空/null
+
+  // 4.请求响应状态
+  // xhr.readyState 属性值会从0-4发送变化
+  // 当xhr.readyState属性发生变化时，会触发onreadystatechange事件
+  xhr.onreadystatechange = function (){
+    // console.log( xhr.readyState )//2 3 4
+    if (xhr.readyState === 4) {//请求完成
+      // 响应状态码 xhr.status
+      if (xhr.status >=200 && xhr.status < 300) {// 响应就绪
+        // 可以拿到数据了
+        // xhr.responseText  接收文本字符串数据
+        // xhr.responseXML  接收xml数据
+        show.innerHTML = xhr.responseText
+      } else {
+        console.log( xhr.status )
+      }
+    }
+  }
+}
+
+</script>
+</body>
+</html>

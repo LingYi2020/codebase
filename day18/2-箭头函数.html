@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+<button id="btn">按钮</button>
+
+<script>
+// 箭头函数：
+// 语法：(参数)=>{函数体}
+// 箭头函数用于匿名函数的地方
+// let fn1 = function (){}
+// let fn1 = ()=>{}
+// setTimeout(()=>{},1000)
+// [1,2,3].map(()=>{})
+// btn.onclick = ()=>{}
+
+// 箭头函数的简写形式：
+// 1.参数只有一个的时候，参数的小括号可以省略
+// let fn2 = abc => {
+//   console.log(abc)
+// }
+// fn2(123)
+// 2.函数体中只有一条语句时，可以省略大括号{}
+// let fn3 = abc => console.log(abc)
+// fn3(456)
+// let fn4 = _ => _// 
+// let fn4 = (_)=>{return _}
+// let fn4 = function (_){return _}
+// console.log( fn4(666) )
+
+
+// 箭头函数的其他特征：
+// 1.对 this 的关联。函数内部的 this 指向，取决于箭头函数定义的位置，而非箭头函数的调用对象（箭头函数内部没有自己的this，指向外层的this）
+// function fun(){
+//   console.log(this)
+// }
+// fun()//window
+// btn.onclick = fun//btn
+
+// btn.onclick = ()=>{
+//   console.log(this)//window
+// }
+
+// btn.onclick = function (){
+//   console.log(this)//btn
+//   setTimeout(function (){
+//     console.log(this)//window
+//   },1000)
+// }
+
+// btn.onclick = function (){
+//   console.log(this)//btn
+//   setTimeout(()=>{
+//     console.log(this)//btn
+//     setTimeout(()=>{
+//       console.log(this)//btn
+//     },1000)
+//   },1000)
+// }
+
+// 2.new 不可用。箭头函数不能使用 new 关键字来实例化对象，不然会报错。
+// let fn = function (){}
+// let obj1 = new fn()
+
+// let fn2 = ()=>{}
+// let obj2 = new fn2()//fn2 is not a constructor
+
+// 3.this 不可变。函数内部 this 不可变，在函数体内整个执行环境中为常量。
+// var obj = {
+//   name: '小明'
+// }
+// setTimeout(()=>{
+//   console.log(this)
+// }.bind(obj),1000)//报错
+
+// btn.onclick = function (){
+//   console.log(this)//btn
+//   setTimeout(()=>{
+//     console.log(this)//btn
+//   },1000)
+// }.bind(obj)
+
+// 4.没有arguments对象。更不能通过arguments对象访问传入参数。
+// let fn4 = (a,b,c)=>{
+//   console.log(a+b+c)
+//   console.log(arguments)//arguments is not defined
+// }
+// fn4(1,2,3)
+
+</script>
+</body>
+</html>

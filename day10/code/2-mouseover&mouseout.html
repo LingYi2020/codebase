@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+  background-color: #ccc;
+}
+.parent{
+  padding: 50px;
+  width: 300px;
+  height: 150px;
+  background-color: pink;
+}
+.child{
+  width: 150px;
+  height: 40px;
+  background-color: blue;
+}
+.box{
+  width: 150px;
+  height: 40px;
+  background-color: green;
+  margin-top: 20px;
+}
+.show{
+  width: 300px;
+  height: 140px;
+  background-color: orange;
+  margin-top: 20px;
+  display: none;
+}
+</style>
+</head>
+<body>
+  
+<div class="parent">
+  <div class="child"></div>
+  <div class="box"></div>
+</div>
+<div class="show"></div>
+<script>
+var parent = document.querySelector('.parent')
+var show = document.querySelector('.show')
+// parent.onmouseenter = function (){
+//   console.log('鼠标进入。。。')
+// }
+// parent.onmouseleave = function (){
+//   console.log('鼠标离开。。。')
+// }
+
+parent.onmouseover = function (ev){
+  // this -> parent
+  var e = ev || event
+  var from = e.relatedTarget || e.fromElement
+  // console.log( from )//鼠标从哪个元素来
+  while(from){
+    if (from == this) {
+      return false
+    }
+    from = from.parentNode
+  }
+
+  console.log('鼠标进入。。。')
+  // show.style.display = 'block'
+}
+parent.onmouseout = function (ev){
+  // this -> parent
+  var e = ev || event
+  var to = e.relatedTarget || e.toElement
+  // console.log( to )//鼠标离开到哪个元素
+  while(to){
+    if (to == this) {
+      return false
+    }
+    to = to.parentNode
+  }
+
+  console.log('鼠标离开。。。')
+  // show.style.display = 'none'
+}
+
+</script>
+</body>
+</html>

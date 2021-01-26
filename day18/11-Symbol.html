@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+// Symbol 一种新的原始数据类型，代表独一无二的值
+var s1 = Symbol()
+var s2 = Symbol('age')//'age'仅仅是一个标识符，不传也可以
+var s3 = Symbol()
+// console.log(s1)//Symbol()
+// console.log(s2)//Symbol('age')
+// console.log(s3)//Symbol()
+// console.log( s1 === s3 )//false
+// console.log( typeof s3 )//'symbol'
+
+var obj = {
+  name: '张三',
+  age: 23,
+  sex: '女',
+  // age: 24
+  [s2]: 24,
+  [Symbol()]: '666'
+}
+// console.log( obj.age )//24
+// console.log( obj[s2] )//24
+// console.log( obj[s2] )//24
+// console.log( obj[Symbol()] )//undefined
+
+// for (let key in obj){
+//   console.log(key)// name age sex
+// }
+
+// var arr = Object.keys(obj)
+// console.log( arr )//[name,age,sex]
+
+// var arr = Object.getOwnPropertyNames(obj)
+// console.log( arr )
+
+// let arr = Object.getOwnPropertySymbols(obj)
+// console.log( arr )//[Symbol(age), Symbol()]
+// console.log( obj[arr[1]] )//'666'
+
+
+// let name1 = Symbol('name')
+// let name2 = Symbol('name')
+// console.log( name1 === name2 )//false
+// console.log( name1 === Symbol('name') )//false
+
+let name1 = Symbol.for('name')
+let name2 = Symbol.for('name')
+console.log( name1 === name2 )//true
+console.log( name1 === Symbol.for('name') )//true
+console.log( Symbol.keyFor(name1) )//'name'
+
+
+</script>
+</body>
+</html>

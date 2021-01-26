@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn">按钮</button>
+<button class="remove">移除事件</button>
+<button class="add">添加元素</button>
+<ul class="list">
+  <li>现存的li--1</li>
+  <li>现存的li--2</li>
+  <li>现存的li--3</li>
+</ul>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// 添加事件
+// $('.btn').click(function (){//事件处理函数
+//   console.log(111)
+// })
+// $('.btn').click(function (){//事件处理函数
+//   console.log(222)
+// })
+
+// bind 添加事件
+// function fn1(){//事件处理函数
+//   console.log('btn被点击。。。1')
+// }
+// function fn2(){//事件处理函数
+//   console.log('btn被点击。。。2')
+// }
+// $('.btn').bind('click',fn1)
+// $('.btn').bind('click',fn2)
+
+// bind 添加事件（不能给动态元素添加事件）
+// $('.list li').bind('click',function (){
+//   $(this).css('color','red')
+// })
+
+// live 添加事件（可以给动态元素添加事件）
+// $('.list li').live('click',function (){
+//   $(this).css('color','red')
+// })
+
+// delegate添加事件（可以给动态元素添加事件）
+// $('.list').delegate('li','click',function (){
+//   $(this).css('color','red')
+// })
+
+// on添加事件（可以给动态元素添加事件）
+$('.list').on('click','li',function (){
+  $(this).css('color','red')
+})
+
+
+// 移除事件
+$('.remove').click(function (){
+  console.log('移除事件。。。。。。。。')
+  // unbind移除事件
+  // $('.btn').unbind('click')//移除所有click事件处理函数
+  // $('.btn').unbind('click',fn1)//移除某个事件处理函数
+
+  // die移除事件
+  // $('.list li').die('click')//移除所有click事件处理函数
+
+  // undelegate移除事件
+  // $('.list').undelegate('li','click')//移除所有click事件处理函数
+
+  // off移除事件
+  $('.list').off('click','li')//移除所有click事件处理函数
+})
+// 添加元素
+$('.add').click(function (){
+  $('.list').append('<li>新增的li--0</li>')
+})
+
+// 一次性事件 one
+// $('.btn').one('click',function (){
+//   console.log('一次性事件....')
+// })
+
+// 合成事件
+$('.list li').hover(function (){
+  // 鼠标移入执行该函数
+  $(this).css('color','red')
+},function (){
+  // 鼠标移出执行该函数
+  $(this).css('color','blue')
+})
+
+// 响应元素轮流的点击事件
+$('.btn').toggle(function (){
+  console.log('开灯。。。')
+},function (){
+  console.log('关灯。。。')
+})
+
+</script>
+</body>
+</html>

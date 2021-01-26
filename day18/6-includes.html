@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+// includes(val,index) 返回布尔值
+
+var arr = [123,456,789,666,123]
+console.log( arr.includes(456) )//true
+console.log( arr.includes(456,0) )//true
+console.log( arr.includes(456,2) )//false
+
+var str = 'abcdefg123'
+console.log( str.includes('g') )//true
+console.log( str.includes('g',0) )//true
+console.log( str.includes('g',7) )//false
+
+</script>
+</body>
+</html>

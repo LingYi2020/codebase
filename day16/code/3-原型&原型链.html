@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+// JavaScript中一切皆对象（null undefined 除外）
+// 对象分为：普通对象和函数对象
+// 普通对象：Number String Object Array Boolean Date 的实例对象 ...
+// 函数对象：函数（函数表达式 函数声明 函数实例）
+
+// prototype 原型
+// 函数对象都有一个属性prototype(Function.prototype除外)，指向一个对象（原型对象）
+// prototype的作用：所有实例对象共享原型对象的属性方法（继承）
+
+// constructor 属性
+// 所有对象都有一个属性constructor，指向创建这个对象的构造函数
+
+// function fn1(){}
+// var fn2 = function (){}
+// var fn3 = new Function()
+// console.log( fn1.prototype )//{...}
+// console.log( fn2.prototype )//{...}
+// console.log( fn3.prototype )//{...}
+// console.log( fn1.prototype.constructor )//fn1
+// console.log( fn2.prototype.constructor )//fn2
+// console.log( fn3.prototype.constructor )//fn3
+// console.log( Object.prototype )//{...}
+// console.log( Object.prototype.constructor )//Object
+// console.log( Number.prototype )//{...}
+// console.log( Number.prototype.constructor )//Number
+// console.log( Function.prototype )//f (){[native code]}
+// console.log( Function.prototype.constructor )//Function
+// console.log( Function.prototype.prototype )//undefined
+
+// Object根构造器
+// Object.prototype.abc = 1234
+// String.prototype.hehe = '呵呵'
+
+// var str = 'abc'
+// var num = 123
+// var boo = true
+// var obj = {a:123}
+// var arr = [1,2,3]
+// var fun = function (){}
+// var nul = null
+// var und = undefined
+
+// console.log( str.abc )//1234
+// console.log( num.abc )//1234
+// console.log( boo.abc )//1234
+// console.log( obj.abc )//1234
+// console.log( arr.abc )//1234
+// console.log( fun.abc )//1234
+// console.log( nul.abc )//报错
+// console.log( und.abc )//报错
+
+// console.log( str.hehe )//'呵呵'
+// console.log( num.hehe )//undefined
+// console.log( boo.hehe )//undefined
+// console.log( obj.hehe )//undefined
+// console.log( arr.hehe )//undefined
+// console.log( fun.hehe )//undefined
+
+// 不推荐修改内置对象的原型
+// Date.prototype.getWeek = function (){
+//   // this -> 实现对象
+//   var index = this.getDay()//0-6
+//   var arr = ['星期天','星期一','星期二','星期三','星期四','星期五','星期六']
+//   return arr[index]
+// }
+// var d = new Date()
+// console.log( Date.prototype )
+// console.log( d.getWeek() )
+
+// console.log( String.prototype )
+// console.log( Array.prototype )
+
+
+
+function Cat(n,c){
+  this.name = n
+  this.color = c
+}
+Cat.prototype.say = function (){
+  console.log('喵喵~')
+}
+// console.log( Cat.prototype )
+// var cat1 = new Cat('小白','black')
+
+// __proto__ 原型
+// 每个对象都有一个隐藏属性__proto__，指向创建该对象的构造函数的prototype
+// __proto__的作用：用于维护原型链
+// console.log( cat1.__proto__ === Cat.prototype)//true
+// console.log( cat1.__proto__ === cat1.constructor.prototype)//true
+// console.log( Cat.__proto__ === Function.prototype )//true
+// console.log( Number.__proto__ === Function.prototype )//true
+// console.log( Date.__proto__ === Function.prototype )//true
+// console.log( Math.__proto__ === Object.prototype )//true
+
+
+// 原型链
+Object.prototype.abc = 1234
+String.prototype.hehe = '呵呵'
+
+var str = 'abc'
+var num = 123
+// console.log( str.abc )//1234
+// console.log( num.abc )//1234
+// console.log( str.hehe )//'呵呵'
+// console.log( num.hehe )//undefiend
+
+// 1.当我们访问 str.abc 时，首先去查找str对象自身是否有该属性
+// obj.hasOwnProperty(attr) -> 布尔值 判断对象自身是否有某个属性
+// console.log( str.hasOwnProperty('abc') )//false
+// 2.如果对象自身没有该属性，则向上层原型链查找
+// console.log( str.__proto__ )//String.prototype
+// console.log( str.__proto__.hasOwnProperty('abc') )//false
+// 3.继续向上层原型链查找
+// console.log( str.__proto__.__proto__ )// Object.prototype
+// console.log( str.__proto__.__proto__.hasOwnProperty('abc') )//true
+// 4.找到属性abc，并返回属性abc的值 1234
+// 所以，console.log( str.abc )//1234
+// str.abc -> str.__proto__ -> str.__proto__.__proto__ -> 1234
+
+// 对象自身该属性:
+// 1.构造函数中给this添加的属性
+// 2.对象动态添加的属性
+function Human(n,a){
+  this.name = n
+  this.age = a
+}
+Human.prototype.sex = '男'
+var zhangsan = new Human('张三',23)
+zhangsan.say = 'hi'
+console.log( zhangsan.hasOwnProperty('name') )//true
+console.log( zhangsan.hasOwnProperty('age') )//true
+console.log( zhangsan.hasOwnProperty('say') )//true
+console.log( zhangsan.hasOwnProperty('sex') )//false
+
+// num.hehe -> num.__proto__ -> num.__proto__.__proto__ -> num.__proto__.__proto__.__proto__ -> null -> undefined
+// console.log( num.hasOwnProperty('hehe') )//false
+// console.log( num.__proto__ === Number.prototype )//true
+// console.log( Number.prototype.hasOwnProperty('hehe') )//false
+// console.log( Number.prototype.__proto__ === Object.prototype )//true
+// console.log( Object.prototype.hasOwnProperty('hehe') )//false
+// console.log( Object.prototype.__proto__ )//null -> undefined
+// console.log( num.hehe )//undefined
+
+
+function Cat(n,c){
+  this.name = n
+  this.color = c
+}
+Cat.prototype.say = function (){
+  console.log('喵喵~')
+}
+var cat2 = new Cat('小黑','balck')
+console.log( cat2.abc )//1234
+// cat2 -> cat2.__proto__ -> Cat.prototype -> Cat.prototype.__proto__ -> Object.prototype -> 1234
+// Cat.__proto__ === Function.prototype
+// Number.__proto__ === Function.prototype
+
+// console.log( Number.abc )//1234
+// Number -> Number.__proto__ -> Function.prototype -> Function.prototype.__proto__ 
+// console.log( Function.prototype.__proto__ === Function.prototype )//false
+// console.log( Function.prototype.__proto__ === Object.prototype )//true
+
+
+// console.log( Object.__proto__ === Function.prototype )//true
+// console.log( Cat.constructor )//Function
+// console.log( Number.constructor )//Function
+// console.log( Object.constructor )//Function
+// console.log( Object.__proto__ )//Function.prototype
+// console.log( Object.prototype )//{...}
+
+
+// instanceof 运算符用于测试构造函数的prototype属性是否出现在对象的原型链中的任何位置
+// cat2是否为Cat的实例对象
+// console.log( cat2 instanceof Cat )//true
+// console.log( cat2 instanceof Object )//true
+// cat2的整个原型链中是否包含 Object.prototype
+
+// var str1 = 'abc'
+// var str2 = new String('abc')
+
+// console.log( str1 instanceof Object )//false
+// console.log( str2 instanceof Object )//true
+
+</script>
+</body>
+</html>

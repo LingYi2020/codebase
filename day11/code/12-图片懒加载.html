@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+.show{
+  width: 1200px;
+  margin: 50px auto 0;
+}
+.show img{
+  width: 597px;
+  height: 300px;
+  /* display: none; */
+}
+
+</style>
+</head>
+<body>
+
+<div class="show">
+  <img _src="./img/1.png" alt="">
+  <img _src="./img/2.png" alt="">
+  <img _src="./img/4.png" alt="">
+  <img _src="./img/5.png" alt="">
+  <img _src="./img/6.png" alt="">
+  <img _src="./img/9.png" alt="">
+  <img _src="./img/11.png" alt="">
+  <img _src="./img/12.png" alt="">
+  <img _src="./img/13.png" alt="">
+  <img _src="./img/16.png" alt="">
+</div>
+
+<script src="./utils.js"></script>
+<script>
+
+// 懒加载插件：https://www.lazyloadjs.cn/
+
+var imgs = $2('.show img')
+
+function loadImg(){
+  var scrollT = document.documentElement.scrollTop
+  var windowHeight = document.documentElement.clientHeight
+  // 判断哪些图片进入可视区
+  for (var i = 0, len = imgs.length; i < len; i++){
+    if (offset(imgs[i]).top <= (scrollT+windowHeight)) {
+      // 当前图片进入可视区
+      imgs[i].src = imgs[i].getAttribute('_src')
+    }
+  }
+}
+
+// 进入页面需要判断加载哪些图片
+loadImg()
+
+// 滚动条滚动时也要判断哪些图片需要加载
+window.onscroll = function (){
+  loadImg()
+}
+
+
+</script>
+</body>
+</html>

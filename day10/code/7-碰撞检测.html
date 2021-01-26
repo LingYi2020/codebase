@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.box1{
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  left: 400px;
+  top: 200px;
+}
+.box2{
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+</style>
+</head>
+<body>
+  
+<div class="box1">box1</div>
+<div class="box2">box2</div>
+
+
+<script>
+var box1 = document.querySelector('.box1')
+var box2 = document.querySelector('.box2')
+
+box2.onmousedown = function (e){
+  e.preventDefault()
+  var to_left = e.clientX - box2.offsetLeft
+  var to_top = e.clientY - box2.offsetTop
+  document.onmousemove = function (e){
+    var l = e.clientX - to_left
+    var t = e.clientY - to_top
+    box2.style.left = l + 'px'
+    box2.style.top = t + 'px'
+
+    // 碰撞检测
+    var l1 = box1.offsetLeft
+    var t1 = box1.offsetTop
+    var r1 = box1.offsetLeft+box1.clientWidth
+    var b1 = box1.offsetTop+box1.clientHeight
+
+    var l2 = box2.offsetLeft
+    var t2 = box2.offsetTop
+    var r2 = box2.offsetLeft+box1.clientWidth
+    var b2 = box2.offsetTop+box1.clientHeight
+
+    if (l1>r2 || l2>r1 || t2>b1 || t1>b2){
+      box1.style.backgroundColor = 'red'
+    } else {
+      box1.style.backgroundColor = 'pink'
+    }
+
+  }
+  document.onmouseup = function (){
+    document.onmousemove = null
+  }
+}
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  body{
+    height: 3000px;
+  }
+  .box{
+    width: 200px;
+    height: 200px;
+    background: pink;
+  }
+</style>
+</head>
+<body>
+
+<div class="box"></div>
+
+<script>
+var box = document.querySelector('.box')
+var str = navigator.userAgent.toLowerCase()//获取用户浏览器识别码并转小写
+
+// 判断浏览器
+if (str.indexOf('firefox')!==-1){
+  // 火狐 支持的滚轮事件 DOMMouseScroll
+  box.addEventListener('DOMMouseScroll',function (e){
+    // console.log( e.detail )// 往前推-3  往后拉3
+    e.preventDefault()
+    if (e.detail < 0){// 往前推 放大
+      box.style.width = box.clientWidth + 20 + 'px'
+      box.style.height = box.clientHeight + 20 + 'px'
+    } else {// 往后拉 缩小
+      box.style.width = box.clientWidth - 20 + 'px'
+      box.style.height = box.clientHeight - 20 + 'px'
+    }
+  })
+} else {
+  // 谷歌 IE 支持的滚轮事件
+  box.onmousewheel = function (ev){
+    var e = ev || event
+    e.preventDefault ? e.preventDefault(): e.returnValue=false
+    // console.log( e.wheelDelta )// 往前推120  往后拉-120
+    if (e.wheelDelta > 0){// 往前推 放大
+      box.style.width = box.clientWidth + 20 + 'px'
+      box.style.height = box.clientHeight + 20 + 'px'
+    } else {// 往后拉 缩小
+      box.style.width = box.clientWidth - 20 + 'px'
+      box.style.height = box.clientHeight - 20 + 'px'
+    }
+  }
+}
+
+</script>
+</body>
+</html>

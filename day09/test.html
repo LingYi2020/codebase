@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    * {margin: 0; padding: 0;}
+
+    #box {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      border-radius: 50%;
+      background-color: aquamarine;
+      z-index: 1;
+    }
+
+    .bullets {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    
+  </div>
+
+  <script>
+    window.onload = () => {
+      let dir = [false, false, false, false]  // 上 下 左 右
+      let box = document.getElementById('box')
+      let speed = 6
+      let currentDir = [false, true, false, false]
+      let tmpArr = []
+
+      window.onkeydown = function (event) {
+        event = event || window.event
+        
+        if ('asdw'.indexOf(event.key) != -1) {
+          dir[{'a': 2, 's': 1, 'd': 3, 'w': 0}[event.key]] = true
+
+          currentDir = []
+          currentDir.push(...dir)
+        } else {
+          if (event.key == ' ') {
+            if (tmpArr.length >= 100) {
+              return
+            }
+
+            let item = document.createElement('div')
+            item.className = 'bullets'
+            item.style.left = box.offsetLeft + box.clientWidth / 2 - 10 + (currentDir[3] - currentDir[2]) * 70 + 'px'
+            item.style.top = box.offsetTop + box.clientHeight / 2 - 10 + (currentDir[1] - currentDir[0]) * 70 + 'px'
+            item.style.backgroundColor = ['red', 'black', 'blue'][parseInt(Math.random() * 4)]
+            
+            let tmp = []
+            tmp.push(...currentDir)
+
+            document.body.appendChild(item)
+            tmpArr.push({item: item, dir: tmp})
+          }
+        }
+      }
+
+      window.onkeyup = function (event) {
+        event = event || window.event
+
+        if ('asdw'.indexOf(event.key) != -1) {
+          dir[{'a': 2, 's': 1, 'd': 3, 'w': 0}[event.key]] = false
+        }
+      }
+
+      function run () {
+        box.style.left = box.offsetLeft + (dir[3] - dir[2]) * speed + 'px'
+        box.style.top = box.offsetTop + (dir[1] - dir[0]) * speed + 'px'
+
+        for (let i = 0, len = tmpArr.length; i < len; i++) {
+          let item = tmpArr[i].item
+
+          item.style.left = item.offsetLeft + (tmpArr[i].dir[3] - tmpArr[i].dir[2]) * 10 + 'px'
+          item.style.top = item.offsetTop + (tmpArr[i].dir[1] - tmpArr[i].dir[0]) * 10 + 'px'
+
+          if (item.offsetLeft <= 0 || item.offsetLeft >= document.body.clientWidth - 20) {
+            tmpArr[i].dir[2] = !tmpArr[i].dir[2]
+            tmpArr[i].dir[3] = !tmpArr[i].dir[3]
+          }
+
+          if (item.offsetTop <= 0 || item.offsetTop >= document.body.clientHeight - 20) {
+            tmpArr[i].dir[0] = !tmpArr[i].dir[0]
+            tmpArr[i].dir[1] = !tmpArr[i].dir[1]
+          }
+        }
+
+        requestAnimationFrame(run)
+      }
+
+      requestAnimationFrame(run)
+    }
+  </script>
+</body>
+</html>

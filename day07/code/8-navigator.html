@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+<script>
+// navigator 保存了与用户浏览器相关的信息
+// console.log( navigator )
+// console.log( navigator.language )//'zh-CN'
+console.log( navigator.userAgent )//返回用户浏览器识别码信息
+
+// 识别浏览器
+var str = navigator.userAgent.toLowerCase()
+if (str.indexOf('chrome')!==-1) {
+  alert('谷歌浏览器')
+}
+
+
+// Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36
+
+// Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0
+
+// Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; WOW64; Trident/7.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET4.0C; .NET4.0E)
+
+</script>
+</body>
+</html>

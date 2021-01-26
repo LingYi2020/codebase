@@ -1,0 +1,46 @@
+
+对象分为：普通对象和函数对象
+
+prototype原型
+每个函数对象都有个属性prototype，指向一个对象（原型对象）
+原型对象上的属性方法被同一个类的所有实例共享（继承）
+Function.prototype = f () {[native code]} 除外
+
+__proto__原型
+每个对象都有一个属性__proto__，指向创建该对象的构造函数的prototype
+属性__proto__ 的主要作用 维护原型链
+var str = '123'
+str.__proto__ -> String.prototype
+String.__proto__ -> Function.prototype
+Number.__proto__  -> Function.prototype
+Object.__proto__  -> Function.prototype
+
+Object.prototype原型链最后的对象
+
+JS的本质就是基于原型的内部链接
+var obj1 = {
+  abc:123,
+  say: function(){
+    console.log('hi')
+  }
+}
+var obj2 = {
+  name: 'xm'
+}
+obj2.__proto__ = obj1
+
+继承
+构造函数继承 原理：改变函数内this指向 ( bind  call apply )
+
+原型继承 原理：改变原型链接
+Dog.prototype = Cat.prototype
+Dog.prototype = new Cat()
+Dog.prototype = Object.create(Cat.prototype)
+
+组合继承(构造函数+原型继承) 完整继承
+
+constructor 每个对象都有，指向创建该对象的构造函数
+
+obj instanceOf Number
+检测Number.prototype是否出现在obj的整个原型链任意位置当中
+

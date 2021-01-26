@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn">按钮</button>
+
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+// 合并对象/拷贝对象属性
+// $.extend === jQuery.extend
+var obj = {
+  name: '小明',
+  age: 23,
+  say: function (){
+    alert('hello')
+  }
+}
+var obj1 = {
+  sex: '男',
+  friends: ['小红','小芳']
+}
+// var obj2 = $.extend(obj,obj1)//第一个参数默认false 浅拷贝
+// var obj2 = $.extend(true,obj,obj1)//第一个参数true 深拷贝
+// console.log( obj )
+// console.log( obj1 )
+// console.log( obj2 === obj )//true
+// console.log( obj.friends === obj1.friends )//false
+
+// $.extend(obj)只传入一个对象的参数时，此方法将obj拷贝到$上
+// $.extend(obj)
+// $.say()
+
+// jQuery静态方法
+// $.trim()
+// $.each()
+// $.noConflict()
+// $.ajax()
+// ...
+
+// var obj3 = Object.assign(obj,obj1)
+// console.log( obj )
+// console.log( obj1 )
+// console.log( obj3 === obj )//true
+// console.log( obj.friends === obj1.friends )//true 浅拷贝
+
+// var obj4 = JSON.parse( JSON.stringify(obj1) )//深拷贝
+// console.log( obj4 === obj1 )//false
+// console.log( obj4.friends === obj1.friends )//false
+
+
+// console.log( $('.btn').jquery )//1.8.3
+// jQuery.fn = jQuery.prototype = {
+// $.fn = jQuery.prototype = {
+// 将obj合并到jQuery.prototype原型对象上
+// $.fn.extend(obj)
+// $('.btn').say()
+// console.log( $('.btn').name )
+
+// $.extend = $.fn.extend = function (){}
+// jQuery.extend = jQuery.fn.extend = function() {}
+
+
+// function Cat(){}
+// Cat.extend = Cat.prototype.extend = function (){
+//   if (typeof arguments[0] === 'object') {
+//     Object.assign(this,arguments[0])
+//   }
+// }
+// Cat.extend({
+//   abc: 'abc123',
+//   say: function (){
+//     alert('hi')
+//   }
+// });
+// Cat.say()
+
+// Cat.prototype.extend({
+//   abc: 'abc123',
+//   say: function (){
+//     alert('hi')
+//   }
+// })
+// var cat1 = new Cat()
+// cat1.say()
+
+</script>
+</body>
+</html>

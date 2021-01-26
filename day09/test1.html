@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {margin: 0; padding: 0;}
+
+    .point {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      position: absolute;
+      background-color: aquamarine;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    window.onload = () => {
+      let points = []
+      let isRun = false
+      let delayTime = 8
+      let cnt = 0
+      let mCnt = 5000000
+
+      window.onmousemove = function (event) {
+        event = event || window.event
+
+        if (cnt > mCnt) return
+        cnt++
+
+        // 创建小点
+        let point = document.createElement('div')
+        point.className = 'point'
+        point.style.left = event.pageX + 'px'
+        point.style.top = event.pageY + 'px'
+
+        let bgc = ['#']
+        for (let i = 0; i < 6; i++) {
+          bgc.push('0123456789abcdef'[parseInt(Math.random() * 16)])
+        }
+        point.style.backgroundColor = bgc.join('')
+
+        document.body.appendChild(point)
+        points.push({dom: point, time: delayTime})
+
+        if (!isRun) {
+          let timer = setInterval(() => {
+            for (let i = 0, len = points.length; i < len; i++) {
+              points[i].time--
+
+              // 销毁
+              if (points[i].time == 0) {
+                points[i].dom.parentNode.removeChild(points[i].dom)
+                points.splice(i--, 1)
+                len--
+                console.log(--cnt)
+              }
+            }
+
+            if (points.length == 0) {
+              clearInterval(timer)
+              isRun = false
+            }
+          }, 20)
+          isRun = true
+        }
+      }
+
+      window.onmousedown = () => {
+        delayTime = -1
+      }
+
+      window.onmouseup = () => {
+        delayTime = 8
+      }
+    }
+  </script>
+</body>
+</html>

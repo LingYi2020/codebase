@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+}
+.wrap{
+  width: 500px;
+  margin: 50px auto 0;
+}
+.wrap input{
+  width: 500px;
+  font-size: 16px;
+  padding: 5px 8px;
+}
+.list li{
+  line-height: 34px;
+  background-color: #eee;
+  padding: 0 10px;
+}
+.list li:hover{
+  background-color: #ccc;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <input type="text" class="ipt">
+  <ul class="list">
+    <!-- <li>123</li>
+    <li>12306</li> -->
+  </ul>
+</div>
+
+<script>
+// jsonp与ajax没有半毛钱关系！！
+// 浏览器的同源策略限制了js的跨域能力！
+// 浏览器的同源策略限制所有跨域行为嘛？ 不是，link img iframe script 
+// script标签加载回来的资源会被当成js在全局执行
+
+var ipt = document.querySelector('.ipt')
+var list = document.querySelector('.list')
+ipt.onkeyup = function (){
+  if (!ipt.value) {
+    list.innerHTML = ''
+    return
+  }
+  // 动态添加script标签
+  var oScript = document.createElement('script')
+  oScript.src = 'http://suggestion.baidu.com/su?cb=hehe&wd='+ipt.value
+  document.body.appendChild(oScript)
+  // 数据加载完成删除 script 标签
+  oScript.onload = function (){
+    // document.body.removeChild(oScript)
+  }
+}
+
+function hehe(json){//请求成功执行的函数
+  console.log(json);
+  var str = ''
+  json.s.forEach(function (item){
+    str += '<li>'+item+'</li>'
+  })
+  list.innerHTML = str
+}
+
+</script>
+</body>
+</html>

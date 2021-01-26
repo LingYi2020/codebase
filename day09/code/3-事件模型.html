@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+  .parent{
+    padding: 50px;
+    width: 400px;
+    height: 200px;
+    background-color: lightblue;
+  }
+  .child{
+    width: 200px;
+    height: 100px;
+    background-color: lightgreen;
+  }
+</style>
+</head>
+<body>
+<button class="btn">移除事件</button>
+<div class="parent">
+  <div class="child"></div>
+</div>
+
+
+<script>
+// 事件模型：添加事件和移除事件的机制
+// DOM 0级事件模型：早期事件添加移除机制
+// 添加事件：dom.on + 事件类型 = 事件处理函数
+// 移除事件：dom.on + 事件类型 = null 
+// 特征：同一个元素添加多个相同事件，事件会发生覆盖
+// 好处：兼容性好
+
+// DOM 2级事件模型：后面新出的事件添加移除机制
+// 添加事件：dom.addEventListener('事件类型','事件处理函数','布尔值')
+// 布尔值：true事件捕获   false事件冒泡，默认冒泡
+// 移除事件：dom.removeEventListener('事件类型','事件处理函数','布尔值')
+// 移除事件时：第二个参数必须是函数名
+// 特征：同一个元素添加多个相同事件，事件不会发生覆盖
+// 好处：元素可以添加多个相同事件，可以设置事件流
+// 缺点：IE678等低版本浏览器不支持
+
+var doc = document
+var html = document.documentElement
+var body = document.body
+var parent = document.querySelector('.parent')
+var child = document.querySelector('.child')
+var btn = document.querySelector('.btn')
+
+// 主流浏览器默认的事件流：事件冒泡
+
+// doc.onclick = function (){
+//   console.log('document被点击')
+// }
+// body.onclick = function (){
+//   console.log('body被点击')
+// }
+// parent.onclick = function (){
+//   console.log('parent被点击')
+// }
+
+// DOM 0级添加事件
+// child.onclick = function (){
+//   console.log('child被点击1')
+// }
+// child.onclick = abc
+// function abc(){
+//   console.log('child被点击2')
+// }
+
+// DOM 2级添加事件
+// child.addEventListener('click',function (){//事件处理函数
+//   console.log('child被点击3')
+// })
+// child.addEventListener('click',fn2)
+// function fn2(){//事件处理函数
+//   console.log('child被点击4')
+// }
+
+// 点击按钮移除child点击事件
+btn.onclick = function (){
+  console.log('移除事件')
+  // DOM 0级移除事件
+  // child.onclick = null
+  // DOM 2级移除事件
+  child.removeEventListener('click',fn2)
+}
+
+
+// 设置事件流
+// child.addEventListener('click',function (){//事件处理函数
+//   console.log('child被点击')
+// },true)// true事件捕获
+// parent.addEventListener('click',function (){//事件处理函数
+//   console.log('parent被点击')
+// },true)// true事件捕获
+// body.addEventListener('click',function (){//事件处理函数
+//   console.log('body被点击')
+// },true)// true事件捕获
+
+
+// IE添加事件监听和移除
+// function fn3(){
+//   console.log('child点击')
+// }
+// child.attachEvent('onclick',fn3)//添加事件
+// child.detachEvent('onclick',fn3)//移除事件
+
+// 添加事件监听（兼容低本版IE）
+function addEvent(dom,type,callback){
+  if (dom.addEventListener) {
+    dom.addEventListener(type,callback)
+  } else {
+    dom.attachEvent('on'+type,callback)
+  }
+}
+// 移除事件监听（兼容低本版IE）
+function removeEvent(dom,type,callback){
+  if (dom.removeEventListener) {
+    dom.removeEventListener(type,callback)
+  } else {
+    dom.detachEvent('on'+type,callback)
+  }
+}
+
+addEvent(child,'click',function (){
+  console.log('1234...')
+})
+
+
+</script>
+</body>
+</html>

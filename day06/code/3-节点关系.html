@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<div id="box">
+  <span>span1</span>
+  <span id="sp2">span2</span>
+  <span>span3</span>
+  <span>span4</span>
+</div>
+
+
+
+<script>
+// 节点关系
+var box = document.getElementById('box')
+var sp2 = document.getElementById('sp2')
+// console.log( box.parentNode )//body
+// console.log( box.children )//元素集合 所有元素子节点
+// box.children[1].style.color = 'red'
+
+// console.log( box.childNodes )//所有子节点(文本节点和元素节点)
+// console.log( box.firstChild )
+// console.log( box.lastChild )
+// console.log( sp2.nextSibling )
+// console.log( sp2.previousSibling )
+
+// IE678不支持
+console.log( box.firstElementChild )
+console.log( box.lastElementChild )
+console.log( sp2.nextElementSibling )
+console.log( sp2.previousElementSibling )
+
+function getFirstChild(dom){
+  if (dom.firstElementChild) {
+    return dom.firstElementChild
+  } else {
+    return dom.firstChild
+  }
+}
+
+function getLastChild(dom){
+  if (dom.lastElementChild) {
+    return dom.lastElementChild
+  } else {
+    return dom.lastChild
+  }
+}
+
+function getNextNode(dom){
+  if (dom.nextElementSibling) {
+    return dom.nextElementSibling
+  } else {
+    return dom.nextSibling
+  }
+}
+
+function getPrevNode(dom){
+  if (dom.previousElementSibling) {
+    return dom.previousElementSibling
+  } else {
+    return dom.previousSibling
+  }
+}
+
+
+</script>
+</body>
+</html>

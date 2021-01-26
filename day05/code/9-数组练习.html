@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// has(arr,60)
+function has(arr,val){
+  for (var i = 0, len = arr.length; i < len; i++){
+    if (arr[i] == val) {
+      return true
+    }
+  }
+  return false
+}
+
+// 数组去重norepeat(arr)
+var arr = [12,5,8,32,12,5,82]
+console.log( arr )
+function norepeat(arr){
+  var arr1 = []
+  for (var i = 0, len = arr.length; i < len; i++){
+    if (!has(arr1,arr[i])) {
+      arr1.push(arr[i])
+    }
+  }
+  return arr1
+}
+console.log( norepeat(arr) )
+
+
+</script>
+</body>
+</html>

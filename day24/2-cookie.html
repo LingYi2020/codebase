@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+
+
+
+<script>
+// 设置cookie 'key=value'
+// document.cookie = 'user1=xiaoming'// 设置
+// document.cookie = 'user2=xiaohong'// 设置
+// document.cookie = 'user2=xiaowang'// 修改
+// document.cookie = 'user3=xiaodong; domain=localhost'//设置域名
+// document.cookie = 'user4=xiaofang; domain='
+// document.cookie = 'user5=xiaowei; path=/GP05'
+// document.cookie = 'user6=xiaoadsf; path='
+
+// 设置有效期
+// var d = new Date()
+// d.setDate(d.getDate()+3)
+// document.cookie = 'user7=xiaokui; expires='+d
+// document.cookie = 'user8=xiao123; expires='
+
+// 封装设置cookie
+function setCookie(options){
+  if (!options.key || !options.val) {
+    throw new Error('设置失败，缺少必须参数！')
+  }
+  // 可选参数的默认值
+  options.domain = options.domain||''
+  options.path = options.path||''
+  options.days = options.days||0
+  // 判断是否设置有效期
+  if (options.days === 0){//不设置有效期
+    document.cookie = options.key+'='+escape(options.val)+'; domain='+options.domain+'; path='+options.path
+  } else {//设置有效期
+    var d = new Date()
+    d.setDate(d.getDate()+options.days)
+    document.cookie = options.key+'='+escape(options.val)+'; domain='+options.domain+'; path='+options.path+'; expires='+d
+  }
+}
+setCookie({
+  key:'user9',
+  val:'zhangsan',
+  domain:'localhost',
+  path:'/GP05',
+  days:7
+})
+setCookie({
+  key:'user10',
+  val:'zhangsan =%dsfsz sadf',
+  days:7
+})
+// 'user10=zhangsan =%dsfsz sadf'
+
+// 获取cookie数据
+console.log( document.cookie )
+// 'user1=xiaoming; user3=xiaodong; user4=xiaofang; user6=xiaoadsf; user7=xiaokui; user8=xiao123; user2=xiaowang; user5=xiaowei; user9=zhangsan'
+// 解析字符串
+// 输入user3 -> 返回 xiaodong
+console.log( document.cookie.split('; ') )
+// ["user1=xiaoming", "user3=xiaodong", "user4=xiaofang", "user6=xiaoadsf", "user7=xiaokui", "user8=xiao123", "user2=xiaowang", "user5=xiaowei", "user9=zhangsan"]
+var arr = document.cookie.split('; ')
+for (var i = 0, len = arr.length; i < len; i++){
+  var arr2 = arr[i].split('=')// ["user1","xiaoming"]
+  if (arr2[0]==='user3') {
+    console.log( arr2[1] )
+  }
+}
+
+// 封装获取cookie
+function getCookie(key){
+  var arr = document.cookie.split('; ')
+  // ["user1=xiaoming", "user3=xiaodong"]
+  for (var i = 0, len = arr.length; i < len; i++){
+    var arr2 = arr[i].split('=')// ["user1","xiaoming"]
+    if (arr2[0]===key) {
+      // return arr2[1]
+      return unescape(arr2[1])
+    }
+  }
+  return null//没有数据
+}
+// console.log( getCookie('user9') )
+
+// 删除cookie
+// cookie过期会被浏览器删除
+function removeCookie(key){
+  setCookie({
+    'key': key,
+    'val': '123',
+    days: -2
+  })
+}
+removeCookie('user4')
+
+</script>
+</body>
+</html>

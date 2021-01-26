@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+<button class="btn">按钮</button>
+
+<script>
+// 构造函数（类） 用于构建对象，构造函数名通常首字母大写（非必须）
+// 内置构造函数：Number  String  Boolean  Object  Array  Function  Date  RegExp ...
+function fn1(){}//函数声明
+var fn2 = function (){alert('fn2')}//函数表达式
+var fn3 = new Function('alert("fn3")')//创建函数实例
+// fn2()
+// fn3()
+// console.log( typeof fn2 )// 'function'
+// console.log( typeof fn3 )// 'function'
+
+
+// var num1 = 123
+// var num2 = new Number(456)
+// var str1 = 'abc'
+// var str2 = new String('www')
+// document.write(num1 + ' ')
+// document.write(num2)
+// console.log( typeof num1 )// 'number'
+// console.log( typeof num2 )// 'object'
+
+
+// 自定义构造函数，任何一个函数都可以使用new当成构造函数调用
+function test(){
+
+}
+var res1 = test()// 普通函数调用
+console.log( res1 )//undefined 
+
+
+// 1.this所在的函数，谁调用它那么this就执行谁
+function Cat(){
+  // 普通函数中 this 指向由调用方式决定
+  // 2.构造函数中 this 指向实例对象
+  console.log(this)
+  // return this //构造函数的默认返回值this
+  // return {a:1234}
+}
+var res2 = new Cat()// 构造函数通常使用new调用，返回实例对象
+console.log(res2)// Cat {}
+
+
+// var btn = document.querySelector('.btn')
+// btn.onclick = function (){// 事件处理函数
+  // 3.在事件处理函数中，this指向触发事件的元素
+  // console.log(this)// btn
+  // Cat()//window
+  // window.Cat()//window
+// }
+
+// btn.onclick = Cat // btn
+// btn.onclick = function Cat(){}
+
+</script>
+</body>
+</html>

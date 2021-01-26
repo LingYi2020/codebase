@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+
+<script>
+// Set 数据结构（类似于数组）
+let s1 = new Set()
+let s2 = new Set([1,2,3,4,3,2,1])
+// console.log(s1)
+console.log(s2)
+// console.log( typeof s1 )//'object'
+// console.log( s2.size )//4
+
+// var res = s2.add(5)//添加值
+// console.log(s2)
+// console.log(res)
+// console.log(res === s2)//true
+
+// console.log( s2.delete(3) )//true 删除某个值
+
+// console.log(s2)
+// console.log( s2.has(6) )//false 判断是否有某个
+
+// s2.clear()//清空所有值
+// console.log(s2)
+
+// console.log( s2[0] )//undefined
+// s2.forEach((item,index,self)=>{
+//   console.log(item)
+//   console.log(index)
+//   console.log(self)
+// })
+
+// console.log( ...s2 )// 1 2 3 4
+
+// 用一行代码实现数组去重？
+// let arr = [3,4,5,6,5,4,3]
+// console.log( [...new Set(arr)] )
+
+// for/of 会调用迭代器 iterator
+// for(var x of s2){
+//   console.log(x)
+// }
+
+// var str = 'hello'
+// var str = new String('hello')
+// console.log(str)
+// for (var v of str){
+//   console.log(v)
+// }
+
+</script>
+</body>
+</html>

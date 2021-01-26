@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+<button class="btn">安安</button>
+<div class="box red blue">
+  div box
+</div>
+
+<script>
+
+var btn = document.querySelector('.btn')
+var box = document.querySelector('.box')
+
+classList对象
+console.log( box.classList )// [...]类数组对象
+console.log( box.classList.length )//返回元素类名个数
+console.log( box.classList[0] )//获取元素类名 'box'
+console.log( box.classList.item(0) )//获取元素类名 'box'
+
+btn.onclick = function (){
+  box.className = 'show'//修改类名
+  box.className = 'box red blue show'//添加类名
+  box.className = 'box blue'//删除类名
+
+  box.classList.add('show')//添加类名
+  box.classList.add('show','green')//添加类名
+
+  box.classList.remove('red')//删除类名
+  box.classList.remove('red','blue')//删除类名
+
+  if (box.classList.contains('red')) {//判断是否有某个类名
+    box.classList.remove('red')//删除类名
+  } else {
+    box.classList.add('red')//添加类名
+  }
+
+  box.classList.toggle('red')//有则删除，无则添加
+}
+
+
+
+</script>
+</body>
+</html>

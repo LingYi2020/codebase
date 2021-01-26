@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+  width: 2000px;
+  height: 3000px;
+}
+#wrap{
+  width: 500px;
+  height: 300px;
+  border: 1px solid #000;
+  overflow: hidden;
+}
+#main{
+  width: 1000px;
+  height: 600px;
+  background-color: #ccc;
+}
+</style>
+</head>
+<body>
+<button id="btn">按钮</button>
+<div id="wrap">
+  <div id="main">
+    卡萨极乐空间发了减肥啦卡萨极乐空间发了减肥啦卡萨极乐空间发了减肥啦卡萨极乐空间发了减肥啦卡萨极乐空间发了减肥啦卡萨极乐空间发了减肥啦
+  </div>
+</div>
+
+<script>
+var btn = document.getElementById('btn')
+var wrap = document.getElementById('wrap')
+// 只要内容大于容器就会产生滚动条
+// 元素不显示滚动条，js一样可以操作滚动条
+btn.onclick = window.onmousewheel = function (){
+  // console.log( wrap.scrollLeft )//获取值
+  // console.log( wrap.scrollTop )//获取值
+
+  // wrap.scrollLeft = 100//设置值
+  // wrap.scrollTop = 100//设置值
+
+  // console.log( wrap.scrollWidth )//可滚动内容总宽度
+  // console.log( wrap.scrollHeight )//可滚动内容总高度
+
+  // 整个窗口的滚动条
+  // 谷歌 火狐 IE
+  // console.log( window.scrollLeft )//undefined
+  // console.log( document.scrollLeft )//undefined
+  // console.log( document.documentElement.scrollLeft )//20
+  // console.log( document.body.scrollLeft )//0
+
+  var windowScrollTop = document.body.scrollTop || document.documentElement.scrollTop //获取
+  // document.documentElement.scrollTop = 200//设置
+  console.log(document.documentElement.scrollHeight, document.documentElement.scrollTop)
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// 数组：有序的数据集合
+// 作用：一个变量保存多个数据
+
+// 创建数据
+var arr1 = []
+var arr2 = [3,4,5,6]
+var arr3 = new Array()
+var arr4 = new Array(7,8,9)
+var arr6 = new Array(3) // 创建一个指定长度为3的数组
+// 数组中 7 8 9 叫数组的元素（可以是任意数据类型）
+var arr5 = [123,'abc',{a:66},['a1','a2'],function (){alert('hello')}]
+// 读取数组元素数据，数组中的元素都有一个数字索引，索引始终从0开始
+// console.log( arr5 )
+// 数组的属性length代表数据长度（数组元素的个数）
+// console.log( arr5.length )//5
+// 读取数组元素数据通过索引访问
+// console.log( arr5[1] )// 'abc'
+// console.log( arr5[2].a )// 66
+// console.log( arr5[3][1] )// 'a2'
+// arr5[4]()
+
+// 添加值或修改值
+// arr1[0] = 11
+// arr1[1] = 22
+// arr1[2] = 33
+// arr1[5] = 66
+// console.log(arr1) // length = 6
+// console.log(arr1[3])//undefined
+// console.log(arr1[4])//undefined
+
+// console.log( arr3 )
+// console.log( arr4 )
+// console.log( arr6 )
+// arr6[0] = 11
+// arr6[1] = 22
+// arr6[2] = 33
+// arr6[3] = 44
+
+
+// 遍历数组
+// for (var i = 0; i < arr2.length; i++){
+//   console.log( arr2[i] )
+// }
+
+// for (var i = 0, len = arr2.length; i < len; i++){
+//   console.log( arr2[i] )
+// }
+
+// 数组的其他属性也会被遍历出来
+// arr2.abc = '1234567'
+// for (var index in arr2){// 不推荐
+//   // console.log(index)
+//   console.log( arr2[index] )
+// }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+<ul class="list">
+  <li>a1</li>
+  <li>a2</li>
+  <li>a3</li>
+  <li>a4</li>
+</ul>
+
+<script>
+// 声明变量的关键字：var
+// var abc = 123
+// hehe = '呵呵'
+
+
+// let 声明变量需要注意的地方：
+
+// 1.let不允许重复声明变量；
+// var a = 1
+// var a = 2
+// console.log(a)//2
+
+// let b = 1
+// let b = 2//报错
+// var b = 2//报错
+// console.log(b)
+
+
+// 2.let声明变量仅在块级作用域内有效；{块级作用域}
+// if (true) {
+//   var a = 123
+// }
+// console.log(a)//123
+
+// if (true) {
+//   let a = 123
+// }
+// console.log(a)//a is not defined
+
+// for(var i = 0; i < 5; i++){
+//   console.log(i)//0 1 2 3 4
+// }
+// console.log(i)//5
+
+// for(let i = 0; i < 5; i++){
+//   console.log(i)//0 1 2 3 4
+// }
+// console.log(i)//i is not defined
+
+
+// 3.不能通过let声明和形参相同的变量；
+// function fn(a,b){
+//   var b = 4
+//   console.log(a+b)
+// }
+// fn(2,3)
+
+// function fn(a,b){
+//   let b = 4//报错
+//   console.log(a+b)
+// }
+// fn(2,3)
+
+
+// 4.let声明变量不会提升；
+// console.log(a)//undefined
+// var a = 123
+
+// console.log(a)//报错
+// let a = 123
+// console.log(a)//123
+
+
+// 5.暂时性死区TDZ
+// var a = 1
+// if (true) {
+//   console.log(a)//1
+//   var a = 2
+// }
+// console.log(a)//2
+
+// let a = 1
+// if (true) {
+//   console.log(a)//报错
+//   let a = 2
+// }
+// console.log(a)
+
+// for(var i = 0; i < 5; i++){
+//   setTimeout(function (){
+//     console.log(i)//5 5 5 5 5
+//   },1000)
+// }
+
+// for(let i = 0; i < 5; i++){
+//   setTimeout(function (){
+//     console.log(i)//0 1 2 3 4
+//   },1000)
+// }
+
+var lis = document.querySelectorAll('.list li')
+// for (var i = 0, len = lis.length; i < len; i++){
+//   lis[i].onclick = function (){
+//     console.log(i)
+//   }
+// }
+
+// for (let i = 0, len = lis.length; i < len; i++){
+//   lis[i].onclick = function (){
+//     console.log(i)
+//   }
+// }
+
+
+// const 声明常量，特征限制和let一样
+// 不同点：
+// 1.一般常量用大写字母（非必须）
+// 2.常量不能重新赋值
+// 3.定义时必须有初始值
+// 4.常量的值为引用类型时，对象的属性可以修改
+const PI = 3.14
+const UESR_NAME = '李四'
+// PI = 3.1415926//报错
+// const AGE //报错
+const USER = {
+  name: '张三',
+  age: 23
+}
+// USER = {//报错，直接修改常量的引用地址
+//   name: '李四',
+//   age: 24
+// }
+USER.age = 25//可以修改
+console.log( USER.age )
+
+
+
+</script>
+</body>
+</html>

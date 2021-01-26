@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  
+</div>
+
+
+<script>
+var wrap = document.querySelector('.wrap')
+var box = document.createElement('div')
+var fragment = document.createDocumentFragment()//文档碎片，不会真实存在dom树中
+var str = ''
+for (var i = 0, len = 50; i < len; i++){
+  // var div = document.createElement('div')
+  // div.innerText = '新建的div'
+  // wrap.appendChild(div) // 频繁操作DOM
+
+  // box.appendChild(div)
+  // fragment.appendChild(div)
+
+  // wrap.innerHTML += '<div>新建的div</div>' // 频繁操作DOM
+  str += '<div>新建的div</div>'
+}
+// wrap.appendChild(fragment)
+
+wrap.innerHTML = str
+</script>
+</body>
+</html>

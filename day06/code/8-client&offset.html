@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body{
+  border: 1px solid #000;
+  width: 2000px;
+  height: 3000px;
+}
+.box1{
+  padding: 50px;
+  width: 600px;
+  height: 300px;
+  border: 10px solid red;
+  background-color: pink;
+  position: relative;
+}
+.box2{
+  padding: 50px;
+  width: 300px;
+  height: 100px;
+  border: 10px solid red;
+  background-color: lightblue;
+  position: relative;
+}
+.box3{
+  padding: 50px;
+  width: 100px;
+  height: 10px;
+  border: 10px solid red;
+  background-color: lightgreen;
+}
+</style>
+</head>
+<body>
+
+
+<div class="box1">
+  <div class="box2">
+    <div class="box3"></div>
+  </div>
+</div>
+
+
+<script>
+var box1 = document.querySelector('.box1')
+var box2 = document.querySelector('.box2')
+var box3 = document.querySelector('.box3')
+// offset系列属性
+// offsetWidth  offsetHeight  返回元素自身的宽高，包含padding和border
+// console.log( box2.offsetWidth )// 420=50 + 10 + 300 + 10 + 50
+// console.log( box2.offsetHeight )// 220=50 + 10 + 100 + 10 + 50
+
+// offsetLeft  返回元素左侧到最近的定位父级的左侧距离
+// offsetTop   返回元素顶部到最近的定位父级的上边距离
+// console.log( box3.offsetLeft )
+// console.log( box3.offsetTop )
+
+// client系列属性
+// clientWidth  clientHeight 返回元素自身的宽高，包含padding，不包含border
+// console.log( box2.clientWidth )//400=50+300+50
+// console.log( box2.clientHeight )//200=50+100+50
+
+// clientLeft  clientTop  实际效果和边框宽度一样
+// console.log( box2.clientLeft )// 10  左边框宽度
+// console.log( box2.clientTop )// 10  上边框宽度
+
+
+// 窗口、可视区、文档 的宽高
+
+// body的宽高 不含边框
+// console.log( document.body.clientWidth )
+// console.log( document.body.clientHeight )
+// body的宽高 含边框
+// console.log( document.body.offsetWidth )
+// console.log( document.body.offsetHeight )
+
+// var html = document.querySelector('html')
+// var html = document.documentElement
+
+console.log( document.documentElement.clientWidth )//可视区的宽度
+console.log( document.documentElement.clientHeight )//可视区高度
+
+console.log( window.innerWidth )//可视区宽度（含滚动条）
+console.log( window.innerHeight )//可视区高度（含滚动条）
+
+// console.log( document.documentElement.offsetWidth )// 可视区宽度
+// console.log( document.documentElement.offsetHeight )//整个文档的高度
+// console.log( document.documentElement.scrollWidth )//整个文档宽度
+
+
+
+</script>
+</body>
+</html>

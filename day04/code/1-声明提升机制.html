@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+
+<script>
+// 声明提升机制：变量和函数声明会提升，声明提升到当前作用域的顶部
+
+// var a = 1
+// function test(){
+//   alert(a)// undefiend
+//   var a = 2
+//   alert(a)// 2
+// }
+// test()
+
+// 模拟代码真实执行顺序
+// var a
+// function test(){
+//   var a
+//   alert(a)// undefiend
+//   a = 2
+//   alert(a)// 2
+// }
+// a = 1
+// test()
+
+// fn1()
+// fn2()
+// var fn1 = function (){
+//   console.log('函数表达式')
+// }
+// fn1()
+// function fn2(){
+//   console.log('函数声明')
+// }
+// fn2()
+
+// 模拟代码真实执行顺序
+// var fn1
+// function fn2(){
+//   console.log('函数声明')
+// }
+// fn1()
+// fn2()
+// fn1 = function (){
+//   console.log('函数表达式')
+// }
+// fn1()
+// fn2()
+
+
+console.log( typeof fn )// 'function'
+var fn = 123
+function fn(){}
+console.log( typeof fn )// 'number'
+
+// 模拟代码真实执行顺序
+// 当变量和函数重名时，该名字优先给函数使用
+// var fn
+// function fn(){}
+// console.log( typeof fn )  // function 
+// fn = 123
+// console.log( typeof fn )  // Number
+
+</script>
+</body>
+</html>

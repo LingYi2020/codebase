@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+<div class="tab">
+  <!-- <div class="header">
+    <h3>喜剧</h3>
+    <h3>动作</h3>
+    <h3>爱情</h3>
+  </div>
+  <div class="content">
+    <div>内容1</div>
+    <div>内容2</div>
+    <div>内容3</div>
+  </div> -->
+</div>
+
+
+<script>
+var tits = ['喜剧','爱情','动作']
+var cons = ['莱克斯顿解放路卡设计费','阿斯顿发生','五二大V顺风车']
+
+let tab = document.querySelector('.tab')
+// tab.innerHTML = '<div class="header"><h3>'+tits[0]+'</h3><h3>'+tits[1]+'</h3><h3>'+tits[2]+'</h3></div><div class="content"><div>'+cons[0]+'</div><div>'+cons[1]+'</div><div>'+cons[2]+'</div></div>'
+
+// tab.innerHTML = '<div class="header">'+
+//                   '<h3>'+tits[0]+'</h3>'+
+//                   '<h3>'+tits[1]+'</h3>'+
+//                   '<h3>'+tits[2]+'</h3>'+
+//                 '</div>'+
+//                 '<div class="content">'+
+//                   '<div>'+cons[0]+'</div>'+
+//                   '<div>'+cons[1]+'</div>'+
+//                   '<div>'+cons[2]+'</div>'+
+//                 '</div>'
+
+// 字符串模板：`` 反引号
+// tab.innerHTML = `
+//   <div class="header">
+//     <h3>${tits[0]}</h3>
+//     <h3>${tits[1]}</h3>
+//     <h3>${tits[2]}</h3>
+//   </div>
+//   <div class="content">
+//     <div>${cons[0]}</div>
+//     <div>${cons[1]}</div>
+//     <div>${cons[2]}</div>
+//     <div>${test()}</div>
+//   </div>
+// `
+// function test(){
+//   return '函数返回值，书法家李撒娇的法拉盛'
+// }
+
+let name = '张三'
+let sex = '男女'
+function fun(a,b,c){
+  console.log(a)// ["随便", "写点", "内容"]
+  console.log(b)//'张三'
+  console.log(c)//'男女'
+}
+// fun(2,3,4)
+// fun `随便${name}写点${sex}内容`
+// fun `随便写点内容`
+// 1.函数名后面跟字符串模板，可以调用执行函数
+// 2.函数名后面跟字符串模板，函数内部第一个参数一定是一个数组
+// 3. ${name}相当于一个分隔符
+</script>
+</body>
+</html>

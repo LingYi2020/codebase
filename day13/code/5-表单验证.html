@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+.register span{
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<form class="register" action="https://www.baidu.com/" method="get" autocomplete="off">
+  <p>
+    账号：<input type="text" class="user" name="user">
+    <span>8到18个字符，字母、数字、下划线</span>
+  </p>
+  <p>
+    密码：<input type="text" class="pass" name="pass">
+    <span>8到18个字符，必须包含字母、数字或特殊字符中的两种</span>
+  </p>
+  <p>
+    手机：<input type="text" class="phone" name="phone">
+    <span>宝贝，这个号码找不到你！</span>
+  </p>
+  <p>
+    邮箱：<input type="text" class="email" name="email">
+    <span>亲，你这个是火星邮箱嘛？</span>
+  </p>
+  <p>
+    昵称：<input type="text" class="nick" name="nick">
+    <span>亲，你这个昵称不符合你的气质！</span>
+  </p>
+  <p>
+    性别：<input type="text" class="sex" name="sex">
+    <span>亲，你从泰国回来吗？</span>
+  </p>
+  <input type="submit" value="注册">
+</form>
+
+<script>
+var register = document.querySelector('.register')
+var ipts = document.querySelectorAll('.register input')
+var tips = document.querySelectorAll('.register span')
+var arr = []// 记录验证结果
+ipts[0].onblur = function (){
+  var val = this.value.replace(/\s+/g,'')//去掉空格
+  console.log(val)
+  var reg = /^\w{8,18}$/
+  if (reg.test(val)) {
+    tips[0].style.display = 'none'
+    arr[0] = 1
+  } else {
+    arr[0] = 0
+    tips[0].style.display = 'inline-block'
+  }
+}
+
+ipts[1].onblur = function (){
+  var val = this.value.replace(/\s+/g,'')//去掉空格
+  var reg1 = /\d+/
+  var reg2 = /[a-z]+/i
+  var reg3 = /[^0-9a-z]+/i
+  var flag = 0
+  if (val.length<8||val.length>18) {
+    tips[1].style.display = 'inline-block'
+    arr[1] = 0
+    return
+  }
+  if (reg1.test(val)) {
+    flag++
+  }
+  if (reg2.test(val)) {
+    flag++
+  }
+  if (reg3.test(val)) {
+    flag++
+  }
+  if (flag >= 2) {
+    tips[1].style.display = 'none'
+    arr[1] = 1
+  } else {
+    arr[1] = 0
+    tips[1].style.display = 'inline-block'
+  }
+}
+
+ipts[2].onblur = function (){
+  var val = this.value.replace(/\s+/g,'')//去掉空格
+  var reg = /^1[3456789]\d{9}$/
+  if (reg.test(val)) {
+    tips[2].style.display = 'none'
+    arr[2] = 1
+  } else {
+    arr[2] = 0
+    tips[2].style.display = 'inline-block'
+  }
+}
+
+ipts[3].onblur = function (){
+  var val = this.value.replace(/\s+/g,'')//去掉空格
+  var reg = /^(\w{4,20})@[0-9a-zA-Z]{1,10}(\.[a-z]{2,3}){1,2}$/
+  if (reg.test(val)) {
+    tips[3].style.display = 'none'
+    arr[3] = 1
+  } else {
+    arr[3] = 0
+    tips[3].style.display = 'inline-block'
+  }
+}
+
+ipts[4].onblur = function (){
+  var val = this.value.replace(/\s+/g,'')//去掉空格
+  var reg = /^.{2,12}$/
+  if (reg.test(val)) {
+    tips[4].style.display = 'none'
+    arr[4] = 1
+  } else {
+    arr[4] = 0
+    tips[4].style.display = 'inline-block'
+  }
+}
+
+ipts[5].onblur = function (){
+  var val = this.value.replace(/\s+/g,'')//去掉空格
+  var reg = /^(男|女)$/
+  if (reg.test(val)) {
+    tips[5].style.display = 'none'
+    arr[5] = 1
+  } else {
+    arr[5] = 0
+    tips[5].style.display = 'inline-block'
+  }
+}
+
+register.onsubmit = function (){
+  // 判断，只要有一个验证不通过就阻止表单提交
+  for (var i = 0, len = arr.length; i < len; i++){
+    if (arr[i] === 0) {
+      alert('请正确输入')
+      return false
+    }
+  }
+  
+  alert('提交成功')
+}
+
+</script>
+</body>
+</html>

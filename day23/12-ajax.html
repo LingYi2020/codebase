@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<button class="btn">请求数据</button>
+<div class="show"></div>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script>
+
+$('.btn').click(function (){
+
+  $.ajax({
+    url: './ajax.php',
+    type: 'get',
+    // data: 'code=abc',
+    data: {code: 'abc'},
+    cache: false,//不读取缓存
+    dataType: 'json',
+    // async: false,// 同步请求
+    timeout: 5000,//设置超时
+    beforeSend: function (){
+      console.log('发送请求之前执行。。。')
+    },
+    success: function (json){
+      $('.show').html(`姓名：${json.name}，年龄：${json.age}`)
+      console.log('666666666')
+    },
+    error: function (err){
+      console.log(err)
+    },
+    complete: function (){
+      console.log('请求完成。。。。')
+    }
+  })
+  console.log('123456789')
+
+})
+
+
+
+
+
+</script>
+</body>
+</html>

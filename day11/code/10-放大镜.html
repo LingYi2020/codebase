@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.wrap h1{
+  min-width: 1180px;
+  height: 80px;
+  background-color: #eee;
+}
+.main{
+  width: 1180px;
+  margin: 20px auto 0;
+  overflow: hidden;
+  position: relative;
+}
+.left{
+  float: left;
+  width: 350px;
+  height: 350px;
+  border: 1px solid #eee;
+  position: relative;
+}
+.left img{
+  width: 350px;
+  height: 350px;
+}
+.left .mask{
+  width: 175px;
+  height: 175px;
+  background-color: orange;
+  opacity: .4;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+  cursor: move;
+}
+.right{
+  float: left;
+  margin-left: 10px;
+}
+.maxBox{
+  position: absolute;
+  left: 360px;
+  top: 0;
+  z-index: 999;
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border: 1px solid lightblue;
+  display: none;
+}
+.maxBox img{
+  width: 800px;
+  height: 800px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+</style>
+</head>
+<body>
+  
+<div class="wrap">
+  <h1>头部</h1>
+  <div class="main">
+    <div class="left">
+      <img src="./img/min.jpg" alt="">
+      <div class="mask"></div>
+    </div>
+    <div class="right">
+      <img src="./img/msg.png" alt="">
+    </div>
+    <div class="maxBox">
+      <img src="./img/max.jpg" alt="">
+    </div>
+  </div>
+</div>
+
+<script src="./utils.js"></script>
+<script>
+var left = $1('.left')
+var mask = $1('.mask')
+var maxBox= $1('.maxBox')
+var maxImg= $1('.maxBox img')
+
+left.onmouseenter = function (){
+  mask.style.display = 'block'
+  maxBox.style.display = 'block'
+}
+left.onmouseleave = function (){
+  mask.style.display = 'none'
+  maxBox.style.display = 'none'
+}
+
+left.onmousemove = function (ev){
+  var e = ev || event
+  // 遮罩层left=鼠标到页面左侧的距离-left容器到最外层的距离-遮罩层宽的一半
+  var mask_left = e.pageX - offset(left).left - mask.clientWidth/2
+  var mask_top = e.pageY - offset(left).top - mask.clientHeight/2
+  // 临界值判断
+  if (mask_left <= 0){
+    mask_left = 0
+  }
+  if (mask_left >= (left.clientWidth - mask.clientWidth)){
+    mask_left = (left.clientWidth - mask.clientWidth)
+  }
+  if (mask_top <= 0){
+    mask_top = 0
+  }
+  if (mask_top >= (left.clientHeight - mask.clientHeight)){
+    mask_top = (left.clientHeight - mask.clientHeight)
+  }
+  // 赋值，改变遮罩层定位
+  mask.style.left = mask_left + 'px'
+  mask.style.top = mask_top + 'px'
+
+  // 移动比例
+  var scaleX = mask_left/(left.clientWidth - mask.clientWidth)
+  var scaleY = mask_top/(left.clientHeight - mask.clientHeight)
+  // 根据比例计算出大图的定位
+  var img_left = (maxImg.clientWidth - maxBox.clientWidth)*scaleX
+  var img_top = (maxImg.clientHeight - maxBox.clientHeight)*scaleY
+  // 赋值，改变大图定位，反向运动
+  maxImg.style.left = -img_left + 'px'
+  maxImg.style.top = -img_top + 'px'
+}
+
+
+</script>
+</body>
+</html>

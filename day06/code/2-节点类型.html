@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+
+<button class="btn">按钮</button>
+<div class="box" id="box" title="标题" hehe="呵呵">一个块<!-- 注释内容 --></div>
+<div class="show">
+  show文本
+  <h3>标题333</h3>
+  <p>段落内容1231333.。。</p>
+</div>
+<input type="text" class="user">
+
+<script>
+var doc = document //文档节点
+var btn = document.querySelector('.btn')//元素节点
+var box = document.querySelector('.box')//元素节点
+var txt = box.firstChild// 文本节点
+var attr = box.getAttributeNode('hehe')//属性节点
+var comment = box.lastChild//注释节点
+
+// 节点类型
+// console.log( doc )// #document
+// console.log( btn )// <button class="btn">按钮</button>
+// console.log( txt )// '一个块'
+// console.log( attr )// hehe="呵呵"
+// console.log( comment )// <!-- 注释内容 -->
+
+// nodeType 返回代表节点类型的数字
+// console.log( doc.nodeType )//9
+// console.log( btn.nodeType )//1     *
+// console.log( attr.nodeType )//2    *
+// console.log( txt.nodeType )//3     *
+// console.log( comment.nodeType )//8
+
+// nodeName 返回节点名称
+// console.log( doc.nodeName )// '#document'
+// console.log( btn.nodeName )// 'BUTTON' 大写的标签名   *
+// console.log( attr.nodeName )// 'hehe'
+// console.log( txt.nodeName )// '#text'
+// console.log( comment.nodeName )// '#comment'
+
+// tagName 返回大写的标签名
+// console.log( btn.tagName )// 'BUTTON'   *
+
+// nodeValue 返回节点的值
+// console.log( doc.nodeValue )// null
+// console.log( btn.nodeValue )// null
+// console.log( attr.nodeValue )// '呵呵'
+// console.log( txt.nodeValue )// '一个块'
+// console.log( comment.nodeValue )// '注释内容'
+
+var btn = document.querySelector('.btn')
+
+// 操作（获取/设置）元素节点的值   ***
+// 表单元素 input select textarea ...
+// 表单元素用value属性操作元素值
+// var user = document.querySelector('.user')
+// btn.onclick = function (){
+//   console.log( user.value )// 获取值
+//   user.value = '请输入电话' // 设置值
+// }
+
+// 非表单元素 div span p h1 strong em a ...
+// 非表单元素用 innerHTML/innerText 属性操作元素值
+var show = document.querySelector('.show')
+btn.onclick = function (){
+  // console.log( show.innerHTML )// 获取值 文本+标签
+  // console.log( show.innerText )// 获取值 文本
+  // show.innerText = '<h1>标题11111</h1>' // 设置值 不解析标签
+  show.innerHTML = '<h1>标题11111</h1>' // 设置值 可解析标签
+}
+</script>
+</body>
+</html>

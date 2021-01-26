@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+
+// onmousewhell  whellDelta    DOMMouseScroll  e.deltail
+
+// 谷歌 IE 支持的滚轮事件
+document.onmousewheel = function (ev){
+  var e = ev || event
+  console.log( e.wheelDelta )// 往前推120  往后拉-120
+}
+
+// 火狐 支持的滚轮事件 DOMMouseScroll
+document.addEventListener('DOMMouseScroll',function (e){
+  console.log( e.detail )// 往前推-3  往后拉3
+})
+
+</script>
+</body>
+</html>

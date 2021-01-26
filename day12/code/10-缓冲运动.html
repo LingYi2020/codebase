@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.box{
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: absolute;
+  left: 0px;
+  top: 50px;
+}
+p{
+  width: 1px;
+  height: 500px;
+  background-color: red;
+  position: absolute;
+  left: 532px;
+  top: 0;
+}
+</style>
+</head>
+<body>
+
+<button class="btn">按钮</button>
+<div class="box"></div>
+<p></p>
+
+<script>
+var btn = document.querySelector('.btn')
+var box = document.querySelector('.box')
+var timer
+// var current = 0 //当前位置
+// var target = 588 //目标位置
+// var speed = 5 //运动速度
+// 60hz  1000/60 = 16.667  30  1000/30 = 33.333
+btn.onclick = function (){
+  animate(box,532)
+}
+
+/** 
+* 运动函数
+* 参数：
+*   dom 要运动的元素
+*   target 运动目标位置
+* 支持功能：
+*   支持left属性运动
+*   支持水平方向运动到任意位置
+*/
+function animate(dom,target){
+  //当前位置
+  var current = dom.offsetLeft
+
+  clearInterval(timer)
+  timer = setInterval(function (){
+    // 持续变化的速度
+    var speed = (target-current)/12
+    // console.log(speed)
+
+    speed = speed>0?Math.ceil(speed):Math.floor(speed)
+
+    // speed = parseInt(speed)//向下取整，会导致少走到达不了终点
+    // speed = Math.ceil(speed)//向上取整
+    // Math.ceil(-4.3)//-4
+    // Math.floor(-4.3)//-5
+
+    // 当前位置+速度
+    current += speed // 585
+    // 临界值判断(运动停止条件：剩余运动量 <= 每次的运动量)
+    if ( Math.abs(target-current) <= Math.abs(speed) ) {
+      current = target//到达目的地
+      clearInterval(timer)
+      console.log('运动完成')
+    }
+    // 持续改变left属性
+    dom.style.left = current + 'px'
+  },20)
+}
+  
+</script>
+</body>
+</html>

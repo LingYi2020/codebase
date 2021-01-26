@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+  
+  <ul class="list">
+    <li>a1</li>
+    <li>a2</li>
+    <li>a3</li>
+    <li>a4</li>
+  </ul>
+
+<script>
+// 展开（扩展）运算符 ...
+// 能展开的数据：数组 字符串 元素集合  arguments Set Map
+// let arr = [23,45,67,89]
+// console.log( arr )
+// console.log( ...arr )   // 23 45 67 89
+// console.log( [...arr] )  
+
+// let str = 'hello'
+// console.log( ...str )
+// console.log( 'h','e','l','l','o' )
+
+// var lis = document.querySelectorAll('.list li')
+// console.log( lis )
+// console.log( [...lis] )
+
+// var obj = {name: 'xm', age: 23, sex: '女'}
+// console.log( obj )
+// console.log( ...obj )// 不能展开，因为没有部署迭代器 iterator
+// var obj2 = {...obj}
+// console.log( obj2 )
+
+
+// rest运算符（和展开相反的操作）
+// function test(a,b,c,d){
+//   console.log(a,b,c,d)
+// }
+// test(1,2,3,4)
+// var arr3 = [2,3,4,5]
+// test(arr3[0],arr3[1],arr3[2],arr3[3])
+
+
+// function test(...arr){//rest运算符
+//   console.log(arr)
+// }
+// var arr3 = [2,3,4,5]
+// test(...arr3)//展开运算符
+// test(2,3,4,5)//展开运算符
+
+// 解构赋值中的rest运算符
+var arr4 = [4,5,6,7,8,9]
+var [a,b,c,...d] = arr4
+// var [a,...b,c,d] = arr4//Rest element must be last element
+console.log(a)//4
+console.log(b)//5
+console.log(c)//6
+console.log(d)//[7,8,9]
+
+</script>
+</body>
+</html>

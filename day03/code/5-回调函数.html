@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+
+<script>
+// 回调函数: 一个函数作为参数传入另外一个函数内部去执行
+function fn1(cb){
+  console.log('fn1程序执行')
+  cb()
+}
+// fn1(function (){// 回调函数
+//   console.log('回调函数执行')
+// })
+function fn2(){
+  console.log('fn2函数执行')
+}
+// fn1(fn2)
+
+
+// setTimeout(function (){// 回调函数
+
+// },2000)
+
+
+</script>
+</body>
+</html>

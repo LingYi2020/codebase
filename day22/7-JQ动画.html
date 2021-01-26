@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+.box{
+  width: 200px;
+  height: 200px;
+  background-color: red;
+  position: absolute;
+  left: 10px;
+  top: 40px;
+}
+
+</style>
+</head>
+<body>
+
+<button class="btn1">按钮1</button>
+<button class="btn2">按钮2</button>
+<button class="btn3">按钮3</button>
+<button class="stop">停止</button>
+<button class="btn4">鼠标移入移出</button>
+<div class="box"></div>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script src="./jquery.easing.min.js"></script>
+<script>
+
+// 动画函数 参数基本都一样
+
+$('.btn1').click(function (){
+  // $('.box').slideUp()//收起
+  // $('.box').slideUp(2000,'easeInBounce',function (){
+  //   console.log('动画执行完成。。。1')
+  // })//收起
+  // $('.box').slideUp({
+  //   duration: 2000,
+  //   easing: 'easeInExpo',
+  //   complete: function (){
+  //     console.log('动画执行完成。。。1')
+  //   }
+  // })//收起
+
+  // $('.box').toggle()//1.切换box显示/隐藏
+  // $('.box').toggle(2000)//2.动画切换box显示/隐藏
+
+  // $('.box').hide()//隐藏元素
+  // $('.box').hide(2000)//动画隐藏元素
+
+  // $('.box').fadeOut()//淡出
+  // $('.box').fadeOut(2000)//淡出
+
+  // $('.box').animate({left: 600}
+
+  // $('.box').animate({
+  //   left: 600
+  // },3000,'swing',function (){
+  //   $('.box').animate({top:400},3000)
+  // })
+
+  // $('.box')
+  // .animate({left:600},2000)
+  // .animate({top:400},2000)
+  // .animate({left:10},2000)
+  // .animate({top:40},2000)
+
+  // 控制动画队列
+  $('.box').animate({left:600},{
+    queue: true,//是否加入动画队列
+    duration: 3000,
+    easing: 'swing',
+    complete: function (){
+      $('.box').css('backgroundColor','blue')
+    }
+  }).animate({top:400},{
+    queue: true,//是否加入动画队列
+    duration: 3000,
+    easing: 'swing',
+    complete: function (){
+      $('.box').css('backgroundColor','green')
+    }
+  })
+})
+$('.btn2').click(function (){
+  // $('.box').slideDown()//展开
+  // $('.box').slideDown(2000,'easeInBounce',function (){
+  //   console.log('动画执行完成。。。2')
+  // })//展开
+  // $('.box').slideDown({
+  //   duration: 2000,
+  //   easing: 'easeInExpo',
+  //   complete: function (){
+  //     console.log('动画执行完成。。。2')
+  //   }
+  // })//展开
+
+  // $('.box').show()//显示元素
+  // $('.box').show(2000)//动画显示元素
+
+  // $('.box').fadeIn()//淡入
+  // $('.box').fadeIn(2000)//淡入
+
+})
+
+// 3.响应btn3轮流的点击事件
+$('.btn3').toggle(function(){
+  console.log(111)
+},function (){
+  console.log(222)
+},function (){
+  console.log(333)
+})
+
+// 停止动画
+$('.stop').click(function (){
+  // $('.box').stop()//停止当前执行的动画，继续队列中的下一个动画
+  // $('.box').stop(true)//停止所有动画
+  $('.box').stop(true,true)//停止所有动画，并到达当前动画的终点
+})
+
+$('.btn4').mouseenter(function (){
+  $('.box').stop().slideDown(1000)
+})
+$('.btn4').mouseleave(function (){
+  $('.box').stop().slideUp(1000)
+})
+
+</script>
+</body>
+</html>

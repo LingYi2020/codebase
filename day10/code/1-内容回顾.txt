@@ -1,0 +1,52 @@
+
+事件：可以被js侦测到的行为
+事件可以提交应用的交互性
+用户行为
+onclick
+onmouseenter
+onmouseleave
+onmouseover
+onmouseout
+....
+非用户行为
+onload
+计时器
+...
+
+事件流：事件触发执行的顺序
+1.嵌套关系
+2.相同的事件
+事件捕获：从外到里触发
+事件冒泡：从里到外触发
+w3c标准事件流：事件先从外到里触发，再从里到外触发
+主流浏览器默认使用事件冒泡
+事件捕获和事件冒泡都有传播的特征
+
+事件模型
+添加事件的方式
+移除事件的方式
+
+DOM 0 级事件模型
+同一个元素不能添加多个相同的事件，后面事件会覆盖前面事件函数，不可以设置事件流
+添加事件：on+eventType = function (){}
+事件移除：on+eventType = null
+
+DOM 2 级事件模型
+同一个元素可以添加多个相同的事件，可以设置事件流
+添加事件：dom.addEventListener(type,fn,boolean) true事件捕获
+移除事件：dom.removeEventListener(type,fnName,boolean)
+
+事件对象：保存了与事件相关所有信息的对象
+var e = ev || window.event
+e.clientX / e.clientY 
+e.offsetX / e.offsetY
+e.pageX / e.pageY
+e.button  0 1 2
+e.which  1 2 3
+e.keyCode || e.which -> ascii
+e.ctrlKey  e.altKey  e.shiftKey
+e.target || e.srcElement
+e.preventDafault() 火狐
+e.returnValue=false  IE
+e.stopPropagation() 火狐
+e.cancelBulle=true IE

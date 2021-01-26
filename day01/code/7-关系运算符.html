@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script>
+// 关系运算符（比较运算符），始终返回布尔值
+// > < >= <= == === != !==
+// == 等于，只比较值是否相等，不考虑数据类型
+// console.log( 2 == '2' )//true
+// === 全等，既要值相等也要数据类型相等（对于引用类型则比较内存地址）
+// console.log( 2 === '2' )// false
+// console.log( {} === {} )//false
+
+// 两个数字比较，正常比较大小
+// console.log( 2 > 3 )// false
+
+// 一个数字和纯数字字符串比较，把纯数字字符串转成number再比较
+// console.log( 2 > '12' )// false
+
+// 两个字符串比较，先比较第一个字符的ASCII码值，不能区分大小再比较后一位
+// console.log( '3' > '21' )//true
+// console.log( 'abc' > 'abd' )//false
+// 0 -- 48   a -- 97   A -- 65
+
+// 非正常比较都返回false
+// 一个数字和非纯数字字符串无法比较，返回false
+// console.log( 2 > 'a12' )// false
+// console.log( 2 < 'a12' )// false
+
+</script>
+</body>
+</html>

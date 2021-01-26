@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  height: 4000px;
+}
+.btn{
+  position: fixed;
+  right: 0;
+  bottom: 100px;
+}
+.box{
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: absolute;
+  left: 588px;
+  top: 50px;
+  opacity: 0.1;
+}
+p{
+  width: 1px;
+  height: 500px;
+  background-color: red;
+  position: absolute;
+  left: 588px;
+  top: 0;
+}
+</style>
+</head>
+<body>
+
+<button class="btn">toTop</button>
+<div class="box"></div>
+<p></p>
+
+<script>
+var btn = document.querySelector('.btn')
+var box = document.querySelector('.box')
+var timer
+// var current = 0 //当前位置
+// var target = 588 //目标位置
+// var speed = 5 //运动速度
+// 60hz  1000/60 = 16.667  30  1000/30 = 33.333
+btn.onclick = function (){
+  // animate(box,888)
+  // animate(box,100)
+  // animate(box,'top',0)
+  // animate(box,'left',0)
+  // animate(box,'width',300)
+  // animate(box,'marginLeft',300)
+  // animate(box,'opacity',0.1)//淡出
+  // animate(box,'opacity',1)//淡入
+  // animate(document.documentElement,'scrollTop',0)//返回顶部
+  animate(document.documentElement,'scrollTop',0,50)//返回顶部
+}
+
+/** 
+* 运动函数
+* 参数：
+*   dom 要运动的元素
+*   attr 要运动的属性
+*   target 运动目标位置
+*   speed 运动速度
+* 支持功能：
+*   支持多个带px单位的属性：left top right bottom marginLeft marginTop width height ...
+*   支持运动到任意位置
+*   支持透明度运动
+*   支持滚动条运动
+*   可以自定义速度
+*/
+function animate(dom,attr,target,speed){
+  // 判断要运动的属性
+  if (attr === 'opacity') {
+    // 属性的当前值
+    var current = parseInt( getComputedStyle(dom)[attr]*100 )
+    // 属性的目标值
+    target *= 100
+  // } else if (attr === 'scrollTop' || attr === 'scrollLeft') {
+  } else if (attr.indexOf('scroll') !== -1) {
+    // 属性的当前值
+    var current = dom[attr]
+  } else {
+    // 属性的当前值
+    var current = parseInt( getComputedStyle(dom)[attr] )
+  }
+  
+  // 设置speed默认值
+  speed = speed || 5
+
+  //判断运动方向
+  if (current > target){
+    speed = -Math.abs(speed)
+  } else {
+    speed = Math.abs(speed)
+  }
+
+  clearInterval(timer)
+  timer = setInterval(function (){
+    // 当前位置+速度
+    current += speed
+    // 临界值判断(运动停止条件：剩余运动量 <= 每次的运动量)
+    if ( Math.abs(target-current) <= Math.abs(speed) ) {
+      current = target//到达目的地
+      clearInterval(timer)
+    }
+    // 持续改变运动属性
+    if (attr === 'opacity') {
+      dom.style[attr] = current/100
+    } else if (attr.indexOf('scroll') !== -1) {
+      dom[attr] = current
+    } else {
+      dom.style[attr] = current + 'px'
+    }
+  },20)
+}
+  
+</script>
+</body>
+</html>

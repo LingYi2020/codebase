@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+*{
+  margin: 0;
+  padding: 0;
+}
+.wrap{
+  width: 800px;
+  margin: 50px auto 0;
+  /* border: 1px solid #ccc; */
+}
+.header{
+  overflow: hidden;
+  border-top: 2px solid #06A86E;
+}
+.header h3{
+  float: left;
+  width: 200px;
+  line-height: 34px;
+  text-align: center;
+  background-color: #eee;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+.content{
+  /* height: 240px; */
+  overflow: hidden;
+}
+.content div{
+  padding: 15px 0;
+  display: none;
+}
+.content div img{
+  width: 180px;
+  height: 240px;
+  margin: 0 10px;
+  float: left;
+}
+/* 选中的样式 */
+.header .active{
+  background-color: #06A86E;
+  color: #fff;
+}
+.content .show{
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="header">
+    <h3 class="active">喜剧</h3>
+    <h3>爱情</h3>
+    <h3>科幻</h3>
+    <h3>动作</h3>
+  </div>
+  <div class="content">
+    <div class="show">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+      <img src="./img/e1.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+      <img src="./img/e2.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+      <img src="./img/e3.png" alt="">
+    </div>
+    <div>
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+      <img src="./img/e4.png" alt="">
+    </div>
+  </div>
+</div>
+
+<script>
+var h3s = document.querySelectorAll('.header h3')
+var divs = document.querySelectorAll('.content div')
+function clearClass(){
+  h3s[0].className = ''
+  h3s[1].className = ''
+  h3s[2].className = ''
+  h3s[3].className = ''
+  divs[0].className = ''
+  divs[1].className = ''
+  divs[2].className = ''
+  divs[3].className = ''
+}
+h3s[0].onclick = function (){
+  // 先清除所有类名
+  clearClass()
+  // 再给当前点击的元素添加类名
+  h3s[0].className = 'active'
+  divs[0].className = 'show'
+}
+h3s[1].onclick = function (){
+  clearClass()
+  h3s[1].className = 'active'
+  divs[1].className = 'show'
+}
+h3s[2].onclick = function (){
+  clearClass()
+  h3s[2].className = 'active'
+  divs[2].className = 'show'
+}
+h3s[3].onclick = function (){
+  clearClass()
+  h3s[3].className = 'active'
+  divs[3].className = 'show'
+}
+
+</script>
+</body>
+</html>

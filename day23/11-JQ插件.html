@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+
+</style>
+</head>
+<body>
+
+<form action="https://www.baidu.com/">
+  <p>账号：<input type="text" class="user" name="user" required="true" rangelength="8,20"></p>
+  <p>密码：<input type="text" class="pass" name="pass" required="true" rangelength="6,18"></p>
+  <p>邮箱：<input type="text" class="email" name="email" required="true" email="true" rangelength="12,30"></p>
+  <p><input type="submit" value="提交"></p>
+</form>
+
+<script src="./jquery-1.8.3/jquery-1.8.3.js"></script>
+<script src="./jquery.validate.js"></script>
+<script src="./jquery.validate.cn.js"></script>
+<script>
+$('form').validate()
+
+// $('form').submit(function (){
+//   return false
+// })
+</script>
+</body>
+</html>

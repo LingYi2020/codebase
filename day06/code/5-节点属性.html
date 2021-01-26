@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+
+</style>
+</head>
+<body>
+
+<div class="box" id="box" title="box标题">今天发生一件大事</div>
+<a href="https://www.baidu.com" hehe="呵呵">百度</a>
+<img src="./mm.jpg" alt="图片">
+<input type="text" name="user" value="请输入电话">
+
+<script>
+var divs = document.querySelectorAll('div')
+var div = document.querySelector('div')
+var a = document.querySelector('a')
+var img = document.querySelector('img')
+var ipt = document.querySelector('input')
+
+// console.log(divs)
+
+// js对象的属性可以直接访问
+// console.log( div.id )
+// console.log( div.className )
+// console.log( div.title )
+// console.log( a.href )
+// console.log( img.src )
+// console.log( ipt.type )
+// console.log( ipt.name )
+
+// 自定义属性不能直接访问
+// console.log( a.hehe )
+
+
+// 属性操作
+// console.log( a.getAttribute('href') )//获取属性值
+// console.log( a.getAttribute('hehe') )//获取属性值
+// a.setAttribute('href','www.jd.com')//修改属性值
+// a.setAttribute('hehe','哈哈')//修改属性值
+// a.setAttribute('haha','呵呵')//添加一个属性
+// a.removeAttribute('hehe')//删除属性节点
+// console.log( a.getAttributeNode('hehe') )// hehe="呵呵" 属性节点
+
+
+
+
+</script>
+</body>
+</html>
