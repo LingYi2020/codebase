@@ -1,0 +1,28 @@
+
+nodejs 是javascript运行时
+nodejs可以让js运行在服务端
+
+npm 包管理工具
+npm install 包名   本地安装
+npm install 包名 -save   项目依赖  -S
+npm install 包名 --global  全局安装  -g
+npm install 包名 --save-dev   开发依赖  -D
+
+npm init -y  生成默认的package.json配置文件
+
+npm install
+
+node test.js  运行js文件
+
+commonjs
+加载模块：require('http')
+导出模块内容：module.exports = {}
+exports.name = name
+
+常用的内置模块
+http
+url
+fs
+path
+querystring
+...
